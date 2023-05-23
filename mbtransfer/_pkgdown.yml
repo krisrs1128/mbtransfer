@@ -1,0 +1,10 @@
+url: ~
+template:
+  bootstrap: 5
+  bslib:
+    bg: "#fcf8ee"
+    fg: "#012840"
+    primary: "#537373"
+    base_font: {google: "Open Sans"}
+    heading_font: {google: "Cormorant"}
+    code_font: {google: "JetBrains Mono"}
