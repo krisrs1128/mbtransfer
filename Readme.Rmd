@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# LNMmediation
+# Microbiome Intervention Analysis using `mbtransfer`
 
 <!-- badges: start -->
 <!-- badges: end -->
