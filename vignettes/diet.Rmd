@@ -2,7 +2,7 @@
 title: "Diet Interventions as Ecological Shifts"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{diet}
+  %\VignetteIndexEntry{Diet Interventions as Ecological Shifts}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -51,12 +51,13 @@ th <- theme_bw() +
   theme(
     panel.grid.minor = element_blank(),
     panel.background = element_rect(fill = "#f7f7f7"),
-    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", linewidth = 0.6),
     axis.text = element_text(size = 8),
     axis.title = element_text(size = 12),
     legend.position = "bottom"
   )
 theme_set(th)
+set.seed(20230524)
 ```
 
 The block below reads in the data. These are [lightly processed](https://github.com/krisrs1128/microbiome_interventions/blob/main/scripts/data_preprocessing.Rmd) versions of data
@@ -137,16 +138,16 @@ is not rich enough.
 fits <- list()
 ts_preds <- list()
 
-fits[["in-sample"]] <- mbtransfer(ts, P = 3, Q = 3)
+fits[["in-sample"]] <- mbtransfer(ts, P = 2, Q = 2)
 ts_missing <- subset_values(ts, 1:8)
-ts_preds[["in-sample"]] <- predict(fit[["in-sample"]], ts_missing)
+ts_preds[["in-sample"]] <- predict(fits[["in-sample"]], ts_missing)
 ```
 
 The block below instead trains on five subjects from each intervention group and
 makes predictions for those who were held out.
 
 ```{r}
-fits[["out-of-sample"]] <- mbtransfer(ts[c(1:5, 11:15)], P = 3, Q = 3)
+fits[["out-of-sample"]] <- mbtransfer(ts[c(1:5, 11:15)], P = 2, Q = 2)
 ts_preds[["out-of-sample"]] <- predict(fits[["out-of-sample"]], ts_missing[c(6:10, 16:20)])
 ```
 
@@ -213,7 +214,8 @@ value and still work through the rest of this vignette (many taxa will still be
 easily detectable).
 
 ```{r}
-staxa <- select_taxa(ts, ws[[1]], ws[[8]],  \(x) mbtransfer(x, 3, 3), n_splits = 20)
+staxa <- select_taxa(ts, ws[[1]], ws[[8]],  \(x) mbtransfer(x, 2, 2), n_splits = 2)
+save(staxa, file = "staxa-diet.rds")
 ```
 
 In addition to the selected set of taxa, this function returns the mirror

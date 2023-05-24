@@ -2,7 +2,7 @@
 title: "Modulating pH in an Aquaculture Microbiome"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{aqua}
+  %\VignetteIndexEntry{Modulating pH in an Aquaculture Microbiome}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -42,12 +42,13 @@ th <- theme_bw() +
   theme(
     panel.grid.minor = element_blank(),
     panel.background = element_rect(fill = "#f7f7f7"),
-    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", linewidth = 0.6),
     axis.text = element_text(size = 8),
     axis.title = element_text(size = 12),
     legend.position = "bottom"
   )
 theme_set(th)
+set.seed(20230524)
 ```
 
 We've hosted [lightly preprocessed](https://github.com/krisrs1128/microbiome_interventions/blob/main/scripts/data_preprocessing.Rmd) versions of the [raw data](https://github.com/hiro-toju/EelMicrobiome128) at the following
@@ -86,7 +87,7 @@ of 128) days within each tank. Then, we forecast the remaining 32 days.
 
 ```{r}
 ts_missing <- subset_values(ts, 1:96)
-fit <- mbtransfer(ts, P = 3, Q = 3)
+fit <- mbtransfer(ts, P = 2, Q = 2)
 ts_pred <- predict(fit, ts_missing)
 ```
 
@@ -95,12 +96,12 @@ the forecast. Performance is generally better in the more abundant species, and
 short time horizons $h$ are easier to predict than long ones.
 
 ```{r, fig.width = 10, fig.height = 6}
-reshape_preds(ts, ts_pred) |>
-  mutate(h_group = cut(h, quantile(h, 5))) |>
+reshape_preds(ts, ts_pred, 3) |>
+  filter(h > 93, h < 99) |>
   ggplot() +
   geom_abline(slope = 1, col = "#400610") +
   geom_point(aes(y, y_hat), size = .7, alpha = .6) +
-  facet_grid(factor(quantile, rev(levels(quantile))) ~ glue("lag {h_group}"), scales = "free_y") +
+  facet_grid(factor(quantile, rev(levels(quantile))) ~ glue("lag {h - 93}"), scales = "free_y") +
   labs(x = expression(y), y = expression(hat(y))) +
   scale_x_continuous(expand = c(0, 0), n.breaks = 3) +
   scale_y_continuous(expand = c(0, 0), n.breaks = 3) +
@@ -132,8 +133,8 @@ ws <- steps(c("pH" = TRUE, "AS" = FALSE), lengths = 4, L = 4) |>
 ws[[1]]["AS", ] <- 38
 ws[[2]]["AS", ] <- 38
 
-staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 3, 3))
-#save(staxa, file = "../../data/staxa-aqua.rds")
+staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 2, 2), n_splits = 2)
+save(staxa, file = "staxa-aqua.rds")
 
 taxa <- staxa$ms |>
   select(multisplit, m, lag) %>%

@@ -2,7 +2,7 @@
 title: "Postpartum Community Remodeling"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{postpartum}
+  %\VignetteIndexEntry{Postpartum Community Remodeling}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -49,12 +49,13 @@ th <- theme_bw() +
   theme(
     panel.grid.minor = element_blank(),
     panel.background = element_rect(fill = "#f7f7f7"),
-    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", linewidth = 0.6),
     axis.text = element_text(size = 8),
     axis.title = element_text(size = 12),
     legend.position = "bottom"
   )
 theme_set(th)
+set.seed(20230524)
 ```
 
 To construct as `ts_inter` object, we combine the following datasets:
@@ -139,8 +140,8 @@ subject_data(ts) <- subject_data(ts) |>
   mutate(BirthControlYesNo = ifelse(BirthControlYesNo == "Yes", 1, 0))
 
 fits <- list()
-fits[["in-sample"]] <- mbtransfer(ts, P = 3, Q = 3)
-fits[["out-of-sample"]] <- mbtransfer(ts[1:25], P = 3, Q = 3)
+fits[["in-sample"]] <- mbtransfer(ts, P = 2, Q = 2)
+fits[["out-of-sample"]] <- mbtransfer(ts[1:25], P = 2, Q = 2)
 ```
 
 The block below computes the in and out of sample prediction errors
@@ -230,7 +231,8 @@ still guarantee FDR control, and you will still be able to run the rest of the
 vignette even if you set `n_splits` to a value like 3 or 4.
 
 ```{r}
-staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 3, 3), n_splits = 20)
+staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 2)
+save(staxa, file = "staxa-postpartum.rds")
 ```
 
 The `ms` element of this object includes the raw mirror statistics that led to
@@ -307,7 +309,7 @@ model has not learned any potential interaction. The paper's discussion is still
 plausible, but the effect does not seem so strong across the entire population
 that it is considered worth learning by the model.
 
-```{r trajectory_vis fig.width=9, fig.height=4.5}
+```{r trajectory_vis, fig.width=9, fig.height=4.5}
 focus_taxa <- c("Porphyromonas", "Lactobacillus", "Prevotella_6", "L.jensenii", "L.iners", "Atopobium")
 rdata <- sim_bc |>
   map_dfr(~ ribbon_data(.[[2]], .[[1]], focus_taxa, delta = 7), .id = "BC") |>
