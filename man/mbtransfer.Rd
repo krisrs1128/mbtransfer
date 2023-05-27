@@ -12,7 +12,7 @@ mbtransfer(
   early_stopping_rounds = 5,
   verbose = 0,
   lambda = 0.01,
-  alpha = 0.01,
+  alpha = 0.001,
   eta = 0.05,
   ...
 )

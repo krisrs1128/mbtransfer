@@ -6,6 +6,19 @@
 \usage{
 predictors(ts_inter, lags, subject)
 }
+\arguments{
+\item{ts_inter}{An object of class \code{ts_inter} over which to generate
+sliding windows.}
+
+\item{lags}{A vector specifying \code{P} and \code{Q} in the trained mbtransfer model.}
+
+\item{subject}{A static data frame of subject-level variables. This will be
+concatenated to time-varying intervention and taxonomic covariates when
+making predictions. This is analogous to the training process.}
+}
 \description{
-Generate a Predictor Matrix
+\code{patchify_df} is used to generate training data. At test time, we don't need
+all the patches, but we do need to construct regressors for the immediate
+past. This will be matched to the model's original training data and used to
+generate predictions.
 }

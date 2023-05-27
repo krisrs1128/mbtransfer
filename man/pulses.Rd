@@ -6,6 +6,19 @@
 \usage{
 pulses(p_states, lags = 1, L = 3, w_star = c(0, 1))
 }
+\arguments{
+\item{lags}{The time length of any interventions that we generate.}
+
+\item{L}{The total length returned, including both intervention and non-intervention timepoints}
+
+\item{w_star}{The unique values to include in and out of the intervention.
+Defaults to 1/0, respectively.}
+
+\item{p_stats}{A list specifying the row names and whether they should
+include interventions. Any name set to TRUE will include intervention
+effects, while those with FALSE will not.}
+}
 \description{
-Hypothetical Pulse Interventions
+Create counterfactual perturbations with specific 0/1 intervention and total
+length patterns.
 }
