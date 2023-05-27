@@ -21,3 +21,7 @@ This generates a data.frame of sliding window predictors and responses by
 wrapping \code{patchify_single}. It is in a format that can directly be used by
 different regression methods.
 }
+\examples{
+data(sim_ts)
+patchify_single_df(sim_ts[[1]], 2, 2)
+}

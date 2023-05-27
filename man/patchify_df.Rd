@@ -24,3 +24,7 @@ intervention features immediately preceding the values in the second
 component, \code{y}. This is constructed by running \code{patchify_single_df} over all
 subjects in the dataset.
 }
+\examples{
+data(sim_ts)
+patchify_df(sim_ts[[1]])
+}

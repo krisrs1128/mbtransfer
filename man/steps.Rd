@@ -9,3 +9,7 @@ steps(p_states, starts = 1, lengths = 1:3, L = 3, w_star = c(0, 1))
 \description{
 Hypothetical Step Interventions
 }
+\examples{
+steps(c("P1" = TRUE), 1:3, 2:3, 4)
+
+}

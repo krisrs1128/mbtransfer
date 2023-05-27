@@ -21,3 +21,7 @@ This creates sliding windows of intervention and community composition
 features for a single subject. It returns a list giving the "patchified"
 data, which can then be organized into matrices for prediction.
 }
+\examples{
+data(sim_ts)
+patchify_single(sim_ts[[1]])
+}

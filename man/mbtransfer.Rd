@@ -11,9 +11,9 @@ mbtransfer(
   nrounds = 500,
   early_stopping_rounds = 5,
   verbose = 0,
-  lambda = 0.01,
-  alpha = 0.001,
-  eta = 0.05,
+  lambda = 0.1,
+  alpha = 0.01,
+  eta = 0.1,
   ...
 )
 }
@@ -62,4 +62,8 @@ of linear gradient boosting-based transfer function models. The output is an
 object of class \code{mbtransfer_model}. Each component boosting model is
 contained in the \verb{@parameters} slot, which is a list whose j^th element is
 the model for the j^th taxon (row) within each \code{ts}'s values matrix.
+}
+\examples{
+data(sim_ts)
+mbtransfer(sim_ts)
 }

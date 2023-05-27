@@ -22,3 +22,7 @@ effects, while those with FALSE will not.}
 Create counterfactual perturbations with specific 0/1 intervention and total
 length patterns.
 }
+\examples{
+pulses(c("P1" = TRUE), 1, 4)
+pulses(c("P1" = TRUE), 1:3, 4)
+}

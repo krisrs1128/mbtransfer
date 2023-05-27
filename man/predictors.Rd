@@ -7,7 +7,7 @@
 predictors(ts_inter, lags, subject)
 }
 \arguments{
-\item{ts_inter}{An object of class \code{ts_inter} over which to generate
+\item{ts_inter}{An object of class \code{ts_inter_single} over which to generate
 sliding windows.}
 
 \item{lags}{A vector specifying \code{P} and \code{Q} in the trained mbtransfer model.}
@@ -21,4 +21,9 @@ making predictions. This is analogous to the training process.}
 all the patches, but we do need to construct regressors for the immediate
 past. This will be matched to the model's original training data and used to
 generate predictions.
+}
+\examples{
+data(sim_ts)
+ts <- subset_values(sim_ts, 1:5)
+predictors(ts[[1]], c(2, 2), NULL)
 }
