@@ -1,7 +1,9 @@
 
-# LNMmediation
+# Microbiome Intervention Analysis using `mbtransfer`
 
 <!-- badges: start -->
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/krisrs1128/mbtransfer_demo/HEAD?urlpath=rstudio)
 <!-- badges: end -->
 
 `mbtransfer` is an R package for modeling and inference of microbial
