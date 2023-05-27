@@ -140,7 +140,7 @@ reshape_preds <- function(ts, ts_pred, n_quantile = 4, lag = 3) {
     group_by(taxon) |>
     summarise(total = median(y)) |>
     ungroup() |>
-    mutate(quantile = cut(total, quantile(total, 0:n_quantile/n_quantile), include.lowest = TRUE))
+    mutate(quantile = cut(total, unique(quantile(total, 0:n_quantile/n_quantile)), include.lowest = TRUE))
   
   ts_df |>
     left_join(taxa_totals)

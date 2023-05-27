@@ -42,7 +42,7 @@
 #' @export
 mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
                        early_stopping_rounds = 5, verbose = 0, lambda = 1e-2,
-                       alpha = 1e-2, eta = 0.05, ...) {
+                       alpha = 1e-3, eta = 0.05, ...) {
   train_data <- patchify_df(ts_inter, P, Q)
   fit <- list()
 
@@ -60,6 +60,14 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
   new("mbtransfer_model", parameters = fit, method = "mbtransfer", hyper = hyper)
 }
 
+#' Prediction method for `mbtransfer` objects
+#' 
+#' @param object An object of class `mbtransfer_model`, as generated using the
+#'   `mbtransfer` function. This includes trained boosting models for every
+#'   taxon, stored within the `@parameters` slot.
+#' @param newdata A new `ts_inter` object over which to perform prediction. This
+#'   method will make predictions for every timepoint that appears in the
+#'   `@interventions` slot but not the `@values`.
 #' @export
 mbtransfer_predict <- function(object, newdata) {
   lags <- time_lags(object@parameters[[1]])
@@ -81,6 +89,23 @@ mbtransfer_predict <- function(object, newdata) {
   new("ts_inter", series = result, subject_data = subject_data(newdata))
 }
 
+#' Prediction for a Single Subject
+#' 
+#' This loops over all timepoints for a single subject and makes predictions by
+#' comparing the number of timepoints in @interventions and in @values. The gap
+#' will be filled in one step at a time using `mbtransfer_predict_step()`.
+#' 
+#' @param fit An object of class `mbtransfer_model`, as generated using the
+#'   `mbtransfer` function. This includes trained boosting models for every
+#'   taxon, stored within the `@parameters` slot.
+#' @param ts_inter A new `ts_inter_single` object over which to perform
+#'   prediction. This method will make predictions for every timepoint that
+#'   appears in the `@interventions` slot but not the `@values`. This is assumed
+#'   to be a single subject from a larger `ts_inter` object.
+#' @param lags A vector specifying `P` and `Q` in the trained mbtransfer model.
+#' @param subject A static data frame of subject-level variables. This will be
+#'   concatenated to time-varying intervention and taxonomic covariates when
+#'   making predictions. This is analogous to the training process.
 model_predict_single <- function(fit, ts_inter, lags, subject = NULL) {
   n_time <- ncol(ts_inter)
   w <- interventions(ts_inter)
@@ -92,6 +117,23 @@ model_predict_single <- function(fit, ts_inter, lags, subject = NULL) {
   ts_inter
 }
 
+#' Predictions for a single timepoint and subject
+#' 
+#' This make predictions for all taxa for a single timestep ahead in one
+#' subject. It loops over the trained boosting models for each taxon predicts a
+#' single value for each.
+#' 
+#' @param fit An object of class `mbtransfer_model`, as generated using the
+#'   `mbtransfer` function. This includes trained boosting models for every
+#'   taxon, stored within the `@parameters` slot.
+#' @param ts_inter A new `ts_inter_single` object over which to perform
+#'   prediction. This method will make predictions for every timepoint that
+#'   appears in the `@interventions` slot but not the `@values`. This is assumed
+#'   to be a single subject from a larger `ts_inter` object.
+#' @param lags A vector specifying `P` and `Q` in the trained mbtransfer model.
+#' @param subject A static data frame of subject-level variables. This will be
+#'   concatenated to time-varying intervention and taxonomic covariates when
+#'   making predictions. This is analogous to the training process.
 model_predict_step <- function(ts_inter, fit, lags, subject = NULL) {
   xz <- predictors(ts_inter, lags, subject)
   y_hat <- vector(length = nrow(ts_inter))
@@ -100,10 +142,15 @@ model_predict_step <- function(ts_inter, fit, lags, subject = NULL) {
   }
 
   values(ts_inter) <- cbind(values(ts_inter), y_hat)
-  delta <- median(diff(ts_inter@time))
   ts_inter
 }
 
+#' Transfer Function Model Class
+#' @slot parameters The model training result. For mbtransfer models, this is a
+#'   list of all the boosting models that have been trained, one for each taxon.
+#' @slot method The model type used for prediction. 
+#' @slot hyper A list. containing any hyperparameters used during model
+#'   training.
 #' @export
 setClass(
   "mbtransfer_model",
@@ -114,5 +161,6 @@ setClass(
   )
 )
 
+#' Prediction method for mbtransfer models
 #' @export
 setMethod("predict",  c(object = "mbtransfer_model"), mbtransfer_predict)

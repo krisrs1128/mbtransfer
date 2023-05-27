@@ -1,4 +1,16 @@
 
+#' Sliding Windows for a ts_inter_single object
+#' 
+#' This creates sliding windows of intervention and community composition
+#' features for a single subject. It returns a list giving the "patchified"
+#' data, which can then be organized into matrices for prediction.
+#' 
+#' @param ts_inter An object of class `ts_inter_single` over which to generate
+#'   sliding windows.
+#' @param p The number of time lags to. use in the sliding window for the
+#'   microbiome features.
+#' @param q The number of time lags to use in the sliding window for
+#'   interventions.
 #' @importFrom slider slide
 patchify_single <- function(ts_inter, p = 2, q = 3) {
   ix <- seq_len(ncol(ts_inter))
@@ -28,6 +40,19 @@ patchify_single <- function(ts_inter, p = 2, q = 3) {
   data
 }
 
+#' Convert `patchify_single` output into a `data.frame`
+#' 
+#' This generates a data.frame of sliding window predictors and responses by
+#' wrapping `patchify_single`. It is in a format that can directly be used by
+#' different regression methods.
+#' 
+#' @param ts_inter An object of class `ts_inter_single` over which to generate
+#'   sliding windows.
+#' @param p The number of time lags to. use in the sliding window for the
+#'   microbiome features.
+#' @param q The number of time lags to use in the sliding window for
+#'   interventions.
+#'   
 #' @importFrom stringr str_c
 patchify_single_df <- function(ts_inter, p, q) {
   data <- patchify_single(ts_inter, p, q)
@@ -52,6 +77,21 @@ patchify_single_df <- function(ts_inter, p, q) {
   result
 }
 
+#' Sliding Windows for a ts_inter object
+#' 
+#' This creates sliding windows of intervention and community composition
+#' features for all. subjects in a `ts_inter` object. It returns a list giving
+#' the "patchified" data. The first component, `x`, gives the microbiome and
+#' intervention features immediately preceding the values in the second
+#' component, `y`. This is constructed by running `patchify_single_df` over all
+#' subjects in the dataset.
+#' 
+#' @param ts_inter An object of class `ts_inter` over which to generate
+#'   sliding windows.
+#' @param p The number of time lags to. use in the sliding window for the
+#'   microbiome features.
+#' @param q The number of time lags to use in the sliding window for
+#'   interventions.
 #' @importFrom purrr map_dfr
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr select bind_cols
@@ -73,6 +113,7 @@ patchify_df <- function(ts_inter, p = 2, q = 3) {
   list(x = x, y = y)
 }
 
+#' Create uniform column names for patchified df
 predictor_names <- function(x_dim, w_dim) {
   n1 <- rep(str_c("taxon", seq_len(x_dim[1])), x_dim[2])
   n2 <- rep(str_c("lag", seq(x_dim[2], 1)), each = x_dim[1])
@@ -85,6 +126,7 @@ predictor_names <- function(x_dim, w_dim) {
   c(x_names, w_names)
 }
 
+#' Detect the time lags based on column names
 #' @importFrom stringr str_extract str_detect str_remove
 lag_from_names <- function(names, group = "taxon") {
   names[str_detect(names, group)] |>
@@ -94,6 +136,7 @@ lag_from_names <- function(names, group = "taxon") {
     max()
 }
 
+#' Detect the time lags over which a model was trained
 #' @export
 time_lags <- function(fit) {
   # different names for gbm and lasso, resp.
@@ -117,6 +160,17 @@ pad_lag <- function(x, lag) {
 
 #' Generate a Predictor Matrix
 #' 
+#' `patchify_df` is used to generate training data. At test time, we don't need
+#' all the patches, but we do need to construct regressors for the immediate
+#' past. This will be matched to the model's original training data and used to
+#' generate predictions.
+#' 
+#' @param ts_inter An object of class `ts_inter` over which to generate
+#'   sliding windows.
+#' @param lags A vector specifying `P` and `Q` in the trained mbtransfer model.
+#' @param subject A static data frame of subject-level variables. This will be
+#'   concatenated to time-varying intervention and taxonomic covariates when
+#'   making predictions. This is analogous to the training process.
 #' @importFrom purrr set_names
 predictors <- function(ts_inter, lags, subject) {
   x <- values(ts_inter) |>

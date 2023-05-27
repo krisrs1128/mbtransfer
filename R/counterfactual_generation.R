@@ -43,6 +43,18 @@ steps <- function(p_states, starts = 1, lengths = 1:3, L = 3, w_star = c(0, 1)) 
 }
 
 #' Hypothetical Pulse Interventions
+#' 
+#' Create counterfactual perturbations with specific 0/1 intervention and total
+#' length patterns.
+#' 
+#' @param p_stats A list specifying the row names and whether they should
+#'   include interventions. Any name set to TRUE will include intervention
+#'   effects, while those with FALSE will not.
+#' @param lags The time length of any interventions that we generate.
+#' @param L The total length returned, including both intervention and non-intervention timepoints
+#' @param w_star The unique values to include in and out of the intervention.
+#'   Defaults to 1/0, respectively.
+#' 
 #' @example
 #' pulses(c("P1" = TRUE), 1, 4)
 #' pulses(c("P1" = TRUE), 1:3, 4)
