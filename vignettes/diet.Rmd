@@ -162,7 +162,7 @@ participants, but the person-to-person variability might be too high for us to
 make reasonable generalizations for less abundant taxa.
 
 ```{r, fig.width = 10, fig.height = 6}
-map_dfr(ts_preds, ~ reshape_preds(ts, ., 12), .id = "generalization") |>
+map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
     filter(h > 0, h < 6) |>
     ggplot() +
     geom_abline(slope = 1, col = "#400610") +
@@ -199,7 +199,7 @@ the last gives the length of the overall output sequence.
 ```{r}
 ws <- steps(c("Plant" = TRUE, "Animal" = FALSE), lengths = 1:4, L = 4) |>
   c(steps(c("Plant" = FALSE, "Animal" = TRUE), lengths = 1:4, L = 4))
-ws
+ws[c(1, 2, 10)]
 ```
 
 The block below runs an instantiation of the mirror statistics FDR controlling
@@ -215,7 +215,8 @@ easily detectable).
 
 ```{r}
 staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
-#saveRDS(staxa, file = "staxa-diet.rds")
+saveRDS(staxa, file = "staxa-diet.rds")
+#staxa <- readRDS("staxa-diet.rds")
 ```
 
 In addition to the selected set of taxa, this function returns the mirror

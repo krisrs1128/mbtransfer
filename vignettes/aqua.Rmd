@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
 )
 ```
 
@@ -76,7 +78,7 @@ ts <- reads |>
   ts_from_dfs(interventions, samples, subject) |>
   interpolate()
 
-ts <- ts[1:3]
+ts <- ts[1:2]
 ```
 
 ## Prediction
@@ -87,7 +89,7 @@ of 128) days within each tank. Then, we forecast the remaining 32 days.
 
 ```{r}
 ts_missing <- subset_values(ts, 1:96)
-fit <- mbtransfer(ts, P = 2, Q = 2)
+fit <- mbtransfer(ts, P = 2, Q = 2, alpha = 1e-3)
 ts_pred <- predict(fit, ts_missing)
 ```
 
@@ -133,8 +135,9 @@ ws <- steps(c("pH" = TRUE, "AS" = FALSE), lengths = 4, L = 4) |>
 ws[[1]]["AS", ] <- 38
 ws[[2]]["AS", ] <- 38
 
-staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 2, 2), n_splits = 25)
-save(staxa, file = "staxa-aqua.rds")
+staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 2, 2, alpha = 1e-3), n_splits = 25)
+saveRDS(staxa, file = "staxa-aqua.rds")
+#staxa <- readRDS("staxa-aqua.rds")
 
 taxa <- staxa$ms |>
   select(multisplit, m, lag) %>%
