@@ -12,6 +12,9 @@
 #' @param q The number of time lags to use in the sliding window for
 #'   interventions.
 #' @importFrom slider slide
+#' @examples
+#' data(sim_ts)
+#' patchify_single(sim_ts[[1]])
 patchify_single <- function(ts_inter, p = 2, q = 3) {
   ix <- seq_len(ncol(ts_inter))
   x_indices <- slide(ix, ~ ., .before = p, .after = -1)
@@ -53,6 +56,9 @@ patchify_single <- function(ts_inter, p = 2, q = 3) {
 #' @param q The number of time lags to use in the sliding window for
 #'   interventions.
 #'   
+#' @examples
+#' data(sim_ts)
+#' patchify_single_df(sim_ts[[1]], 2, 2)
 #' @importFrom stringr str_c
 patchify_single_df <- function(ts_inter, p, q) {
   data <- patchify_single(ts_inter, p, q)
@@ -61,7 +67,7 @@ patchify_single_df <- function(ts_inter, p, q) {
   w <- data$w
   
   result <- list(
-    x = matrix(nrow = length(x), ncol = 1 + length(x[[1]]) + length(w[[1]])),
+    x = matrix(nrow = length(x), ncol = length(x[[1]]) + length(w[[1]])),
     y = matrix(nrow = length(x), ncol = length(y[[1]]))
   )
   
@@ -69,7 +75,7 @@ patchify_single_df <- function(ts_inter, p, q) {
     xi <- matrix(x[[i]], nrow = 1)
     result$y[i, ] <- matrix(y[[i]], nrow = 1)
     wi <- matrix(w[[i]], nrow = 1)
-    result$x[i, ] <- cbind(1, xi, wi)
+    result$x[i, ] <- cbind(xi, wi)
   }
   
   colnames(result$x) <- predictor_names(dim(x[[1]]), dim(w[[1]]))
@@ -95,6 +101,9 @@ patchify_single_df <- function(ts_inter, p, q) {
 #' @importFrom purrr map_dfr
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr select bind_cols
+#' @examples
+#' data(sim_ts)
+#' patchify_df(sim_ts[[1]])
 #' @export
 patchify_df <- function(ts_inter, p = 2, q = 3) {
   patches <- list()
@@ -117,7 +126,7 @@ patchify_df <- function(ts_inter, p = 2, q = 3) {
 predictor_names <- function(x_dim, w_dim) {
   n1 <- rep(str_c("taxon", seq_len(x_dim[1])), x_dim[2])
   n2 <- rep(str_c("lag", seq(x_dim[2], 1)), each = x_dim[1])
-  x_names <- c("intercept", str_c(n1, "_", n2))
+  x_names <- str_c(n1, "_", n2)
   
   n1 <- rep(str_c("intervention", seq_len(w_dim[1])), w_dim[2])
   n2 <- rep(str_c("lag", seq(w_dim[2] - 1, 0)), each = w_dim[1])
@@ -137,7 +146,6 @@ lag_from_names <- function(names, group = "taxon") {
 }
 
 #' Detect the time lags over which a model was trained
-#' @export
 time_lags <- function(fit) {
   # different names for gbm and lasso, resp.
   if (!is.null(fit$feature_names)) {
@@ -165,13 +173,18 @@ pad_lag <- function(x, lag) {
 #' past. This will be matched to the model's original training data and used to
 #' generate predictions.
 #' 
-#' @param ts_inter An object of class `ts_inter` over which to generate
+#' @param ts_inter An object of class `ts_inter_single` over which to generate
 #'   sliding windows.
 #' @param lags A vector specifying `P` and `Q` in the trained mbtransfer model.
 #' @param subject A static data frame of subject-level variables. This will be
 #'   concatenated to time-varying intervention and taxonomic covariates when
 #'   making predictions. This is analogous to the training process.
 #' @importFrom purrr set_names
+#' @examples
+#' data(sim_ts)
+#' ts <- subset_values(sim_ts, 1:5)
+#' predictors(ts[[1]], c(2, 2), NULL)
+#' @export
 predictors <- function(ts_inter, lags, subject) {
   x <- values(ts_inter) |>
     pad_lag(lags[1])
@@ -182,7 +195,7 @@ predictors <- function(ts_inter, lags, subject) {
   x_prev <- x[, seq(n_time - lags[1] + 1, by = 1, length.out = lags[1]), drop = FALSE]
   w_prev <- w[, seq(n_time - lags[2] + 2, by = 1, length.out = lags[2]), drop = FALSE]
   
-  xw <- cbind(intercept = 1, matrix(x_prev, nrow = 1), matrix(w_prev, nrow = 1)) |>
+  xw <- cbind(matrix(x_prev, nrow = 1), matrix(w_prev, nrow = 1)) |>
     as.data.frame() |>
     set_names(predictor_names(dim(x_prev), dim(w_prev))) |>
     as.matrix()

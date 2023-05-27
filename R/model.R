@@ -40,9 +40,12 @@
 #' @importFrom glue glue
 #' @importFrom xgboost xgboost
 #' @export
+#' @examples
+#' data(sim_ts)
+#' mbtransfer(sim_ts)
 mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
-                       early_stopping_rounds = 5, verbose = 0, lambda = 1e-2,
-                       alpha = 1e-3, eta = 0.05, ...) {
+                       early_stopping_rounds = 5, verbose = 0, lambda = 1e-1,
+                       alpha = 1e-2, eta = 0.1, ...) {
   train_data <- patchify_df(ts_inter, P, Q)
   fit <- list()
 
@@ -51,7 +54,8 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
     pb$tick()
     fit[[j]] <- xgboost(
       data = train_data$x, label = train_data$y[[j]], nrounds = nrounds,
-      booster = "gblinear", lambda = lambda, alpha = alpha,
+      booster = "gblinear", alpha = alpha, lambda = lambda,
+      eta = eta,
       early_stopping_rounds = early_stopping_rounds, verbose = verbose, ...
     )
   }
@@ -69,6 +73,11 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
 #'   method will make predictions for every timepoint that appears in the
 #'   `@interventions` slot but not the `@values`.
 #' @export
+#' @examples
+#' data(sim_ts)
+#' fit <- mbtransfer(sim_ts)
+#' ts_subset <- subset_values(sim_ts, 1:25)
+#' predict(fit, ts_subset)
 mbtransfer_predict <- function(object, newdata) {
   lags <- time_lags(object@parameters[[1]])
   result <- list()
