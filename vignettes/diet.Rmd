@@ -23,7 +23,7 @@ bib <- ReadBib("references.bib")
 
 ### Data and Problem Context
 
-`Citep(bib, "David2013DietRA")` was one of the first studies to draw attention
+`r Citep(bib, "David2013DietRA")` was one of the first studies to draw attention
 to the way the human microbiomes could quickly respond to changes in host
 behavior. This had implications for a lot of how we think of the microbiome in
 health and disease -- it wouldn't make sense to try engineering/manipulating
@@ -69,9 +69,9 @@ be used by our `ts_from_dfs` function.
 ```{r}
 subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
 interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
-  column_to_rownames("sample")
+ column_to_rownames("sample")
 reads <- read_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
-  column_to_rownames("sample")
+ column_to_rownames("sample")
 samples <- read_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
 ```
 
@@ -162,7 +162,7 @@ participants, but the person-to-person variability might be too high for us to
 make reasonable generalizations for less abundant taxa.
 
 ```{r, fig.width = 10, fig.height = 6}
-map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
+map_dfr(ts_preds, ~ reshape_preds(ts, ., 12), .id = "generalization") |>
     filter(h > 0, h < 6) |>
     ggplot() +
     geom_abline(slope = 1, col = "#400610") +
@@ -197,8 +197,8 @@ that counterfactual, the second gives the candidate intervention lengths, and
 the last gives the length of the overall output sequence.
 
 ```{r}
-ws <- steps(c("Plant" = TRUE, "Animal" = FALSE), lengths = 1:3, L = 4) |>
-  c(steps(c("Plant" = FALSE, "Animal" = TRUE), lengths = 1:3, L = 4))
+ws <- steps(c("Plant" = TRUE, "Animal" = FALSE), lengths = 1:4, L = 4) |>
+  c(steps(c("Plant" = FALSE, "Animal" = TRUE), lengths = 1:4, L = 4))
 ws
 ```
 
@@ -214,8 +214,8 @@ value and still work through the rest of this vignette (many taxa will still be
 easily detectable).
 
 ```{r}
-staxa <- select_taxa(ts, ws[[1]], ws[[8]],  \(x) mbtransfer(x, 2, 2), n_splits = 2)
-save(staxa, file = "staxa-diet.rds")
+staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
+#saveRDS(staxa, file = "staxa-diet.rds")
 ```
 
 In addition to the selected set of taxa, this function returns the mirror
@@ -271,10 +271,10 @@ imaginary `ts` objects, we fill in predictions for every timepoint that appears
 as a column of `interventions` but not of `values`.
 
 ```{r}
-ws <- steps(c("Plant" = TRUE, "Animal" = FALSE), lengths = 1:3, L = 8) |>
-  c(steps(c("Plant" = FALSE, "Animal" = TRUE), lengths = 1:3, L = 8))
+ws <- steps(c("Plant" = TRUE, "Animal" = FALSE), lengths = 1:4, L = 8) |>
+  c(steps(c("Plant" = FALSE, "Animal" = TRUE), lengths = 1:4, L = 8))
 
-sim_ts <- counterfactual_ts(ts, ws[[1]], ws[[8]], start_ix = 4) |>
+sim_ts <- counterfactual_ts(ts, ws[[1]], ws[[10]], start_ix = 4) |>
   map(~ predict(fits[["in-sample"]], .))
 ```
 

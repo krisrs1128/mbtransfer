@@ -231,8 +231,8 @@ still guarantee FDR control, and you will still be able to run the rest of the
 vignette even if you set `n_splits` to a value like 3 or 4.
 
 ```{r}
-staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 2)
-save(staxa, file = "staxa-postpartum.rds")
+staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
+saveRDS(staxa, file = "staxa-postpartum.rds")
 ```
 
 The `ms` element of this object includes the raw mirror statistics that led to
