@@ -215,8 +215,7 @@ easily detectable).
 
 ```{r}
 staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
-saveRDS(staxa, file = "staxa-diet.rds")
-#staxa <- readRDS("staxa-diet.rds")
+staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-aqua.rds"))
 ```
 
 In addition to the selected set of taxa, this function returns the mirror

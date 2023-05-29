@@ -232,8 +232,7 @@ vignette even if you set `n_splits` to a value like 3 or 4.
 
 ```{r}
 staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
-saveRDS(staxa, file = "staxa-postpartum.rds")
-#readRDS("staxa-postpartum.rds")
+staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-postpartum.rds"))
 ```
 
 The `ms` element of this object includes the raw mirror statistics that led to

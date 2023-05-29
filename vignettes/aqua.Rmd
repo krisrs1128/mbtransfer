@@ -136,8 +136,7 @@ ws[[1]]["AS", ] <- 38
 ws[[2]]["AS", ] <- 38
 
 #staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 4, 4, alpha = 1e-3, eta = 0.01), n_splits = 25)
-#saveRDS(staxa, file = "staxa-aqua.rds")
-staxa <- readRDS("staxa-aqua.rds")
+staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-aqua.rds"))
 
 taxa <- staxa$ms |>
   select(multisplit, m, lag) %>%
