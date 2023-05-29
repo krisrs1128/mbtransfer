@@ -43,12 +43,16 @@ ts_to_dfs <- function(ts) {
     names(ts) <- seq_along(ts)
   }
   
-  reads <- do.call(cbind, map(ts, ~ values(.)))
-  interventions <- do.call(cbind, map(ts, ~ interventions(.))) |>
+  reads <- do.call(cbind, map(ts@series, ~ values(.)))
+  interventions <- do.call(cbind, map(ts@series, ~ interventions(.))) |>
     t() |>
     as.data.frame() |>
     rownames_to_column("sample")
-  metadata <- map_dfr(ts, ~ tibble(sample = colnames(values(.)), time = .@time), .id = "subject")
+  metadata <- map_dfr(
+    ts@series,
+    ~ tibble(sample = colnames(values(.)), time = .@time),
+    .id = "subject"
+  )
   
   list(
     reads = reads,
