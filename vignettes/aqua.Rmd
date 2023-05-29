@@ -78,7 +78,7 @@ ts <- reads |>
   ts_from_dfs(interventions, samples, subject) |>
   interpolate()
 
-ts <- ts[1:2]
+ts <- ts[1:3]
 ```
 
 ## Prediction
@@ -89,7 +89,7 @@ of 128) days within each tank. Then, we forecast the remaining 32 days.
 
 ```{r}
 ts_missing <- subset_values(ts, 1:96)
-fit <- mbtransfer(ts, P = 2, Q = 2, alpha = 1e-3)
+fit <- mbtransfer(ts, P = 2, Q = 2, nrounds = 1e3, eta = 1e-2)
 ts_pred <- predict(fit, ts_missing)
 ```
 
@@ -135,9 +135,9 @@ ws <- steps(c("pH" = TRUE, "AS" = FALSE), lengths = 4, L = 4) |>
 ws[[1]]["AS", ] <- 38
 ws[[2]]["AS", ] <- 38
 
-staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 2, 2, alpha = 1e-3), n_splits = 25)
-saveRDS(staxa, file = "staxa-aqua.rds")
-#staxa <- readRDS("staxa-aqua.rds")
+#staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 4, 4, alpha = 1e-3, eta = 0.01), n_splits = 25)
+#saveRDS(staxa, file = "staxa-aqua.rds")
+staxa <- readRDS("staxa-aqua.rds")
 
 taxa <- staxa$ms |>
   select(multisplit, m, lag) %>%
@@ -200,7 +200,7 @@ pivot_ts(ts) |>
   filter(taxon %in% focus_taxa, taxon %in% taxa(ts)[vis_taxa]) |>
   ggplot() +
   geom_point(aes(pH, value), alpha = 0.6, size = 0.8) +
-  facet_wrap(~ taxon, ncol = 7)
+  facet_wrap(~ taxon)
 ```
 
 Next, we'll see how these taxa vary in response to intermediate shifts pH, not
