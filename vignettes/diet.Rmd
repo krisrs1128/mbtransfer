@@ -214,8 +214,8 @@ value and still work through the rest of this vignette (many taxa will still be
 easily detectable).
 
 ```{r}
-staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
-staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-aqua.rds"))
+#staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
+staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-diet.rds"))
 ```
 
 In addition to the selected set of taxa, this function returns the mirror
@@ -234,7 +234,7 @@ staxa$ms <- staxa$ms |>
 vis_otus <- staxa$ms |>
   group_by(taxon) |>
   summarise(m = mean(m)) |>
-  slice_max(m, n = 50) |>
+  slice_max(m, n = 100) |>
   pull(taxon)
 
 focus_taxa <- unlist(map(staxa$taxa, ~ c(.)))
@@ -301,7 +301,7 @@ quartiles always agree with one another. This suggests that the model has
 focused on effects from $w_{t}$, and that the initial community profiles $y_{t}$
 play no role in the model's reduction.
 
-```{r, fig.height = 5, fig.width = 9}
+```{r, fig.height = 5, fig.width = 12}
 rdata_wide <- rdata |>
   select(taxon, time, median) |>
   filter(time > 0) |>
@@ -318,7 +318,12 @@ rdata_order <- rdata_wide |>
 rdata |>
   left_join(rdata_order) |>
   ribbon_plot(reorder_var = "1") +
-  theme(panel.spacing = unit(0, "line"))
+  scale_y_continuous(breaks = 2) +
+  theme(
+    panel.spacing = unit(0, "line"),
+    axis.text.y = element_text(size = 8)
+  )
+ggsave("~/Desktop/writing/202305/figure/counterfactual_diet_staxa.png", width = 12, height = 5)
 ```
 
 In the spirit of progressive disclosure in data visualization, we can plot the

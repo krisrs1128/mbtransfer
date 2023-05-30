@@ -89,7 +89,7 @@ of 128) days within each tank. Then, we forecast the remaining 32 days.
 
 ```{r}
 ts_missing <- subset_values(ts, 1:96)
-fit <- mbtransfer(ts, P = 2, Q = 2, nrounds = 1e3, eta = 1e-2)
+fit <- mbtransfer(ts, P = 4, Q = 4, alpha = 1e-3, eta = 1e-2)
 ts_pred <- predict(fit, ts_missing)
 ```
 
@@ -185,21 +185,22 @@ each plot might lead you to believe. A transfer function + mirror testing
 approach accounts for temporal dependence, which is the main reason for going
 through all the additional modeling effort.
 
-```{r}
+```{r, fig.width = 12, fig.height = 4}
 focus_taxa <- unlist(map(staxa$taxa, ~ c(.)))
 
 taxa_order <- staxa$ms |>
   group_by(taxon) |>
-  summarise(median_m = median(m)) |>
-  arrange(-median_m) |>
+  summarise(mean_m = mean(m)) |>
+  arrange(-mean_m) |>
   pull(taxon)
 
 pivot_ts(ts) |>
   mutate(taxon = factor(taxon, levels = taxa(ts)[taxa_order])) |>
   filter(taxon %in% focus_taxa, taxon %in% taxa(ts)[vis_taxa]) |>
   ggplot() +
-  geom_point(aes(pH, value), alpha = 0.6, size = 0.8) +
-  facet_wrap(~ taxon)
+  geom_point(aes(pH, value), alpha = 0.4, size = 0.3) +
+  facet_wrap(~ taxon, ncol = 8)
+ggsave("aqua_scatterplot.png", width= 12, height = 4, dpi = 200)
 ```
 
 Next, we'll see how these taxa vary in response to intermediate shifts pH, not
