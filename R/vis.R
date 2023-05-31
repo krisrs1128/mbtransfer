@@ -14,6 +14,7 @@ subject_order <- function(values_df, taxa, r = 0) {
   rownames(values_wide)[hclust(dist(values_wide))$order]
 }
 
+#' @importFrom ggplot2 scale_color_gradient scale_fill_gradient
 #' @export
 interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   p <- values_df |>
@@ -22,8 +23,8 @@ interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
     ggplot() +
     geom_tile(aes(time, subject, fill = value, col = value), ...) +
     scale_x_continuous(expand = c(0, 0)) +
-    scale_fill_distiller(direction = 1) +
-    scale_color_distiller(direction = 1) +
+    scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
+    scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
     theme(
       strip.text.y = element_text(angle = 0),
       panel.grid = element_blank(),
@@ -49,8 +50,8 @@ interaction_barcode <- function(values_df, taxa, condition = NULL, r = 0, ...) {
     ggplot() +
     geom_tile(aes(time, taxon, fill = value, col = value), ...) +
     scale_x_continuous(expand = c(0, 0)) +
-    scale_fill_distiller(direction = 1) +
-    scale_color_distiller(direction = 1) +
+    scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
+    scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
     theme(
       panel.spacing = unit(0, "line"),
       panel.border = element_rect(linewidth = 1, fill = NA, color = "#d3d3d3"),

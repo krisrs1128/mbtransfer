@@ -13,6 +13,7 @@
 #'   interventions.
 #' @importFrom slider slide
 #' @examples
+#' library(mbtransfer)
 #' data(sim_ts)
 #' patchify_single(sim_ts[[1]])
 patchify_single <- function(ts_inter, p = 2, q = 3) {
@@ -57,6 +58,7 @@ patchify_single <- function(ts_inter, p = 2, q = 3) {
 #'   interventions.
 #'   
 #' @examples
+#' library(mbtransfer)
 #' data(sim_ts)
 #' patchify_single_df(sim_ts[[1]], 2, 2)
 #' @importFrom stringr str_c
@@ -102,6 +104,7 @@ patchify_single_df <- function(ts_inter, p, q) {
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr select bind_cols
 #' @examples
+#' library(mbtransfer)
 #' data(sim_ts)
 #' patchify_df(sim_ts[[1]])
 #' @export
@@ -181,6 +184,7 @@ pad_lag <- function(x, lag) {
 #'   making predictions. This is analogous to the training process.
 #' @importFrom purrr set_names
 #' @examples
+#' library(mbtransfer)
 #' data(sim_ts)
 #' ts <- subset_values(sim_ts, 1:5)
 #' predictors(ts[[1]], c(2, 2), NULL)

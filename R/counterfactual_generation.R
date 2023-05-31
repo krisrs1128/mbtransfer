@@ -12,6 +12,7 @@ to_vector <- function(x) {
 
 #' Hypothetical Step Interventions
 #' @examples
+#' library(mbtransfer)
 #' steps(c("P1" = TRUE), 1:3, 2:3, 4)
 #' 
 #' @importFrom glue glue
@@ -56,6 +57,7 @@ steps <- function(p_states, starts = 1, lengths = 1:3, L = 3, w_star = c(0, 1)) 
 #'   Defaults to 1/0, respectively.
 #' 
 #' @examples
+#' library(mbtransfer)
 #' pulses(c("P1" = TRUE), 1, 4)
 #' pulses(c("P1" = TRUE), 1:3, 4)
 #" pulses(c("P1" = TRUE), 1:3, 4, seq(0, 1, .2))

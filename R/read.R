@@ -1,6 +1,18 @@
 
 #'Build a  `ts` 
 #' @importFrom dplyr pull filter left_join distinct
+#' @examples
+#' library(mbtransfer)
+#' library(tibble)
+#' subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
+#' interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
+#' column_to_rownames("sample")
+#' reads <- read_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
+#'  column_to_rownames("sample")
+#' samples <- read_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
+#' ts <- as.matrix(reads) |>
+#'   ts_from_dfs(interventions, samples, subject)
+#' ts
 #' @export
 ts_from_dfs <- function(reads, interventions, metadata, subject_data = NULL) {
   subjects <- unique(metadata$subject)

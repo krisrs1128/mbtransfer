@@ -11,6 +11,7 @@
 #'   expected dimensions are n_taxa x time_lag x random_split_index.
 #' @export
 #' @examples
+#' library(mbtransfer)
 #' effects <- matrix(rnorm(500), 250, 2)
 #' m <- consistency_mirror(effects)
 #' hist(m, 20)
@@ -26,6 +27,7 @@ consistency_mirror <- function(effects) {
 }
 
 #' Compute Mirrors across Splits
+#' 
 #' The mirror of `consistency_mirror` works on effects derived from a single
 #' split. In practice, we will want to have mirror statistics across a multiple
 #' splits. This is a small wrapper of that function that computes mirrors for
@@ -36,6 +38,8 @@ consistency_mirror <- function(effects) {
 #' @importFrom dplyr mutate bind_rows row_number
 #' @importFrom tibble tibble
 #' @examples
+#' library(mbtransfer)
+#' library(mbtransfer)
 #' effects <- list()
 #' effects[[1]] <- array(rnorm(1000), dim = c(250, 2, 2))
 #' effects[[2]] <- array(rnorm(1000), dim = c(250, 2, 2))
@@ -87,6 +91,7 @@ consistency_mirror_multisplit <- function(effects) {
 #'   splits.
 #' @export
 #' @examples
+#' library(mbtransfer)
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
@@ -140,6 +145,7 @@ pd_summary <- function(y0, y1, ix, summary_fun = mean) {
 #'   counterfactuals. The procedure concatenates these counterfactuals to the
 #'   end of the series and computes the difference in the forecasts.
 #' @examples
+#' library(mbtransfer)
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
@@ -193,6 +199,7 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select
 #' @examples
+#' library(mbtransfer)
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
