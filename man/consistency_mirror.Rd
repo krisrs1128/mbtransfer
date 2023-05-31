@@ -19,7 +19,6 @@ then the signs are more likely to agree (sign == 1 below) and the magnitude
 should be large.
 }
 \examples{
-library(mbtransfer)
 effects <- matrix(rnorm(500), 250, 2)
 m <- consistency_mirror(effects)
 hist(m, 20)

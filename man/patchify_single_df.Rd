@@ -22,7 +22,6 @@ wrapping \code{patchify_single}. It is in a format that can directly be used by
 different regression methods.
 }
 \examples{
-library(mbtransfer)
 data(sim_ts)
 patchify_single_df(sim_ts[[1]], 2, 2)
 }

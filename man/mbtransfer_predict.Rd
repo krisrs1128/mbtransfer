@@ -19,7 +19,6 @@ method will make predictions for every timepoint that appears in the
 Prediction method for \code{mbtransfer} objects
 }
 \examples{
-library(mbtransfer)
 data(sim_ts)
 fit <- mbtransfer(sim_ts)
 ts_subset <- subset_values(sim_ts, 1:25)

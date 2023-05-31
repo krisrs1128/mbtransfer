@@ -18,8 +18,6 @@ splits. This is a small wrapper of that function that computes mirrors for
 effects available along a list.
 }
 \examples{
-library(mbtransfer)
-library(mbtransfer)
 effects <- list()
 effects[[1]] <- array(rnorm(1000), dim = c(250, 2, 2))
 effects[[2]] <- array(rnorm(1000), dim = c(250, 2, 2))

@@ -25,7 +25,6 @@ component, \code{y}. This is constructed by running \code{patchify_single_df} ov
 subjects in the dataset.
 }
 \examples{
-library(mbtransfer)
 data(sim_ts)
 patchify_df(sim_ts[[1]])
 }

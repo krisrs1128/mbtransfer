@@ -42,7 +42,6 @@ counterfactual partial dependence effects across all taxa and time lags. This
 supports estimation of these effects for a single random data split pair.
 }
 \examples{
-library(mbtransfer)
 data(sim_ts)
 w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))

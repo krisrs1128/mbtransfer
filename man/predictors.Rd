@@ -23,7 +23,6 @@ past. This will be matched to the model's original training data and used to
 generate predictions.
 }
 \examples{
-library(mbtransfer)
 data(sim_ts)
 ts <- subset_values(sim_ts, 1:5)
 predictors(ts[[1]], c(2, 2), NULL)

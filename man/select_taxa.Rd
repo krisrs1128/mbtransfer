@@ -42,7 +42,6 @@ effects of interventions on taxa responses, but the same principle could
 apply to estimate significant relationships between taxa.
 }
 \examples{
-library(mbtransfer)
 data(sim_ts)
 w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))

@@ -64,7 +64,7 @@ contained in the \verb{@parameters} slot, which is a list whose j^th element is
 the model for the j^th taxon (row) within each \code{ts}'s values matrix.
 }
 \examples{
-library(mbtransfer)
 data(sim_ts)
-mbtransfer(sim_ts)
+fit <- mbtransfer(sim_ts)
+fit@parameters[[1]]
 }
