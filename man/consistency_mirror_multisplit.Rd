@@ -2,11 +2,7 @@
 % Please edit documentation in R/pd-mirror.R
 \name{consistency_mirror_multisplit}
 \alias{consistency_mirror_multisplit}
-\title{Compute Mirrors across Splits
-The mirror of \code{consistency_mirror} works on effects derived from a single
-split. In practice, we will want to have mirror statistics across a multiple
-splits. This is a small wrapper of that function that computes mirrors for
-effects available along a list.}
+\title{Compute Mirrors across Splits}
 \usage{
 consistency_mirror_multisplit(effects)
 }
@@ -16,13 +12,14 @@ effects. The list indexes different splits. Within each list element, the
 expected dimensions are n_taxa x time_lag x random_split_index.}
 }
 \description{
-Compute Mirrors across Splits
 The mirror of \code{consistency_mirror} works on effects derived from a single
 split. In practice, we will want to have mirror statistics across a multiple
 splits. This is a small wrapper of that function that computes mirrors for
 effects available along a list.
 }
 \examples{
+library(mbtransfer)
+library(mbtransfer)
 effects <- list()
 effects[[1]] <- array(rnorm(1000), dim = c(250, 2, 2))
 effects[[2]] <- array(rnorm(1000), dim = c(250, 2, 2))
