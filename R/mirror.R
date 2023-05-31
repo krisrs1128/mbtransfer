@@ -11,6 +11,7 @@ fdp_hat <- function(m) {
   fdp
 }
 
+#' @importFrom dplyr slice_min
 #' @export
 tau_q <- function(fdp, q) {
   if (!any(na.omit(fdp$fdp) < q)) {

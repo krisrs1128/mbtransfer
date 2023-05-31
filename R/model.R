@@ -43,7 +43,8 @@
 #' @examples
 #' library(mbtransfer)
 #' data(sim_ts)
-#' mbtransfer(sim_ts)
+#' fit <- mbtransfer(sim_ts)
+#' fit@parameters[[1]]
 mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
                        early_stopping_rounds = 5, verbose = 0, lambda = 1e-1,
                        alpha = 1e-2, eta = 0.1, ...) {
