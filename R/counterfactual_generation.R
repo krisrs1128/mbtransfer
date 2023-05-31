@@ -12,7 +12,6 @@ to_vector <- function(x) {
 
 #' Hypothetical Step Interventions
 #' @examples
-#' library(mbtransfer)
 #' steps(c("P1" = TRUE), 1:3, 2:3, 4)
 #' 
 #' @importFrom glue glue

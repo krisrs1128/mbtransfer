@@ -2,7 +2,6 @@
 #'Build a  `ts` 
 #' @importFrom dplyr pull filter left_join distinct
 #' @examples
-#' library(mbtransfer)
 #' library(tibble)
 #' subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
 #' interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>

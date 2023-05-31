@@ -41,7 +41,6 @@
 #' @importFrom xgboost xgboost
 #' @export
 #' @examples
-#' library(mbtransfer)
 #' data(sim_ts)
 #' fit <- mbtransfer(sim_ts)
 #' fit@parameters[[1]]
@@ -76,7 +75,6 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
 #'   `@interventions` slot but not the `@values`.
 #' @export
 #' @examples
-#' library(mbtransfer)
 #' data(sim_ts)
 #' fit <- mbtransfer(sim_ts)
 #' ts_subset <- subset_values(sim_ts, 1:25)

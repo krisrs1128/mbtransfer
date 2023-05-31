@@ -12,6 +12,7 @@ fdp_hat <- function(m) {
 }
 
 #' @importFrom dplyr slice_min
+#' @importFrom magrittr %>%
 #' @export
 tau_q <- function(fdp, q) {
   if (!any(na.omit(fdp$fdp) < q)) {

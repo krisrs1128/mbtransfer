@@ -11,7 +11,6 @@
 #'   expected dimensions are n_taxa x time_lag x random_split_index.
 #' @export
 #' @examples
-#' library(mbtransfer)
 #' effects <- matrix(rnorm(500), 250, 2)
 #' m <- consistency_mirror(effects)
 #' hist(m, 20)
@@ -38,8 +37,6 @@ consistency_mirror <- function(effects) {
 #' @importFrom dplyr mutate bind_rows row_number
 #' @importFrom tibble tibble
 #' @examples
-#' library(mbtransfer)
-#' library(mbtransfer)
 #' effects <- list()
 #' effects[[1]] <- array(rnorm(1000), dim = c(250, 2, 2))
 #' effects[[2]] <- array(rnorm(1000), dim = c(250, 2, 2))
@@ -86,12 +83,10 @@ consistency_mirror_multisplit <- function(effects) {
 #'   end of the series and computes the difference in the forecasts.
 #' @param tr_fun A function that can be used to train over random splits. In the
 #'   examples in this package, we use an anonymous function that fills our
-#'   chosen hyperparameters in `mbtransfer`. For example \(x) mbtransfer(x, P =
-#'   1, Q = 1) will fit a lag-1 transfer function model on all the random
-#'   splits.
+#'   chosen hyperparameters in `mbtransfer`. For example `\(x) mbtransfer(x, P =  1, Q = 1)`
+#'    will fit a lag-1 transfer function model on all the random splits.
 #' @export
 #' @examples
-#' library(mbtransfer)
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
@@ -145,7 +140,6 @@ pd_summary <- function(y0, y1, ix, summary_fun = mean) {
 #'   counterfactuals. The procedure concatenates these counterfactuals to the
 #'   end of the series and computes the difference in the forecasts.
 #' @examples
-#' library(mbtransfer)
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
@@ -199,7 +193,6 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select
 #' @examples
-#' library(mbtransfer)
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
