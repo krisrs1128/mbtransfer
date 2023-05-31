@@ -319,6 +319,7 @@ rdata |>
   left_join(rdata_order) |>
   ribbon_plot(reorder_var = "1") +
   scale_y_continuous(breaks = 2) +
+  labs(x = "Time", y = "Median Counterfactual Diference") +
   theme(
     panel.spacing = unit(0, "line"),
     axis.text.y = element_text(size = 8)
@@ -343,9 +344,18 @@ Overall, we recommend an overall workflow that first evaluates taxa using formal
 models and then investigates subject-level variation using
 
 ```{r, fig.height = 3, fig.width = 11}
+taxa_hm <- c("Otu000011", "Otu000095", "Otu000434", "Otu000236", "Otu000169", "Otu000017")
+
 values_df |>
   filter(diet == "Animal") |>
   group_by(taxon) |>
-  mutate(value = rank(value) / n()) |>
-  interaction_hm(taxa = c("Otu000011", "Otu000017", "Otu000142"), "diet")
+  mutate(
+    value = rank(value) / n(),
+    taxon = factor(taxon, levels = taxa_hm)
+  ) |>
+  interaction_hm(taxa = taxa_hm, "diet") +
+  scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
+  scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
+  labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank")
+ggsave("~/Downloads/diet_raw_hm.png", width = 11, height = 3)
 ```
