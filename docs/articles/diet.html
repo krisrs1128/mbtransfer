@@ -137,7 +137,7 @@ common practice (e.g., <code>r</code>Citep(bib,
 variation in the gaps between samples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">reads</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">ts_from_dfs</span><span class="op">(</span><span class="va">interventions</span>, <span class="va">samples</span>, <span class="va">subject</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/ts_from_dfs.html">ts_from_dfs</a></span><span class="op">(</span><span class="va">interventions</span>, <span class="va">samples</span>, <span class="va">subject</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">interpolate</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span></code></pre></div>
 <p>Before doing any modeling, let’s visualize some of the raw data. The
 plot below shows interpolated series for the seven most abundant taxa.
@@ -273,34 +273,8 @@ power. However, this takes time, and you can reset the value of
 <code>n_splits</code> to a smaller value and still work through the rest
 of this vignette (many taxa will still be easily detectable).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">staxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_taxa.html">select_taxa</a></span><span class="op">(</span><span class="va">ts</span>, <span class="va">ws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">ws</span><span class="op">[[</span><span class="fl">10</span><span class="op">]</span><span class="op">]</span>,  \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/mbtransfer.html">mbtransfer</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, n_splits <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Training models for split 1/25</span></span>
-<span><span class="co">#&gt; Training models for split 2/25</span></span>
-<span><span class="co">#&gt; Training models for split 3/25</span></span>
-<span><span class="co">#&gt; Training models for split 4/25</span></span>
-<span><span class="co">#&gt; Training models for split 5/25</span></span>
-<span><span class="co">#&gt; Training models for split 6/25</span></span>
-<span><span class="co">#&gt; Training models for split 7/25</span></span>
-<span><span class="co">#&gt; Training models for split 8/25</span></span>
-<span><span class="co">#&gt; Training models for split 9/25</span></span>
-<span><span class="co">#&gt; Training models for split 10/25</span></span>
-<span><span class="co">#&gt; Training models for split 11/25</span></span>
-<span><span class="co">#&gt; Training models for split 12/25</span></span>
-<span><span class="co">#&gt; Training models for split 13/25</span></span>
-<span><span class="co">#&gt; Training models for split 14/25</span></span>
-<span><span class="co">#&gt; Training models for split 15/25</span></span>
-<span><span class="co">#&gt; Training models for split 16/25</span></span>
-<span><span class="co">#&gt; Training models for split 17/25</span></span>
-<span><span class="co">#&gt; Training models for split 18/25</span></span>
-<span><span class="co">#&gt; Training models for split 19/25</span></span>
-<span><span class="co">#&gt; Training models for split 20/25</span></span>
-<span><span class="co">#&gt; Training models for split 21/25</span></span>
-<span><span class="co">#&gt; Training models for split 22/25</span></span>
-<span><span class="co">#&gt; Training models for split 23/25</span></span>
-<span><span class="co">#&gt; Training models for split 24/25</span></span>
-<span><span class="co">#&gt; Training models for split 25/25</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">staxa</span>, file <span class="op">=</span> <span class="st">"staxa-diet.rds"</span><span class="op">)</span></span>
-<span><span class="co">#staxa &lt;- readRDS("staxa-diet.rds")</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#staxa &lt;- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)</span></span>
+<span><span class="va">staxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></span><span class="op">(</span><span class="st">"https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-diet.rds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>In addition to the selected set of taxa, this function returns the
 mirror statistics for for each taxon. These statistics are larger for
 taxa with clearer sensitivity to the intervention. We’ve chosen the 50
@@ -317,7 +291,7 @@ discoveries).</p>
 <span><span class="va">vis_otus</span> <span class="op">&lt;-</span> <span class="va">staxa</span><span class="op">$</span><span class="va">ms</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">taxon</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_max</a></span><span class="op">(</span><span class="va">m</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_max</a></span><span class="op">(</span><span class="va">m</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">taxon</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">focus_taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">staxa</span><span class="op">$</span><span class="va">taxa</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -377,12 +351,12 @@ series to diverge after the intervention appears.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Otu000001    -<span style="color: #BB0000;">4</span>  0       0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Otu000001    -<span style="color: #BB0000;">3</span>  0       0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Otu000001    -<span style="color: #BB0000;">2</span>  0       0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Otu000001    -<span style="color: #BB0000;">1</span>  0.098<span style="text-decoration: underline;">8</span>  0.098<span style="text-decoration: underline;">8</span>  0.098<span style="text-decoration: underline;">8</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Otu000001     0  0.261   0.261   0.261 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Otu000001     1  0.330   0.330   0.330 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Otu000001    -<span style="color: #BB0000;">1</span>  0.102   0.102   0.102 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Otu000001     0  0.259   0.259   0.259 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Otu000001     1  0.328   0.328   0.328 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Otu000001     2  0.320   0.320   0.320 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Otu000001     3  0.181   0.181   0.181 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Otu000001     4 -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Otu000001     3  0.177   0.177   0.177 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Otu000001     4 -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">6</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 942 more rows</span></span></span></code></pre></div>
 <p>We can now visualize the trajectories of the selected taxa. We can
 organize the taxa so that those with similar trajectory differences are
@@ -412,8 +386,15 @@ model’s reduction.</p>
 <span><span class="va">rdata</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">rdata_order</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ribbon_plot</span><span class="op">(</span>reorder_var <span class="op">=</span> <span class="st">"1"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.spacing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0</span>, <span class="st">"line"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diet_files/figure-html/unnamed-chunk-16-1.png" width="864"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Median Counterfactual Diference"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    panel.spacing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0</span>, <span class="st">"line"</span><span class="op">)</span>,</span>
+<span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="diet_files/figure-html/unnamed-chunk-16-1.png" width="1152"></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"~/Desktop/writing/202305/figure/counterfactual_diet_staxa.png"</span>, width <span class="op">=</span> <span class="fl">12</span>, height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p>In the spirit of progressive disclosure in data visualization, we can
 plot the raw data associated with a few of these selected taxa. The
 effects do seem consistent with our estimated trajectories. The weaker
@@ -429,13 +410,23 @@ promising taxa. Moreover, we have some formal guarantees that not too
 many of our selected taxa are false positives. Overall, we recommend an
 overall workflow that first evaluates taxa using formal models and then
 investigates subject-level variation using</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">values_df</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">taxa_hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Otu000011"</span>, <span class="st">"Otu000095"</span>, <span class="st">"Otu000434"</span>, <span class="st">"Otu000236"</span>, <span class="st">"Otu000169"</span>, <span class="st">"Otu000017"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">values_df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">diet</span> <span class="op">==</span> <span class="st">"Animal"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">taxon</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">interaction_hm</span><span class="op">(</span>taxa <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Otu000011"</span>, <span class="st">"Otu000017"</span>, <span class="st">"Otu000142"</span><span class="op">)</span>, <span class="st">"diet"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    taxon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">taxon</span>, levels <span class="op">=</span> <span class="va">taxa_hm</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">interaction_hm</span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">taxa_hm</span>, <span class="st">"diet"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Subject"</span>, fill <span class="op">=</span> <span class="st">"Rank"</span>, color <span class="op">=</span> <span class="st">"Rank"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="diet_files/figure-html/unnamed-chunk-17-1.png" width="1056"></p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"~/Downloads/diet_raw_hm.png"</span>, width <span class="op">=</span> <span class="fl">11</span>, height <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

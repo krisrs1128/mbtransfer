@@ -56,7 +56,7 @@ the model for the j^th taxon (row) within each ts's values matrix."><!-- mathjax
 
     <div class="ref-description section level2">
     <p>This is the main prediction function in the <code>mbtransfer</code> package. Given an
-object of class <code>ts_inter</code> (see <code>ts_from_dfs()</code>), this will fit a collection
+object of class <code>ts_inter</code> (see <code><a href="ts_from_dfs.html">ts_from_dfs()</a></code>), this will fit a collection
 of linear gradient boosting-based transfer function models. The output is an
 object of class <code>mbtransfer_model</code>. Each component boosting model is
 contained in the <code>@parameters</code> slot, which is a list whose j^th element is
@@ -85,7 +85,7 @@ the model for the j^th taxon (row) within each <code>ts</code>'s values matrix.<
 <dd><p>An object of class <code>ts_inter</code> containing the time-varying
 microbiome community, environmental interventions, and static host features
 data. The columns for each element of the <code>values</code> matrix are expected to
-be consecutive timepoints in an changing community. <code>ts_from_dfs()</code> is a
+be consecutive timepoints in an changing community. <code><a href="ts_from_dfs.html">ts_from_dfs()</a></code> is a
 helper to create these objects from <code>data.frames</code> with the relevant
 information.</p></dd>
 
@@ -139,7 +139,8 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mbtransfer</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">mbtransfer</span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "mbtransfer_model"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot "parameters":</span>
@@ -165,16 +166,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.843097 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.843097 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.84328 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.843280 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.573207</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.461021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.615770</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.499420</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.843119</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.843097</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.843301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.843280</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -198,16 +199,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.513264 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.513264 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.512622 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.512622 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.419226</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.294882</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.420059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.291520</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.513311</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.513264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.512668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.512622</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -231,16 +232,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.866704 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.866704 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.866709 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.866709 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.348239</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.296660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.351480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.300427</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.866708</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.866704</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.866713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.866709</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -264,16 +265,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 21.3426 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:21.342604 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 21.34244 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:21.342437 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   23.51145</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   23.24121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   23.51172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   23.24120</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   21.34266</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   21.34260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   21.34249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   21.34244</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -297,16 +298,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.832343 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.832343 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.831768 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.831768 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.787870</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.682535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.753640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.647134</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.832423</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.832343</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.831845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.831768</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -330,16 +331,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.175597 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.175597 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.175616 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.175616 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.412521</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.390451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.412741</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.390514</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.175621</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.175597</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.175640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.175616</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -363,16 +364,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.234692 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.234692 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.234833 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.234833 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.715663</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.648319</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.699697</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.631437</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.234706</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.234692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.234848</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.234833</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -396,16 +397,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.9171 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.917100 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.917146 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.917146 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.107674</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.091791</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.106535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.090535</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.917123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.917100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.917169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.917146</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -429,16 +430,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.888451 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.888451 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.888416 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.888416 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.349897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.300714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.351410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.301260</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.888532</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.888451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.888496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.888416</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -462,16 +463,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.9474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.947400 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.947436 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.947436 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.228001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.197721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.227992</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.197074</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.947434</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.947400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.947471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.947436</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[11]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -495,16 +496,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.047665 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.047665 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.04759 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.047590 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.279715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.268016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.280264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.268610</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.047717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.047665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.047641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.047590</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[12]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -528,16 +529,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.565956 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.565956 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.56595 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.565950 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.807914</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.790383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.808198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.790498</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.566007</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.565956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.566001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.565950</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[13]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -561,16 +562,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.36283 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.362830 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.362766 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.362766 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.637257</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.609167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.629827</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.603134</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.362846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.362830</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.362782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.362766</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[14]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -594,16 +595,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.41923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.419230 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.418985 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.418985 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.626778</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.614667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.618253</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.605678</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.419290</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.419230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.419045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.418985</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[15]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -627,16 +628,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.285356 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.285356 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.285384 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.285384 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.616107</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.592146</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.615227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.591230</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.285440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.285356</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.285469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.285384</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[16]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -660,16 +661,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.447644 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.447644 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.44796 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.447960 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.760604</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.728974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.772314</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.742194</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.447664</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.447644</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.447981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.447960</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[17]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -693,16 +694,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.56823 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.568230 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.568061 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.568061 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.865404</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.847501</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.865505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.847532</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.568310</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.568230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.568140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.568061</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[18]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -726,16 +727,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.069838 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.069838 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.06964 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.069640 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.407507</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.383861</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.407481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.384094</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.069873</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.069838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.069675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.069640</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[19]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -759,16 +760,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.163727 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.163727 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.163703 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.163703 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.427719</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.405486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.429070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.406572</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.163762</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.163727</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.163737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.163703</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[20]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -792,16 +793,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.623988 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.623988 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.62448 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.624480 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.833527</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.815391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.836982</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.818070</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.624026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.623988</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.624519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.624480</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[21]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -825,16 +826,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.674081 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.674081 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.67403 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.674030 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.872384</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.849756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.872868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.850233</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.674100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.674081</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.674049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.674030</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[22]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -858,16 +859,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.824085 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.824085 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.824148 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.824148 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.153084</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.126193</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.153236</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.126052</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.824137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.824085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.824200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.824148</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[23]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -891,16 +892,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 10.09572 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:10.095717 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 10.09567 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:10.095669 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   10.40376</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   10.38473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   10.40406</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   10.38500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   10.09576</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   10.09572</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   10.09571</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   10.09567</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[24]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -924,16 +925,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.525661 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.525661 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.524924 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.524924 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.723149</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.707843</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.685429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.671177</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.525707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.525661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.524968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.524924</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[25]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -957,16 +958,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.0463 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.046300 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.046167 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.046167 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.300420</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.283254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.299733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.282591</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.046331</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.046300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.046199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.046167</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[26]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -990,16 +991,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.141067 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.141067 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.141026 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.141026 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.370430</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.357702</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.369157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.356388</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.141138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.141067</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.141097</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.141026</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[27]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1023,16 +1024,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.4362 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.436200 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.436279 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.436279 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.615159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.602489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.610746</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.599249</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.436247</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.436200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.436327</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.436279</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[28]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1056,16 +1057,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.673091 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.673091 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.673307 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.673307 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.837022</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.824766</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.829719</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.819963</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.673123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.673091</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.673340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.673307</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[29]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1089,16 +1090,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 4.496307 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:4.496307 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 4.496301 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:4.496301 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   4.648506</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   4.637689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   4.648803</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   4.638041</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   4.496344</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   4.496307</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   4.496338</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   4.496301</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[30]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1122,16 +1123,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.244645 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.244645 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.244543 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.244543 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.577017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.556522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.577011</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.556168</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.244683</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.244645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.244580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.244543</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[31]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1155,16 +1156,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.990825 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.990825 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.990949 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.990949 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.247131</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.226681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.244213</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.224022</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.990872</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.990825</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.990996</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.990949</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[32]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1188,16 +1189,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.475726 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.475726 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.475717 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.475717 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.803715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.778195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.797915</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.772628</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.475741</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.475726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.475732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.475717</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[33]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1221,16 +1222,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.474028 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.474028 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.47382 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.473820 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.744152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.720974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.743747</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.720939</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.474083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.474028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.473874</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.473820</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[34]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1254,16 +1255,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.778763 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.778763 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.778819 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.778819 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.109271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.081418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.109762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.081635</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.778817</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.778763</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.778873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.778819</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[35]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1287,16 +1288,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.550626 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.550626 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.550785 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.550785 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.808744</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.791002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.808643</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.792048</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.550655</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.550626</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.550815</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.550785</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[36]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1320,16 +1321,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.364078 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.364078 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.363905 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.363905 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.789020</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.748443</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.786260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.745978</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.364135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.364078</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.363961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.363905</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[37]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1353,16 +1354,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.971974 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.971974 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.9719 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.971900 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.238196</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.215358</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.236177</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.213550</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.971988</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.971974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.971914</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.971900</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[38]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1386,16 +1387,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.652725 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.652725 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.652792 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.652792 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.902488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.886690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.901555</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.885651</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.652766</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.652725</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.652833</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.652792</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[39]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1419,16 +1420,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.837387 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.837387 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.837396 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.837396 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.087803</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.064429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.086377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.063664</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.837422</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.837387</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.837430</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.837396</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[40]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1452,16 +1453,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.30449 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.304490 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.303683 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.303683 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.776241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.720299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.733301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.673581</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.304535</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.304490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.303726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.303683</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[41]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1485,16 +1486,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 11.65532 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:11.655320 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 11.65579 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:11.655793 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   11.97479</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   11.95293</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   11.97476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   11.95298</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   11.65542</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   11.65532</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   11.65590</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   11.65579</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[42]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1518,16 +1519,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.242921 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.242921 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 8.242802 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:8.242802 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.654661</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.609361</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.647477</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.604198</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.242983</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.242921</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   8.242865</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   8.242802</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[43]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1551,16 +1552,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.120295 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.120295 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.120471 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.120471 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.357168</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.337509</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.328608</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.310577</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.120317</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.120295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.120493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.120471</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[44]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1584,16 +1585,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.12951 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.129510 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.129336 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.129336 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.351924</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.336045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   6.351800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   6.336001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.129553</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.129510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.129379</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.129336</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[45]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1617,16 +1618,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.871105 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.871105 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.870866 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.870866 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.256030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.231517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.256595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.231991</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.871131</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.871105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.870891</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.870866</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[46]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1650,16 +1651,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.6777 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.677700 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.677743 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.677743 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.929886</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.909076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   9.930208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   9.909254</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.677726</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.677700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.677770</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.677743</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[47]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1683,16 +1684,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.811303 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.811303 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 7.810734 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:7.810734 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.155006</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.133261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   8.128840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   8.100876</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.811360</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.811303</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   7.810790</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   7.810734</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[48]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1716,16 +1717,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.666737 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.666737 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 9.666651 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:9.666651 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.027467</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.004636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1  10.027437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2  10.004707</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.666775</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.666737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   9.666688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   9.666651</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[49]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1749,16 +1750,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.243835 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.243835 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 5.243412 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:5.243412 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.515179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.500500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   5.513405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   5.494145</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.243864</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.243835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   5.243441</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   5.243412</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[50]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
@@ -1782,16 +1783,16 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.835357 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.835357 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 6.835312 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:6.835312 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 54 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.182795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.123441</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1   7.182056</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2   7.122390</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.835373</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.835357</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      499   6.835328</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      500   6.835312</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot "method":</span>

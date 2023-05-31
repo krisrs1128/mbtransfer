@@ -161,7 +161,7 @@ temporal sampling, unfortunately, so we downsample to biweekly (14 day)
 resolution using the <code>interpolate</code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="va">reads</span> <span class="op">|&gt;</span></span>
-<span> <span class="fu">ts_from_dfs</span><span class="op">(</span><span class="va">interventions</span>, <span class="va">samples</span>, <span class="va">subject_data</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span> <span class="fu"><a href="../reference/ts_from_dfs.html">ts_from_dfs</a></span><span class="op">(</span><span class="va">interventions</span>, <span class="va">samples</span>, <span class="va">subject_data</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu">interpolate</span><span class="op">(</span>delta <span class="op">=</span> <span class="fl">14</span>, method <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span></code></pre></div>
 <p>Now that we have constructed our interpolated <code>ts_inter</code>
 object, it can be helpful to visualize the subject trajectories. We can
@@ -311,34 +311,8 @@ guarantee FDR control, and you will still be able to run the rest of the
 vignette even if you set <code>n_splits</code> to a value like 3 or
 4.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">staxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_taxa.html">select_taxa</a></span><span class="op">(</span><span class="va">ts</span>, <span class="va">ws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">ws</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="op">~</span> <span class="fu"><a href="../reference/mbtransfer.html">mbtransfer</a></span><span class="op">(</span><span class="va">.</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, n_splits <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Training models for split 1/25</span></span>
-<span><span class="co">#&gt; Training models for split 2/25</span></span>
-<span><span class="co">#&gt; Training models for split 3/25</span></span>
-<span><span class="co">#&gt; Training models for split 4/25</span></span>
-<span><span class="co">#&gt; Training models for split 5/25</span></span>
-<span><span class="co">#&gt; Training models for split 6/25</span></span>
-<span><span class="co">#&gt; Training models for split 7/25</span></span>
-<span><span class="co">#&gt; Training models for split 8/25</span></span>
-<span><span class="co">#&gt; Training models for split 9/25</span></span>
-<span><span class="co">#&gt; Training models for split 10/25</span></span>
-<span><span class="co">#&gt; Training models for split 11/25</span></span>
-<span><span class="co">#&gt; Training models for split 12/25</span></span>
-<span><span class="co">#&gt; Training models for split 13/25</span></span>
-<span><span class="co">#&gt; Training models for split 14/25</span></span>
-<span><span class="co">#&gt; Training models for split 15/25</span></span>
-<span><span class="co">#&gt; Training models for split 16/25</span></span>
-<span><span class="co">#&gt; Training models for split 17/25</span></span>
-<span><span class="co">#&gt; Training models for split 18/25</span></span>
-<span><span class="co">#&gt; Training models for split 19/25</span></span>
-<span><span class="co">#&gt; Training models for split 20/25</span></span>
-<span><span class="co">#&gt; Training models for split 21/25</span></span>
-<span><span class="co">#&gt; Training models for split 22/25</span></span>
-<span><span class="co">#&gt; Training models for split 23/25</span></span>
-<span><span class="co">#&gt; Training models for split 24/25</span></span>
-<span><span class="co">#&gt; Training models for split 25/25</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">staxa</span>, file <span class="op">=</span> <span class="st">"staxa-postpartum.rds"</span><span class="op">)</span></span>
-<span><span class="co">#readRDS("staxa-postpartum.rds")</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#staxa &lt;- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)</span></span>
+<span><span class="va">staxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></span><span class="op">(</span><span class="st">"https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-postpartum.rds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>ms</code> element of this object includes the raw mirror
 statistics that led to the final inference. The larger the value of
 these mirror statistics, the stronger the estimated intervention effect.
