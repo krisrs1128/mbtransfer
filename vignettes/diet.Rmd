@@ -47,6 +47,7 @@ library(mbtransfer)
 library(tidyverse)
 library(glue)
 library(tidymodels)
+library(patchwork)
 th <- theme_bw() +
   theme(
     panel.grid.minor = element_blank(),
@@ -324,7 +325,6 @@ rdata |>
     panel.spacing = unit(0, "line"),
     axis.text.y = element_text(size = 8)
   )
-ggsave("~/Desktop/writing/202305/figure/counterfactual_diet_staxa.png", width = 12, height = 5)
 ```
 
 In the spirit of progressive disclosure in data visualization, we can plot the
@@ -346,9 +346,11 @@ models and then investigates subject-level variation using
 ```{r, fig.height = 3, fig.width = 11}
 taxa_hm <- c("Otu000011", "Otu000095", "Otu000434", "Otu000236", "Otu000169", "Otu000017")
 
-values_df |>
+hm_data <- values_df |>
   filter(diet == "Animal") |>
-  group_by(taxon) |>
+  group_by(taxon)
+
+hm_data |>
   mutate(
     value = rank(value) / n(),
     taxon = factor(taxon, levels = taxa_hm)
@@ -357,5 +359,47 @@ values_df |>
   scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
   scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
   labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank")
-ggsave("~/Downloads/diet_raw_hm.png", width = 11, height = 3)
+```
+
+We can merge the two figures above so that it's easier to compare simulated with
+real data. We'll focus on every third taxon in the original display.
+
+```{r, fig.width = 10, fig.height = 4}
+focus_taxa <- rdata_order |>
+  arrange(`1`) |>
+  filter(row_number() %% 6 == 0) |>
+  pull(taxon)
+
+p1 <- rdata |>
+  filter(taxon %in% focus_taxa) |>
+  left_join(rdata_order) |>
+  ribbon_plot(reorder_var = "1") +
+  scale_x_continuous(breaks = seq(-5, 8, by = 3)) +
+  scale_y_continuous(breaks = round(seq(-.2, 1, by = 0.2), 1)) +
+  facet_grid(. ~ reorder(taxon, `1`)) +
+  labs(title = "(a) Counterfactual Difference at Interventions", y = "Difference") +
+  theme(
+    panel.spacing = unit(0, "line"),
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 6),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 10),
+    plot.margin = unit(c(0, 0, 0, 0), "null")
+  )
+
+p2 <- hm_data |>
+  mutate(
+    value = rank(value) / n(),
+    taxon = factor(taxon, levels = focus_taxa)
+  ) |>
+  interaction_hm(taxa = focus_taxa, "diet") +
+  scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
+  scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
+  labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank", title = "(b) Original Data") +
+  theme(legend.position = "left")
+
+
+p1 / p2 +
+  plot_layout(heights = c(1, 2))
+ggsave("diet-combined.png", width = 10, height = 4)
 ```

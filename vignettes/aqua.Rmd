@@ -38,8 +38,9 @@ just sets `ggplot2` color themes.
 
 ```{r setup}
 library(mbtransfer)
-library(tidyverse)
 library(glue)
+library(patchwork)
+library(tidyverse)
 th <- theme_bw() +
   theme(
     panel.grid.minor = element_blank(),
@@ -200,7 +201,6 @@ pivot_ts(ts) |>
   ggplot() +
   geom_point(aes(pH, value), alpha = 0.4, size = 0.3) +
   facet_wrap(~ taxon, ncol = 8)
-ggsave("aqua_scatterplot.png", width= 12, height = 4, dpi = 200)
 ```
 
 Next, we'll see how these taxa vary in response to intermediate shifts pH, not
@@ -213,10 +213,10 @@ L <- 42
 ws <- list()
 plateaus <- seq(2, 9, length.out = 10)
 for (p in seq_along(plateaus)) {
-  ws[[p]] <- matrix(38, nrow = 2, ncol = L)
-  colnames(ws[[p]]) <- glue("t{seq_len(L)}")
+  ws[[p]] <- matrix(38, nrow = 2, ncol = L / 2)
+  colnames(ws[[p]]) <- glue("t{seq_len(L/2)}")
   rownames(ws[[p]]) <- c("pH", "AS")
-  ws[[p]][1, ] <- rep(plateaus[p], L)
+  ws[[p]][1, ] <- rep(plateaus[p], L / 2)
 }
 ```
 
@@ -254,7 +254,6 @@ sim_ts <- map(sim_ts_, ~ predict(fit, .)) |>
   map_dfr(pivot_ts, .id = "counterfactual")
 
 sim_ts |>
-#  filter(taxon %in% c("X_0001", "X_0019", "X_0129", "X_0009", "X_0012", "X_0033"), time > 20, time < 70) |>
   filter(taxon %in% focus_taxa, time > 20, time < 70) |>
   mutate(
     pH = factor(round(plateaus[as.integer(counterfactual)], 3)),
@@ -268,4 +267,37 @@ sim_ts |>
    facet_wrap(~ taxon, scales = "free_y") +
    scale_fill_manual(values = pal) +
    scale_color_manual(values = pal)
+```
+
+```{r, fig.width = 12, fig.height = 6}
+vis_taxa2 <- focus_taxa[seq(1, length(focus_taxa), by = 9)] # 9 works well
+
+p1 <- pivot_ts(ts) |>
+  mutate(taxon = factor(taxon, levels = taxa(ts)[taxa_order])) |>
+  filter(taxon %in% vis_taxa2) |>
+  ggplot() +
+  geom_point(aes(pH, value), alpha = 0.4, size = 0.3) +
+  labs(x = "pH", y = "asinh(Abundance)", title = "(a) pH vs. Abundance") +
+  facet_wrap(~ taxon, scales = "free_y", nrow = 1) +
+  theme(plot.margin = unit(c(0, 0, 0, 0), "null"))
+
+p2 <- sim_ts |>
+  filter(taxon %in% vis_taxa2, time > 35, time < 55) |>
+  mutate(
+    pH = factor(round(plateaus[as.integer(counterfactual)], 3)),
+    taxon = factor(taxon, levels = taxa(ts)[taxa_order])
+    ) |>
+  group_by(taxon, time, pH) |>
+  summarise(q50 = median(value)) |>
+  ggplot() +
+   geom_line(aes(time, q50, col = pH)) +
+   geom_vline(col = "#c1c1c1c1", xintercept = L, linewidth = 1) +
+   facet_wrap(~ taxon, scales = "free_y", nrow = 1) +
+   scale_fill_manual(values = pal) +
+   labs(x = "Time", y = "Median Abundance", title = "(b) Counterfactual Trajectories") +
+   scale_color_manual(values = pal)
+
+p1 / p2 +
+  plot_layout(heights = c(1, 2))
+ggsave("aqua-combined.png", width = 12, height = 6)
 ```
