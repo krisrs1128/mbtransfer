@@ -156,7 +156,7 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
     counterfactual_ts(w0, w1)
 
   # compute difference in predictions across future ix
-  y_hats <- map(ts_star, ~ predict(fit, .))
+  y_hats <- map(ts_star, ~ mbtransfer::predict(fit, .))
   ix <- seq(patch_len + 1, patch_len + ncol(w0))
   pd_summary(y_hats[[1]], y_hats[[2]], ix)
 }
@@ -191,7 +191,6 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
 #'   1, Q = 1) will fit a lag-1 transfer function model on all the random
 #'   splits.
 #' @param qvalue The target False Discovery Rate. Defaults to 0.2.
-#' @importFrom magrittr %>%
 #' @importFrom dplyr select
 #' @examples
 #' data(sim_ts)
@@ -204,9 +203,10 @@ select_taxa <- function(ts, w0, w1, tr_fun, qvalue = 0.2, ...) {
   ms <- consistency_mirror_multisplit(effects)
   
   taxa <- ms |>
-    select(multisplit, m, lag) %>%
-    split(.$lag) %>%
-    map(~ split(., .$multisplit) %>% map(~ pull(., m))) |>
+    select(multisplit, m, lag)
+
+  taxa <- split(taxa, taxa$lag)
+  taxa <-  map(taxa, ~ split(., .$multisplit) |> map(~ pull(., m))) |>
     map(~ which(multiple_data_splitting(., q = qvalue))) |>
     map(~ taxa(ts)[.])
   

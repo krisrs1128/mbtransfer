@@ -26,5 +26,5 @@ subjects in the dataset.
 }
 \examples{
 data(sim_ts)
-patchify_df(sim_ts[[1]])
+patchify_df(sim_ts)
 }

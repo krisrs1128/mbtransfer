@@ -105,7 +105,7 @@ patchify_single_df <- function(ts_inter, p, q) {
 #' @importFrom dplyr select bind_cols
 #' @examples
 #' data(sim_ts)
-#' patchify_df(sim_ts[[1]])
+#' patchify_df(sim_ts)
 #' @export
 patchify_df <- function(ts_inter, p = 2, q = 3) {
   patches <- list()
@@ -139,7 +139,12 @@ predictor_names <- function(x_dim, w_dim) {
 }
 
 #' Detect the time lags based on column names
+#' 
+#' This is a helper function for deciding on P and Q in transfer function models
+#' using just the names of an example set of covariates.
 #' @importFrom utils strcapture
+#' @examples
+#' lag_from_names(c("taxon1_lag1", "taxon1_lag2", "taxon1_lag3"))
 lag_from_names <- function(names, group = "taxon") {
   names_ix <- names[grepl(group, names)]
   names_value <- strcapture("(lag[0-9]+)", names_ix, data.frame(chr=character()))
@@ -149,6 +154,14 @@ lag_from_names <- function(names, group = "taxon") {
 }
 
 #' Detect the time lags over which a model was trained
+#' 
+#' This is a helper for determining the P, Q associated with a fitted mbtransfer
+#' model.
+#' 
+#' @examples
+#' data(sim_ts)
+#' fit <- mbtransfer(sim_ts)
+#' time_lags(fit)
 time_lags <- function(fit) {
   # different names for gbm and lasso, resp.
   if (!is.null(fit$feature_names)) {
