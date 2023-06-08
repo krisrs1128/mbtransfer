@@ -26,9 +26,8 @@ end of the series and computes the difference in the forecasts.}
 
 \item{tr_fun}{A function that can be used to train over random splits. In the
 examples in this package, we use an anonymous function that fills our
-chosen hyperparameters in \code{mbtransfer}. For example \(x) mbtransfer(x, P =
-1, Q = 1) will fit a lag-1 transfer function model on all the random
-splits.}
+chosen hyperparameters in \code{mbtransfer}. For example \verb{\\(x) mbtransfer(x, P =  1, Q = 1)}
+will fit a lag-1 transfer function model on all the random splits.}
 }
 \description{
 For ech split, we return an array of dimension n_taxa x 2 fits x n_lags. Each
@@ -40,5 +39,5 @@ data).
 data(sim_ts)
 w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
-pd_splits(sim_ts, w0, w1, \(x) mbtransfer(x, 1, 1, nrounds = 10), n_splits = 1)
+pd_result <- pd_splits(sim_ts, w0, w1, \(x) mbtransfer(x, 1, 1, nrounds = 10), n_splits = 1)
 }
