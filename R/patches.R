@@ -12,6 +12,7 @@
 #' @param q The number of time lags to use in the sliding window for
 #'   interventions.
 #' @importFrom slider slide
+#' @export
 #' @examples
 #' data(sim_ts)
 #' patchify_single(sim_ts[[1]])
@@ -59,7 +60,8 @@ patchify_single <- function(ts_inter, p = 2, q = 3) {
 #' @examples
 #' data(sim_ts)
 #' patchify_single_df(sim_ts[[1]], 2, 2)
-#' @importFrom stringr str_c
+#' @importFrom glue glue
+#' @export
 patchify_single_df <- function(ts_inter, p, q) {
   data <- patchify_single(ts_inter, p, q)
   x <- data$x
@@ -79,7 +81,7 @@ patchify_single_df <- function(ts_inter, p, q) {
   }
   
   colnames(result$x) <- predictor_names(dim(x[[1]]), dim(w[[1]]))
-  colnames(result$y) <- str_c("taxon", seq_len(nrow(y[[1]])))
+  colnames(result$y) <- glue("taxon{seq_len(nrow(y[[1]]))}")
   result
 }
 
@@ -123,24 +125,25 @@ patchify_df <- function(ts_inter, p = 2, q = 3) {
 }
 
 #' Create uniform column names for patchified df
+#' @importFrom glue glue
 predictor_names <- function(x_dim, w_dim) {
-  n1 <- rep(str_c("taxon", seq_len(x_dim[1])), x_dim[2])
-  n2 <- rep(str_c("lag", seq(x_dim[2], 1)), each = x_dim[1])
-  x_names <- str_c(n1, "_", n2)
+  n1 <- rep(glue("taxon{seq_len(x_dim[1])}"), x_dim[2])
+  n2 <- rep(glue("lag{seq(x_dim[2], 1)}"), each = x_dim[1])
+  x_names <- paste(n1, n2, sep = "_")
   
-  n1 <- rep(str_c("intervention", seq_len(w_dim[1])), w_dim[2])
-  n2 <- rep(str_c("lag", seq(w_dim[2] - 1, 0)), each = w_dim[1])
-  w_names <- str_c(n1, "_", n2)
+  n1 <- rep(glue("intervention{seq_len(w_dim[1])}"), w_dim[2])
+  n2 <- rep(glue("lag{seq(w_dim[2] - 1, 0)}"), each = w_dim[1])
+  w_names <- paste(n1, n2, sep = "_")
   
   c(x_names, w_names)
 }
 
 #' Detect the time lags based on column names
-#' @importFrom stringr str_extract str_detect str_remove
+#' @importFrom utils strcapture
 lag_from_names <- function(names, group = "taxon") {
-  names[str_detect(names, group)] |>
-    str_extract("lag[0-9]+") |>
-    str_remove("lag") |>
+  names_ix <- names[grepl(group, names)]
+  names_value <- strcapture("(lag[0-9]+)", names_ix, data.frame(chr=character()))
+  gsub("lag", "", names_value$chr) |>
     as.numeric() |>
     max()
 }

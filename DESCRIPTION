@@ -15,12 +15,10 @@ Depends:
     R (>= 3.50),
     abind,
     ggplot2,
-    ggh4x,
     glue,
     progress,
     purrr,
     slider,
-    stringr,
     xgboost
 LazyData: true
 Suggests: 

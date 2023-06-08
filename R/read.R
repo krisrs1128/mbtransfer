@@ -76,6 +76,12 @@ ts_to_dfs <- function(ts) {
 #' Joined ts dfs
 #' @importFrom tibble rownames_to_column
 #' @importFrom dplyr left_join
+#' @importFrom tidyr pivot_longer
+#' @export
+#' @examples
+#' data(sim_ts)
+#' pivoted <- pivot_longer(sim_ts)
+#' head(pivoted)
 #' @export
 pivot_ts <- function(ts) {
   dfs <- ts_to_dfs(ts)

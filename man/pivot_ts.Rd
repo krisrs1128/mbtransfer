@@ -9,3 +9,8 @@ pivot_ts(ts)
 \description{
 Joined ts dfs
 }
+\examples{
+data(sim_ts)
+pivoted <- pivot_longer(sim_ts)
+head(pivoted)
+}
