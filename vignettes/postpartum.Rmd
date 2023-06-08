@@ -102,6 +102,8 @@ day) resolution using the `interpolate` function.
 ts <- reads |>
  ts_from_dfs(interventions, samples, subject_data) |>
  interpolate(delta = 14, method = "linear")
+
+ts
 ```
 Now that we have constructed our interpolated `ts_inter` object, it can be
 helpful to visualize the subject trajectories. We can use `pivot_ts` to convert
@@ -370,7 +372,6 @@ p1 <- rdata |>
     panel.spacing = unit(0, "line"),
     axis.text.x = element_text(size = 8),
     axis.title.x = element_blank(),
-    axis.title.y = element_text(size = 10),
     plot.margin = unit(c(0, 0, 0, 0), "null")
   )
 
@@ -391,5 +392,4 @@ p2 <- values_df |>
 p1 / p2 +
   plot_layout(heights = c(1, 2), guides = "collect") &
   theme(legend.position = "right")
-ggsave("postpartum-combined.png", width = 10, height = 4)
 ```

@@ -88,6 +88,8 @@ than entirely ignoring variation in the gaps between samples.
 ts <- as.matrix(reads) |>
   ts_from_dfs(interventions, samples, subject) |>
   interpolate(method = "linear")
+
+ts
 ```
 
 Before doing any modeling, let's visualize some of the raw data. The plot below
@@ -381,9 +383,8 @@ p1 <- rdata |>
   theme(
     panel.spacing = unit(0, "line"),
     axis.text.x = element_text(size = 8),
-    axis.text.y = element_text(size = 6),
+    axis.text.y = element_text(size = 7),
     axis.title.x = element_blank(),
-    axis.title.y = element_text(size = 10),
     plot.margin = unit(c(0, 0, 0, 0), "null")
   )
 
@@ -400,6 +401,6 @@ p2 <- hm_data |>
 
 
 p1 / p2 +
-  plot_layout(heights = c(1, 2))
-ggsave("diet-combined.png", width = 10, height = 4)
+  plot_layout(heights = c(1, 2), guides = "collect") &
+  theme(legend.position = "right")
 ```

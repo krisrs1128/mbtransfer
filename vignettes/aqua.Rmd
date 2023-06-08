@@ -80,6 +80,7 @@ ts <- reads |>
   interpolate()
 
 ts <- ts[1:3]
+ts
 ```
 
 ## Prediction
@@ -269,20 +270,20 @@ sim_ts |>
    scale_color_manual(values = pal)
 ```
 
-```{r, fig.width = 12, fig.height = 6}
-vis_taxa2 <- focus_taxa[seq(1, length(focus_taxa), by = 9)] # 9 works well
+```{r, fig.width = 10, fig.height = 4}
+vis_taxa2 <- focus_taxa[seq(1, length(focus_taxa), by = 9)]
 
 p1 <- pivot_ts(ts) |>
   mutate(taxon = factor(taxon, levels = taxa(ts)[taxa_order])) |>
   filter(taxon %in% vis_taxa2) |>
   ggplot() +
   geom_point(aes(pH, value), alpha = 0.4, size = 0.3) +
-  labs(x = "pH", y = "asinh(Abundance)", title = "(a) pH vs. Abundance") +
+  labs(x = "pH", y = "Abundance", title = "(a) pH vs. Abundance") +
   facet_wrap(~ taxon, scales = "free_y", nrow = 1) +
   theme(plot.margin = unit(c(0, 0, 0, 0), "null"))
 
 p2 <- sim_ts |>
-  filter(taxon %in% vis_taxa2, time > 35, time < 55) |>
+  filter(taxon %in% vis_taxa2, time > 20, time < 70) |>
   mutate(
     pH = factor(round(plateaus[as.integer(counterfactual)], 3)),
     taxon = factor(taxon, levels = taxa(ts)[taxa_order])
@@ -292,12 +293,12 @@ p2 <- sim_ts |>
   ggplot() +
    geom_line(aes(time, q50, col = pH)) +
    geom_vline(col = "#c1c1c1c1", xintercept = L, linewidth = 1) +
-   facet_wrap(~ taxon, scales = "free_y", nrow = 1) +
+   facet_grid(. ~ taxon) +
    scale_fill_manual(values = pal) +
    labs(x = "Time", y = "Median Abundance", title = "(b) Counterfactual Trajectories") +
    scale_color_manual(values = pal)
 
 p1 / p2 +
-  plot_layout(heights = c(1, 2))
-ggsave("aqua-combined.png", width = 12, height = 6)
+  plot_layout(heights = c(1, 2), guides = "collect") &
+  theme(legend.position = "right")
 ```
