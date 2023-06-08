@@ -90,7 +90,7 @@ consistency_mirror_multisplit <- function(effects) {
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
-#' pd_splits(sim_ts, w0, w1, \(x) mbtransfer(x, 1, 1, nrounds = 10), n_splits = 1)
+#' pd_result <- pd_splits(sim_ts, w0, w1, \(x) mbtransfer(x, 1, 1, nrounds = 10), n_splits = 1)
 pd_splits <- function(ts, w0, w1, tr_fun, n_splits = 20, ...) {
   effects <- replicate(n_splits, array(dim = c(nrow(ts[[1]]), 2, ncol(w0))), simplify = FALSE)
 
@@ -145,6 +145,7 @@ pd_summary <- function(y0, y1, ix, summary_fun = mean) {
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
 #' fit <- mbtransfer(sim_ts, 1, 1, nrounds = 10)
 #' pd_effects(fit, sim_ts, w0, w1)
+#' @export
 pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, intervention_len = NULL) {
   if (is.null(n_sample)) {
     n_sample <- 0.5 * length(ts) * ncol(ts[[1]]) / patch_len
@@ -196,7 +197,7 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
 #' data(sim_ts)
 #' w0 <- cbind(sim_ts[[1]]@interventions, matrix(0, nrow = 1, ncol = 3))
 #' w1 <- cbind(sim_ts[[1]]@interventions, matrix(1, nrow = 1, ncol = 3))
-#' select_taxa(sim_ts, w0, w1, \(x) mbtransfer(x, 1, 1, nrounds = 10), n_splits = 1)
+#' S <- select_taxa(sim_ts, w0, w1, \(x) mbtransfer(x, 1, 1, nrounds = 10), n_splits = 1)
 #' @export
 select_taxa <- function(ts, w0, w1, tr_fun, qvalue = 0.2, ...) {
   effects <- pd_splits(ts, w0, w1, tr_fun, ...)

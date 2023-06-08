@@ -1,5 +1,21 @@
 setClassUnion("data.frameOrNull", members=c("data.frame", "NULL"))
 
+#' An S4 class to represent a single subject's series
+#' 
+#' Taxonomic abundances, binary/continuous interventions, and underlying
+#' timepoints for a single subject are stored in this unified data structure. A
+#' `ts_inter` object is list of these `ts_inter_single` classes (together wtih
+#' static subject data).
+#' 
+#' @slot values A matrix whose rows are taxa and whose columns are samples.
+#' @slot time A vector of the timepoints associated with the samples in `values`.
+#' @slot interventions A matrix whose rows are perturbations, columns are
+#'   samples, and values are either binary interventions or continuous input
+#'   series, representing the value of the exogenous influence.
+#' 
+#' @examples
+#' data(sim_ts)
+#' sim_ts[[1]]
 #' @export
 setClass(
   "ts_inter_single", 
@@ -10,7 +26,20 @@ setClass(
   )
 )
 
+#' An S4 class representing a collection of time series under environmental shifts
+#' 
+#' While `ts_inter_single` represents shifts for a single subject, `ts_inter`
+#' includes shifts across a collection of subjects. It includes an additional
+#' slot, `subject_data` to store non-time-varying subject metadata.
+#' 
+#' @slot series A list of `ts_inter_single` objects, each representing
+#'   interventions and compositional responses for a subject.
+#' @slot subject_data An optional data.frame storing static host-level metadata
+#'   associated with each series.
 #' @export
+#' @examples
+#' data(sim_ts)
+#' sim_ts
 setClass(
   "ts_inter",
   slots = c(
@@ -88,6 +117,50 @@ setMethod("[[<-", "ts_inter", function(x, i, j, value) {
   x@series[[i]] <- value
   x
 })
+
+#' @importFrom utils head
+print_ts_inter <- function(object) {
+  n_time <- unlist(lapply(object@series, function(x) ncol(values(x))))
+  cat(sprintf(
+    "# A ts_inter object | %d taxa | %d subjects | %.2f \U00B1 %.2f timepoints:\n",
+    length(taxa(object)), length(object), mean(n_time), 1.9 * sd(n_time)
+  ))
+  for (i in seq_len(min(3, length(n_time)))) {
+    cat(sprintf("\n%s:\n", names(object)[i]))
+    v <- data.frame(values(object[[i]])[1:4, 1:4])
+    v <- cbind(v, " " = "\U2026")
+    print(v)
+    cat("\t\U22EE\t\U22EE\t\U22EE\t\U22EE\t\U22EE")
+  }
+  
+  if (length(n_time) > 3) {
+    cat(sprintf("\nand %d more subjects.", length(n_time) - 3))
+  }
+}
+  
+setMethod("show", "ts_inter", print_ts_inter)
+
+print_ts_inter_single <- function(object) {
+  cat(sprintf(
+    "# A ts_inter_single object | %d taxa | %d timepoints:\n",
+    length(nrow(values(object))), ncol(values(object))
+  ))
+  
+  cat("taxa:\n")
+  v <- data.frame(values(object)[1:4, 1:4])
+  v <- cbind(v, " " = "\U2026")
+  print(v)
+  cat("\t\U22EE\t\U22EE\t\U22EE\t\U22EE\t\U22EE\n")
+
+  cat("interventions:\n")
+  i <- interventions(object)[, 1:4, drop = FALSE]
+  i <- as.data.frame(i)
+  i <- cbind(i, " " = "\U2026")
+  print(i)
+}
+  
+setMethod("show", "ts_inter_single", print_ts_inter_single)
+
 
 #' @export
 setGeneric("interventions", function(x) standardGeneric("interventions"))

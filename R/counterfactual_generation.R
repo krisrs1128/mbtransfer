@@ -63,8 +63,8 @@ steps <- function(p_states, starts = 1, lengths = 1:3, L = 3, w_star = c(0, 1)) 
 #' @importFrom glue glue
 #' @export
 pulses <- function(p_states, lags = 1, L = 3, w_star = c(0, 1)) {
-  w0 <- matrix(0, nrow = nrow(inter), ncol = L)
-  rownames(w0) <- rownames(inter)
+  w0 <- matrix(0, nrow = length(p_states), ncol = L)
+  rownames(w0) <- names(p_states)
   colnames(w0) <- glue("Tn_{seq_len(ncol(w0))}")
   lengths <- to_vector(lengths)
   active_p <- names(p_states[p_states])
