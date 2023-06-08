@@ -40,8 +40,8 @@ interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   p
 }
 
-
-#' @importFrom ggh4x facet_nested
+#' @importFrom ggplot2 facet_grid ggplot geom_tile scale_x_continuous
+#'   scale_color_gradient scale_fill_gradient
 #' @export
 interaction_barcode <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   p <- values_df |>
@@ -63,7 +63,8 @@ interaction_barcode <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   
   if (!is.null(condition)) {
     p <- p + 
-      facet_nested(reorder(.data[[condition]], -value) + subject ~ ., scales = "free", space = "free")
+      #ggh4x::facet_nested(reorder(.data[[condition]], -value) + subject ~ ., scales = "free", space = "free")
+      facet_grid(reorder(.data[[condition]], -value) + subject ~ ., scales = "free", space = "free")
   }
   
   p

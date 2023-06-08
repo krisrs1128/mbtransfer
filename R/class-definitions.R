@@ -128,9 +128,9 @@ print_ts_inter <- function(object) {
   for (i in seq_len(min(3, length(n_time)))) {
     cat(sprintf("\n%s:\n", names(object)[i]))
     v <- data.frame(values(object[[i]])[1:4, 1:4])
-    v <- cbind(v, " " = "\U2026")
+    v <- cbind(v, " " = rep("\U2026", 4))
+    v <- rbind(v, " " = c(rep("\U22EE", 4), "\U22F1"))
     print(v)
-    cat("\t\U22EE\t\U22EE\t\U22EE\t\U22EE\t\U22EE")
   }
   
   if (length(n_time) > 3) {
@@ -148,9 +148,9 @@ print_ts_inter_single <- function(object) {
   
   cat("taxa:\n")
   v <- data.frame(values(object)[1:4, 1:4])
-  v <- cbind(v, " " = "\U2026")
+  v <- cbind(v, " " = rep("\U2026", 4))
+  v <- rbind(v, " " = c(rep("\U22EE", 4), "\U22F1"))
   print(v)
-  cat("\t\U22EE\t\U22EE\t\U22EE\t\U22EE\t\U22EE\n")
 
   cat("interventions:\n")
   i <- interventions(object)[, 1:4, drop = FALSE]
