@@ -80,8 +80,26 @@ interventions.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">patchify_single</span><span class="op">(</span><span class="va">sim_ts</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in patchify_single(sim_ts[[1]]):</span> could not find function "patchify_single"</span>
+<span class="r-in"><span><span class="va">patches</span> <span class="op">&lt;-</span> <span class="fu">patchify_single</span><span class="op">(</span><span class="va">sim_ts</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">patches</span><span class="op">$</span><span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      S1_T1 S1_T2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1     5     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2    23    43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3    17    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4    30    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax5     3     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax6   115    20</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">patches</span><span class="op">$</span><span class="va">w</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    S1_T1 S1_T2 S1_T3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> P1     0     0     0</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">patches</span><span class="op">$</span><span class="va">y</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      S1_T4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3    25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax5    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax6     1</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

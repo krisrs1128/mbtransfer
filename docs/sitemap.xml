@@ -37,6 +37,9 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/interaction_hm.html</loc>
+  </url>
+  <url>
     <loc>/reference/lag_from_names.html</loc>
   </url>
   <url>
@@ -88,7 +91,13 @@
     <loc>/reference/replace_inter_.html</loc>
   </url>
   <url>
+    <loc>/reference/sample_ts.html</loc>
+  </url>
+  <url>
     <loc>/reference/select_taxa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sim_ts.html</loc>
   </url>
   <url>
     <loc>/reference/steps.html</loc>
@@ -101,5 +110,11 @@
   </url>
   <url>
     <loc>/reference/ts_from_dfs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ts_inter-class.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ts_inter_single-class.html</loc>
   </url>
 </urlset>

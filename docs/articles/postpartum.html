@@ -163,7 +163,54 @@ resolution using the <code>interpolate</code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="va">reads</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="../reference/ts_from_dfs.html">ts_from_dfs</a></span><span class="op">(</span><span class="va">interventions</span>, <span class="va">samples</span>, <span class="va">subject_data</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span> <span class="fu">interpolate</span><span class="op">(</span>delta <span class="op">=</span> <span class="fl">14</span>, method <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span></code></pre></div>
+<span> <span class="fu">interpolate</span><span class="op">(</span>delta <span class="op">=</span> <span class="fl">14</span>, method <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ts</span></span>
+<span><span class="co">#&gt; # A ts_inter object | 29 taxa | 49 subjects | 38.82 ± 10.15 timepoints:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; S10001:</span></span>
+<span><span class="co">#&gt;                        S10001_T1        S10001_T2        S10001_T3</span></span>
+<span><span class="co">#&gt; Lactobacillus   13.3151742836165 13.7761717595526 13.7315134010377</span></span>
+<span><span class="co">#&gt; Gardnerella                    0                0                0</span></span>
+<span><span class="co">#&gt; Prevotella      5.02106632464025 5.16966817087269 6.43899178084623</span></span>
+<span><span class="co">#&gt; Bifidobacterium                0                0 5.22399559357616</span></span>
+<span><span class="co">#&gt;                                ⋮                ⋮                ⋮</span></span>
+<span><span class="co">#&gt;                         S10001_T4  </span></span>
+<span><span class="co">#&gt; Lactobacillus    14.5729124202713 …</span></span>
+<span><span class="co">#&gt; Gardnerella                     0 …</span></span>
+<span><span class="co">#&gt; Prevotella      0.660976231381956 …</span></span>
+<span><span class="co">#&gt; Bifidobacterium 0.837924764864333 …</span></span>
+<span><span class="co">#&gt;                                 ⋮ ⋱</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; S10004:</span></span>
+<span><span class="co">#&gt;                        S10004_T1        S10004_T2        S10004_T3</span></span>
+<span><span class="co">#&gt; Lactobacillus   13.2799306405699 13.0682430734155 13.7712707909119</span></span>
+<span><span class="co">#&gt; Gardnerella     9.44330017171651 8.10858793171294 5.08668506711529</span></span>
+<span><span class="co">#&gt; Prevotella      7.30252395007546 6.36330236190931 7.13791663736412</span></span>
+<span><span class="co">#&gt; Bifidobacterium 1.72019408972623  1.9764621765614 2.30919585602774</span></span>
+<span><span class="co">#&gt;                                ⋮                ⋮                ⋮</span></span>
+<span><span class="co">#&gt;                         S10004_T4  </span></span>
+<span><span class="co">#&gt; Lactobacillus    14.1047278106487 …</span></span>
+<span><span class="co">#&gt; Gardnerella      7.29632234890682 …</span></span>
+<span><span class="co">#&gt; Prevotella       6.25385022873878 …</span></span>
+<span><span class="co">#&gt; Bifidobacterium 0.452041439136619 …</span></span>
+<span><span class="co">#&gt;                                 ⋮ ⋱</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; S10051:</span></span>
+<span><span class="co">#&gt;                        S10051_T1        S10051_T2        S10051_T3</span></span>
+<span><span class="co">#&gt; Lactobacillus   15.0450683860542 13.7994033823116 12.5537383785689</span></span>
+<span><span class="co">#&gt; Gardnerella                    0 1.55007149743762 3.10014299487525</span></span>
+<span><span class="co">#&gt; Prevotella      5.73308483906712 6.43419185274483 7.13529886642254</span></span>
+<span><span class="co">#&gt; Bifidobacterium                0 1.92812254591743 3.85624509183486</span></span>
+<span><span class="co">#&gt;                                ⋮                ⋮                ⋮</span></span>
+<span><span class="co">#&gt;                        S10051_T4  </span></span>
+<span><span class="co">#&gt; Lactobacillus     12.85099364799 …</span></span>
+<span><span class="co">#&gt; Gardnerella     1.55007149743762 …</span></span>
+<span><span class="co">#&gt; Prevotella      7.08537071346813 …</span></span>
+<span><span class="co">#&gt; Bifidobacterium 1.92812254591743 …</span></span>
+<span><span class="co">#&gt;                                ⋮ ⋱</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; and 46 more subjects.</span></span></code></pre></div>
 <p>Now that we have constructed our interpolated <code>ts_inter</code>
 object, it can be helpful to visualize the subject trajectories. We can
 use <code>pivot_ts</code> to convert the <code>ts_inter</code> object
@@ -431,7 +478,7 @@ the spirit of (Holmes, 1993).</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">subject_data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">vis_taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lactobacillus"</span>, <span class="st">"L.iners"</span>, <span class="st">"Porphyromonas"</span>, <span class="st">"Prevotella_6"</span><span class="op">)</span></span>
-<span><span class="fu">interaction_hm</span><span class="op">(</span><span class="va">values_df</span>, <span class="va">vis_taxa</span>, <span class="st">"BirthControlYesNo"</span>, <span class="op">-</span><span class="fl">1</span>, width <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="../reference/interaction_hm.html">interaction_hm</a></span><span class="op">(</span><span class="va">values_df</span>, <span class="va">vis_taxa</span>, <span class="st">"BirthControlYesNo"</span>, <span class="op">-</span><span class="fl">1</span>, width <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
 <span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    strip.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
@@ -450,7 +497,6 @@ the spirit of (Holmes, 1993).</p>
 <span>    panel.spacing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0</span>, <span class="st">"line"</span><span class="op">)</span>,</span>
 <span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
 <span>    axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="st">"null"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
@@ -459,7 +505,7 @@ the spirit of (Holmes, 1993).</p>
 <span>    value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    taxon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">taxon</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lactobacillus"</span>, <span class="st">"L.iners"</span>, <span class="st">"L.jensenii"</span>, <span class="st">"Atopobium"</span>, <span class="st">"Prevotella_6"</span>, <span class="st">"Porphyromonas"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span><span class="op">|&gt;</span></span>
-<span>  <span class="fu">interaction_hm</span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">focus_taxa</span>, <span class="st">"BirthControlYesNo"</span>, <span class="op">-</span><span class="fl">1</span>, width <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/interaction_hm.html">interaction_hm</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">focus_taxa</span>, <span class="st">"BirthControlYesNo"</span>, <span class="op">-</span><span class="fl">1</span>, width <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Subject"</span>, fill <span class="op">=</span> <span class="st">"Rank"</span>, color <span class="op">=</span> <span class="st">"Rank"</span>, title <span class="op">=</span> <span class="st">"(b) Original Data"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -472,8 +518,6 @@ the spirit of (Holmes, 1993).</p>
 <span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="postpartum_files/figure-html/unnamed-chunk-15-1.png" width="960"></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"postpartum-combined.png"</span>, width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

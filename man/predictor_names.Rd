@@ -9,3 +9,8 @@ predictor_names(x_dim, w_dim)
 \description{
 Create uniform column names for patchified df
 }
+\examples{
+data(sim_ts)
+predictor_names(c(2, 3), c(2, 2))
+predictor_names(c(5, 2), c(1, 1))
+}

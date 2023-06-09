@@ -13,5 +13,5 @@ model.
 \examples{
 data(sim_ts)
 fit <- mbtransfer(sim_ts)
-time_lags(fit)
+time_lags(fit@parameters[[1]])
 }

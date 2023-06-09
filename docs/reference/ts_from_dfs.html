@@ -56,86 +56,76 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">subject</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40275934/subject.csv"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv"):</span> could not find function "read_csv"</span>
-<span class="r-in"><span><span class="va">interventions</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40279171/interventions.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">subject</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40275934/subject.csv"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">20</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span> (2): subject, diet</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="r-in"><span><span class="va">interventions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40279171/interventions.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv"):</span> could not find function "read_csv"</span>
-<span class="r-in"><span><span class="va">reads</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40279108/reads.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">236</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">3</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span> (1): sample</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">dbl</span> (2): Plant, Animal</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="r-in"><span><span class="va">reads</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40279108/reads.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in read_csv("https://figshare.com/ndownloader/files/40279108/reads.csv"):</span> could not find function "read_csv"</span>
-<span class="r-in"><span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40275943/samples.csv"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in read_csv("https://figshare.com/ndownloader/files/40275943/samples.csv"):</span> could not find function "read_csv"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">236</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">192</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span>   (1): sample</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">dbl</span> (191): Otu000001, Otu000002, Otu000003, Otu000004, Otu000005, Otu000006,...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="r-in"><span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"https://figshare.com/ndownloader/files/40275943/samples.csv"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">236</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">4</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span> (3): sample, subject, condition</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">dbl</span> (1): time</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="r-in"><span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">reads</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">ts_from_dfs</span><span class="op">(</span><span class="va">interventions</span>, <span class="va">samples</span>, <span class="va">subject</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in unique(metadata$subject):</span> object 'samples' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(subject)`</span>
 <span class="r-in"><span><span class="va">ts</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function (data = NA, start = 1, end = numeric(), frequency = 1, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     deltat = 1, ts.eps = getOption("ts.eps"), class = if (nseries &gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         1) c("mts", "ts", "matrix") else "ts", names = if (!is.null(dimnames(data))) colnames(data) else paste("Series", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         seq(nseries))) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (is.data.frame(data)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         data &lt;- data.matrix(data)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (is.matrix(data)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         nseries &lt;- ncol(data)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ndata &lt;- nrow(data)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         dimnames(data) &lt;- list(NULL, names)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     else {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         nseries &lt;- 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ndata &lt;- length(data)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (ndata == 0) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         stop("'ts' object must have one or more observations")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (missing(frequency)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         frequency &lt;- 1/deltat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     else if (missing(deltat)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         deltat &lt;- 1/frequency</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (frequency &gt; 1 &amp;&amp; 0 &lt; (d &lt;- abs(frequency - round(frequency))) &amp;&amp; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         d &lt; ts.eps) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         frequency &lt;- round(frequency)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (!missing(start)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         start &lt;- as.numeric(start)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (length(start) &gt; 1L) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         start &lt;- start[1L] + (start[2L] - 1)/frequency</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (!missing(end)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         end &lt;- as.numeric(end)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (length(end) &gt; 1L) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         end &lt;- end[1L] + (end[2L] - 1)/frequency</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (missing(end)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         end &lt;- start + (ndata - 1)/frequency</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     else if (missing(start)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         start &lt;- end - (ndata - 1)/frequency</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (start &gt; end) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         stop("'start' cannot be after 'end'")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     cycles &lt;- as.numeric((end - start) * frequency)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (abs(round(cycles) - cycles) &gt; ts.eps * max(cycles, 1)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         stop("'end' must be a whole number of cycles after 'start'")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     nobs &lt;- floor(cycles + 1.01)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (nobs != ndata) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         data &lt;- if (NCOL(data) == 1) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             if (ndata &lt; nobs) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 rep_len(data, nobs)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             else if (ndata &gt; nobs) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 data[1L:nobs]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         else {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             if (ndata &lt; nobs) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 data[rep_len(1L:ndata, nobs), ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             else if (ndata &gt; nobs) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 data[1L:nobs, ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     attr(data, "tsp") &lt;- c(start, end, frequency)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (!is.null(class) &amp;&amp; class[[1]] != "none") </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         attr(data, "class") &lt;- class</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x7f7bd3fbac40&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:stats&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A ts_inter object | 191 taxa | 20 subjects | 11.80 ± 3.57 timepoints:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Plant5:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       DD53            DD111             DD24             DD29  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000001 10.2182984901644 9.14941182693663 8.39212694793041 9.39899720494429 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000002                0                0 5.15032449125274 8.45355572278925 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000003 6.41298639815534                0  3.5089592334818 3.56986494940344 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000004 7.45977126049619 6.99747111345779 6.85504008284069  8.0400754435393 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          ⋮                ⋮                ⋮                ⋮ ⋱</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Plant7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       DD79             DD34             DD72            DD144  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000001 9.31064796332915 9.36846144577821 8.05207430379548 9.73394258993618 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000002                0                0 4.83763438231674 1.84428530870696 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000003 7.20133580603692 7.57511920224131 5.67443724637428 7.12722792269608 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000004  9.3751864834759 9.59128858883673 8.31292026544233 9.43524314853652 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          ⋮                ⋮                ⋮                ⋮ ⋱</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Plant4:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       DD31            DD146             DD38            DD138  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000001 8.17627997254723 8.51162759090965 8.28399997223762 8.46589312749772 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000002 4.54496581622368                0                0                0 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000003 8.47143621467469  8.2262417618481 7.68084465953917 6.52660031646268 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Otu000004                0                0                0                0 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          ⋮                ⋮                ⋮                ⋮ ⋱</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 17 more subjects.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

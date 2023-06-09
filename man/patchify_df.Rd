@@ -26,5 +26,6 @@ subjects in the dataset.
 }
 \examples{
 data(sim_ts)
-patchify_df(sim_ts)
+result <- patchify_df(sim_ts)
+lapply(result, head)
 }

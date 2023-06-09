@@ -54,7 +54,23 @@
     </div>
 
 
-  </main></div>
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">predictor_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "taxon1_lag3"        "taxon2_lag3"        "taxon1_lag2"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "taxon2_lag2"        "taxon1_lag1"        "taxon2_lag1"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "intervention1_lag1" "intervention2_lag1" "intervention1_lag0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "intervention2_lag0"</span>
+<span class="r-in"><span><span class="fu">predictor_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "taxon1_lag2"        "taxon2_lag2"        "taxon3_lag2"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "taxon4_lag2"        "taxon5_lag2"        "taxon1_lag1"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "taxon2_lag1"        "taxon3_lag1"        "taxon4_lag1"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "taxon5_lag1"        "intervention1_lag0"</span>
+</code></pre></div>
+    </div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

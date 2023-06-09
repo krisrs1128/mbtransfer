@@ -89,8 +89,315 @@ interventions.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">patchify_df</span><span class="op">(</span><span class="va">sim_ts</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'ncol': this S4 class is not subsettable</span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">patchify_df</span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">head</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon1_lag2 taxon2_lag2 taxon3_lag2 taxon4_lag2 taxon5_lag2 taxon6_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           5          23          17          30           3         115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           7          43          40          12           2          20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           5          19          42          15           3          23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           3           3          25           7          13           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           6           7           8          23           7          15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           2          14          13          13           4           2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon7_lag2 taxon8_lag2 taxon9_lag2 taxon10_lag2 taxon11_lag2 taxon12_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           8           2          14           42           21            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]          42           3           8            9            5           53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]          22          12           4           13            8           47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           6          19          14           15           21           22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]          27          13          15           33           11           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           9          14          22           19           13           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon13_lag2 taxon14_lag2 taxon15_lag2 taxon16_lag2 taxon17_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           12            2           10           12            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            8            4           18            6            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            2           23           18            2            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           21            5           18            8            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           12            7           13            1           11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            4            6            7            3           11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon18_lag2 taxon19_lag2 taxon20_lag2 taxon21_lag2 taxon22_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           20            5            1            3            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            5            2           27            3            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            9            9           21            5           48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            4           10            0            4           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            7            9            5            8            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            5           24            7            1            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon23_lag2 taxon24_lag2 taxon25_lag2 taxon26_lag2 taxon27_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           22            1            5           35           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            1            7            8            5            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            3           29            2           12            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           21            1            7            7            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            3            4            4            4           22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           12            6           21            8            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon28_lag2 taxon29_lag2 taxon30_lag2 taxon31_lag2 taxon32_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            7           29            3           14            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           13            4            5            1            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            6            4           14            7            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            5            0            5            4            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           12            0            6           14            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           10           10            6            2            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon33_lag2 taxon34_lag2 taxon35_lag2 taxon36_lag2 taxon37_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            6            3            7           10           48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            5            2           13            1           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            2            8            5            9            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           10           10            1           11            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            2           13           14           17           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            7           15            4            5           21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon38_lag2 taxon39_lag2 taxon40_lag2 taxon41_lag2 taxon42_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            6            8           10            6           19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            9            4           11            8           56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            7           13            4            4            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            7            1            7            8            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            4            2            7           10           16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            4            7            6            2            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon43_lag2 taxon44_lag2 taxon45_lag2 taxon46_lag2 taxon47_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           18           13           44           23            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           30           22           13           79            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           26           36           10           11            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            2            9            7            6            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           10           32           21            6            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            3            0            8           30            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon48_lag2 taxon49_lag2 taxon50_lag2 taxon51_lag2 taxon52_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            4            8           17            0            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            7            9            6            0            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           23            3           16           12            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           24           17           19           11            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            8           12           19            4           19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           14           17           22            5            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon53_lag2 taxon54_lag2 taxon55_lag2 taxon56_lag2 taxon57_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           15           78           17            0            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           12           10            4            3           25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           19           19            8            3           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           10           32            8            5           17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            5           26           16           17            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           13           10            3            9            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon58_lag2 taxon59_lag2 taxon60_lag2 taxon61_lag2 taxon62_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           12            5           14           14           21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            8            3           21           56           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            6            1            5           40           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            8           14            9           17           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            3           17           26            9            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            8            9           10           52            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon63_lag2 taxon64_lag2 taxon65_lag2 taxon66_lag2 taxon67_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           26           28           13           16            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            2           15            7           29            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           25           21           10           32            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            2           13            9           11           21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            4           25           11            6            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            6           29            4            8            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon68_lag2 taxon69_lag2 taxon70_lag2 taxon71_lag2 taxon72_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           12           13           29            6           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            0            8           40            5            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           31            3           31            7            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            9            3           10            4            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           11            2            7           31           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           15           26           13            6            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon73_lag2 taxon74_lag2 taxon75_lag2 taxon76_lag2 taxon77_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            5           17            6            4            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            7           22            1            0            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           13           12            6            5           18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           16            2            3            4           16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           18           16            5           21            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           17            9            8            0            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon78_lag2 taxon79_lag2 taxon80_lag2 taxon81_lag2 taxon82_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            2            6           14            5           16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            6            0            4            7            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           13            3            7           19            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            3            8            0           12            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           22           14           11            9           11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            7           11           15            4            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon83_lag2 taxon84_lag2 taxon85_lag2 taxon86_lag2 taxon87_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            5            5           10           18            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           12            3            6            6           15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           36           10            7           24            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           16           12            2            6           11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            9           10            0           12            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           13           28            0           18            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon88_lag2 taxon89_lag2 taxon90_lag2 taxon91_lag2 taxon92_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           37            6           26           21            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           10            7           12           18           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           13           14            5            3            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            5            3            1           13            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           12            8           17            4           25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           11            4            6            6           20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon93_lag2 taxon94_lag2 taxon95_lag2 taxon96_lag2 taxon97_lag2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           10           10            3           58           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            4           23           32           23           41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            0            9           13           15            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           31            6           31           20           16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           14            8            9            4           15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            4            6           31            9           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon98_lag2 taxon99_lag2 taxon100_lag2 taxon1_lag1 taxon2_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           10           12             5           7          43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           17            4             0           5          19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           14            9             9           3           3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            0           10             1           6           7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           12            7            16           2          14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            1           18             8           7           2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon3_lag1 taxon4_lag1 taxon5_lag1 taxon6_lag1 taxon7_lag1 taxon8_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]          40          12           2          20          42           3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]          42          15           3          23          22          12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]          25           7          13           1           6          19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           8          23           7          15          27          13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]          13          13           4           2           9          14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]          29          13           6          11          14          13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon9_lag1 taxon10_lag1 taxon11_lag1 taxon12_lag1 taxon13_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           8            9            5           53            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           4           13            8           47            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]          14           15           21           22           21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]          15           33           11           14           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]          22           19           13           14            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]          11            2           15            1            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon14_lag1 taxon15_lag1 taxon16_lag1 taxon17_lag1 taxon18_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            4           18            6            7            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           23           18            2            7            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            5           18            8            6            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            7           13            1           11            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            6            7            3           11            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           14            2           19            3            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon19_lag1 taxon20_lag1 taxon21_lag1 taxon22_lag1 taxon23_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            2           27            3            2            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            9           21            5           48            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           10            0            4           13           21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            9            5            8            1            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           24            7            1            6           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            7           23           29           36           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon24_lag1 taxon25_lag1 taxon26_lag1 taxon27_lag1 taxon28_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            7            8            5            2           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           29            2           12            8            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            1            7            7            6            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            4            4            4           22           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            6           21            8            5           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            5           21           14           14            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon29_lag1 taxon30_lag1 taxon31_lag1 taxon32_lag1 taxon33_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            4            5            1            0            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            4           14            7            1            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            0            5            4            8           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            0            6           14            0            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           10            6            2            2            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           15            8            0           15            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon34_lag1 taxon35_lag1 taxon36_lag1 taxon37_lag1 taxon38_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            2           13            1           14            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            8            5            9            8            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           10            1           11            4            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           13           14           17           14            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           15            4            5           21            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            9            3            7            8            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon39_lag1 taxon40_lag1 taxon41_lag1 taxon42_lag1 taxon43_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            4           11            8           56           30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           13            4            4            5           26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            1            7            8            7            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            2            7           10           16           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            7            6            2            8            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            4           10            3            9           16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon44_lag1 taxon45_lag1 taxon46_lag1 taxon47_lag1 taxon48_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           22           13           79            1            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           36           10           11            2           23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            9            7            6            7           24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           32           21            6            5            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            0            8           30            9           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           12            7            3            4            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon49_lag1 taxon50_lag1 taxon51_lag1 taxon52_lag1 taxon53_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            9            6            0            2           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            3           16           12            1           19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           17           19           11            3           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           12           19            4           19            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           17           22            5            2           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           18            4            6            2            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon54_lag1 taxon55_lag1 taxon56_lag1 taxon57_lag1 taxon58_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           10            4            3           25            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           19            8            3           14            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           32            8            5           17            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           26           16           17            8            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           10            3            9            6            8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           12            9            3            0            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon59_lag1 taxon60_lag1 taxon61_lag1 taxon62_lag1 taxon63_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            3           21           56           10            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            1            5           40           12           25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           14            9           17           12            2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           17           26            9            7            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            9           10           52            4            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            8           13            0            5            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon64_lag1 taxon65_lag1 taxon66_lag1 taxon67_lag1 taxon68_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           15            7           29            1            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           21           10           32            9           31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           13            9           11           21            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           25           11            6            4           11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           29            4            8            6           15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            8           10            3            6            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon69_lag1 taxon70_lag1 taxon71_lag1 taxon72_lag1 taxon73_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            8           40            5            1            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            3           31            7            1           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            3           10            4            5           16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            2            7           31           13           18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           26           13            6            4           17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           14            7            4            7            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon74_lag1 taxon75_lag1 taxon76_lag1 taxon77_lag1 taxon78_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           22            1            0            2            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           12            6            5           18           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            2            3            4           16            3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           16            5           21            2           22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            9            8            0            5            7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           30           25           29            4            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon79_lag1 taxon80_lag1 taxon81_lag1 taxon82_lag1 taxon83_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            0            4            7            4           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            3            7           19            3           36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            8            0           12            5           16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           14           11            9           11            9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           11           15            4            5           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           14           14           12            6           28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon84_lag1 taxon85_lag1 taxon86_lag1 taxon87_lag1 taxon88_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            3            6            6           15           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           10            7           24            1           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           12            2            6           11            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]           10            0           12            6           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           28            0           18            9           11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            6            7            7           16           13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon89_lag1 taxon90_lag1 taxon91_lag1 taxon92_lag1 taxon93_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            7           12           18           13            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]           14            5            3            9            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            3            1           13            8           31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            8           17            4           25           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            4            6            6           20            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           26           12            2           10           15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon94_lag1 taxon95_lag1 taxon96_lag1 taxon97_lag1 taxon98_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           23           32           23           41           17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            9           13           15            8           14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]            6           31           20           16            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            8            9            4           15           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]            6           31            9           13            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]            3           15           17            4            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      taxon99_lag1 taxon100_lag1 intervention1_lag2 intervention1_lag1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]            4             0                  0                  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]            9             9                  0                  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]           10             1                  0                  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]            7            16                  0                  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]           18             8                  0                  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]           11            11                  0                  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      intervention1_lag0        V1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]                  0 0.3295958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]                  0 0.3295958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]                  0 0.3295958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]                  0 0.3295958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]                  0 0.3295958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]                  0 0.3295958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 100</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   taxon1 taxon2 taxon3 taxon4 taxon5 taxon6 taxon7 taxon8 taxon9 taxon10 taxon11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>      3      3     25      7     13      1      6     19     14      15      21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>      6      7      8     23      7     15     27     13     15      33      11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>      2     14     13     13      4      2      9     14     22      19      13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>      7      2     29     13      6     11     14     13     11       2      15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     11     18     10      7     12     22     16      9      5      19       3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>      6      6      5      8     15     35      2     11     24      24       4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 89 more variables: taxon12 &lt;dbl&gt;, taxon13 &lt;dbl&gt;, taxon14 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   taxon15 &lt;dbl&gt;, taxon16 &lt;dbl&gt;, taxon17 &lt;dbl&gt;, taxon18 &lt;dbl&gt;, taxon19 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   taxon20 &lt;dbl&gt;, taxon21 &lt;dbl&gt;, taxon22 &lt;dbl&gt;, taxon23 &lt;dbl&gt;, taxon24 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   taxon25 &lt;dbl&gt;, taxon26 &lt;dbl&gt;, taxon27 &lt;dbl&gt;, taxon28 &lt;dbl&gt;, taxon29 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   taxon30 &lt;dbl&gt;, taxon31 &lt;dbl&gt;, taxon32 &lt;dbl&gt;, taxon33 &lt;dbl&gt;, taxon34 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   taxon35 &lt;dbl&gt;, taxon36 &lt;dbl&gt;, taxon37 &lt;dbl&gt;, taxon38 &lt;dbl&gt;, taxon39 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   taxon40 &lt;dbl&gt;, taxon41 &lt;dbl&gt;, taxon42 &lt;dbl&gt;, taxon43 &lt;dbl&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

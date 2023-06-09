@@ -106,7 +106,511 @@ end of the series and computes the difference in the forecasts.</p></dd>
 <span class="r-in"><span><span class="va">w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">sim_ts</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">interventions</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, nrow <span class="op">=</span> <span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="mbtransfer.html">mbtransfer</a></span><span class="op">(</span><span class="va">sim_ts</span>, <span class="fl">1</span>, <span class="fl">1</span>, nrounds <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">pd_effects</span><span class="op">(</span><span class="va">fit</span>, <span class="va">sim_ts</span>, <span class="va">w0</span>, <span class="va">w1</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in pd_effects(fit, sim_ts, w0, w1):</span> could not find function "pd_effects"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        S14_S1_T1 S14_S1_T2 S14_S1_T3 S14_S1_T4 S14_S1_T5 S14_S1_T6 S14_S1_T7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax5           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax6           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax7           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax8           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax9           0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax10          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax11          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax12          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax13          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax14          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax15          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax16          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax17          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax18          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax19          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax20          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax21          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax22          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax23          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax24          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax25          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax26          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax27          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax28          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax29          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax30          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax31          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax32          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax33          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax34          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax35          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax36          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax37          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax38          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax39          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax40          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax41          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax42          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax43          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax44          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax45          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax46          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax47          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax48          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax49          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax50          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax51          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax52          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax53          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax54          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax55          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax56          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax57          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax58          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax59          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax60          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax61          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax62          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax63          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax64          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax65          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax66          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax67          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax68          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax69          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax70          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax71          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax72          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax73          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax74          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax75          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax76          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax77          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax78          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax79          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax80          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax81          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax82          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax83          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax84          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax85          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax86          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax87          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax88          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax89          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax90          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax91          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax92          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax93          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax94          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax95          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax96          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax97          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax98          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax99          0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax100         0         0         0         0         0         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        S14_S1_T8 S14_S1_T9 S14_S1_T10 S14_S1_T11 S14_S1_T12 S14_S1_T13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax5           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax6           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax7           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax8           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax9           0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax10          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax11          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax12          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax13          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax14          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax15          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax16          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax17          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax18          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax19          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax20          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax21          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax22          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax23          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax24          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax25          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax26          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax27          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax28          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax29          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax30          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax31          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax32          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax33          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax34          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax35          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax36          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax37          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax38          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax39          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax40          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax41          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax42          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax43          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax44          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax45          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax46          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax47          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax48          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax49          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax50          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax51          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax52          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax53          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax54          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax55          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax56          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax57          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax58          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax59          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax60          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax61          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax62          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax63          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax64          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax65          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax66          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax67          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax68          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax69          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax70          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax71          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax72          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax73          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax74          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax75          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax76          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax77          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax78          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax79          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax80          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax81          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax82          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax83          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax84          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax85          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax86          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax87          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax88          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax89          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax90          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax91          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax92          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax93          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax94          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax95          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax96          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax97          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax98          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax99          0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax100         0         0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        S14_S1_T14 S14_S1_T15 S14_S1_T16 S14_S1_T17 S14_S1_T18 S14_S1_T19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax5            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax6            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax7            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax8            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax9            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax10           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax11           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax12           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax13           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax14           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax15           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax16           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax17           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax18           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax19           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax20           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax21           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax22           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax23           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax24           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax25           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax26           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax27           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax28           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax29           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax30           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax31           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax32           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax33           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax34           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax35           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax36           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax37           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax38           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax39           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax40           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax41           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax42           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax43           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax44           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax45           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax46           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax47           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax48           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax49           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax50           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax51           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax52           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax53           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax54           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax55           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax56           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax57           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax58           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax59           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax60           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax61           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax62           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax63           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax64           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax65           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax66           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax67           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax68           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax69           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax70           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax71           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax72           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax73           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax74           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax75           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax76           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax77           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax78           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax79           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax80           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax81           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax82           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax83           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax84           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax85           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax86           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax87           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax88           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax89           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax90           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax91           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax92           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax93           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax94           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax95           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax96           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax97           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax98           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax99           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax100          0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        S14_S1_T20 S14_S1_T21 S14_S1_T22 S14_S1_T23 S14_S1_T24 S14_S1_T25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax5            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax6            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax7            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax8            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax9            0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax10           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax11           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax12           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax13           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax14           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax15           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax16           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax17           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax18           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax19           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax20           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax21           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax22           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax23           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax24           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax25           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax26           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax27           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax28           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax29           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax30           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax31           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax32           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax33           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax34           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax35           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax36           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax37           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax38           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax39           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax40           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax41           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax42           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax43           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax44           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax45           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax46           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax47           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax48           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax49           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax50           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax51           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax52           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax53           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax54           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax55           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax56           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax57           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax58           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax59           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax60           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax61           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax62           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax63           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax64           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax65           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax66           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax67           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax68           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax69           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax70           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax71           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax72           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax73           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax74           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax75           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax76           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax77           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax78           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax79           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax80           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax81           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax82           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax83           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax84           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax85           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax86           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax87           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax88           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax89           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax90           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax91           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax92           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax93           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax94           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax95           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax96           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax97           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax98           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax99           0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax100          0          0          0          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        S14_S1_T26 S14_S1_T27          S14_         S14_         S14_</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1            0          0 -0.6261767376 -0.916677793 -1.036988707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2            0          0 -8.6797808238 -8.865025100 -9.045131876</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3            0          0  0.4901266098  0.461494230  0.324778943</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4            0          0  0.0226087570 -0.455028579 -0.615769216</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax5            0          0 -4.5699100494 -5.454703376 -5.638825621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax6            0          0 -0.8229837418 -1.223879042 -1.395385175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax7            0          0 -2.1631822586 -2.148629824 -2.304602441</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax8            0          0 -3.1050276075 -3.404119492 -3.564895471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax9            0          0 -2.1424026489 -1.976222175 -2.075100604</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax10           0          0 -4.6008948258 -4.906381755 -5.077423414</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax11           0          0  0.1006116981 -0.037262633 -0.175065370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax12           0          0  0.0899591332 -0.032846791 -0.199776979</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax13           0          0  0.2611198425  0.092973789 -0.023829551</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax14           0          0  0.0453519821 -0.110882589 -0.219053620</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax15           0          0 -0.0013198853 -0.176928861 -0.337490593</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax16           0          0 -0.1955499763 -0.306998400 -0.438218798</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax17           0          0  0.1461925507  0.127523797 -0.020266533</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax18           0          0  0.2110414505  0.073243118 -0.064082407</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax19           0          0  0.3695640564  0.238580556  0.104187568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax20           0          0  0.5999727249  0.505684796  0.355241946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax21           0          0  0.0639905816 -0.044497195 -0.181773719</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax22           0          0 -0.1367178077 -0.456645182 -0.610433056</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax23           0          0  0.1827573776  0.062707822 -0.054808049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax24           0          0  0.0001440048 -0.035454489 -0.171921219</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax25           0          0  0.3243532181  0.156830731  0.046159608</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax26           0          0 -0.0922403336 -0.363432021 -0.508635464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax27           0          0  0.0000000000 -0.178715184 -0.314561730</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax28           0          0  0.0457067490 -0.242247650 -0.403863475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax29           0          0  0.4687204361  0.434578021  0.329291605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax30           0          0 -0.0370254517 -0.093403725 -0.206440415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax31           0          0  0.1704483032  0.031506255 -0.075367156</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax32           0          0  0.1253042221  0.072026616 -0.030252763</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax33           0          0  0.1577425003  0.227468105  0.125237908</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax34           0          0  0.0714664459 -0.023746252 -0.122553411</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax35           0          0  0.0116882324 -0.092424779 -0.213454281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax36           0          0 -0.0997276306 -0.202837603 -0.329016004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax37           0          0  0.0123949051 -0.089545216 -0.218472515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax38           0          0 -0.0696502186 -0.107987211 -0.214436225</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax39           0          0  0.0308160782 -0.157193831 -0.284616289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax40           0          0  0.2448488758  0.155139140  0.052556163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax41           0          0  0.0544996375 -0.074133657 -0.195355926</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax42           0          0  0.3344421387  0.201911166  0.043483938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax43           0          0 -0.1978740692 -0.408833322 -0.546982890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax44           0          0  0.0861520767 -0.079530591 -0.217192355</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax45           0          0  0.2641477585  0.144852774  0.045255820</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax46           0          0  0.1718807220 -0.020314932 -0.156352736</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax47           0          0  0.0573344798 -0.076502777 -0.209166788</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax48           0          0 -0.0559082031 -0.164186818 -0.267772209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax49           0          0  0.0452156067  0.017378364 -0.103209121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax50           0          0  0.6197443008  0.533635730  0.392921312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax51           0          0 -0.1088237762 -0.181746784 -0.283840089</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax52           0          0  0.1620292664  0.054749160 -0.070278213</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax53           0          0 -0.0650682449 -0.106371380 -0.243282420</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax54           0          0 -0.1676607132 -0.501237881 -0.641671624</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax55           0          0  0.0465764999 -0.054123152 -0.201142266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax56           0          0  0.1694231033  0.064360176 -0.067084880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax57           0          0  0.3289899940  0.349780877  0.249715260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax58           0          0  0.0049743652 -0.102058887 -0.229921398</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax59           0          0 -0.0651731491 -0.172925665 -0.282679376</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax60           0          0  0.1003923416  0.017927442 -0.106186628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax61           0          0  0.1284294128  0.167002371  0.006636699</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax62           0          0  0.0421905518 -0.035024325 -0.143519708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax63           0          0 -0.0326814651 -0.135563090 -0.251329995</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax64           0          0  0.0000000000 -0.220004706 -0.392079444</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax65           0          0  0.2770986557 -0.014982155 -0.185921135</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax66           0          0  0.1851730347  0.066095295 -0.053948153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax67           0          0 -0.3655233383 -0.517924002 -0.646030982</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax68           0          0 -0.0241069794 -0.215817508 -0.335266897</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax69           0          0  0.1588163262  0.124772219 -0.012991690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax70           0          0  0.0117511749 -0.041636751 -0.154396568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax71           0          0 -0.0166425705 -0.130806684 -0.242245243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax72           0          0 -0.3836088294 -0.664908330 -0.801755349</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax73           0          0  0.2657938117  0.094382933 -0.045772552</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax74           0          0  0.0588607788 -0.205403737 -0.340480248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax75           0          0  0.2981920469  0.174052659  0.034593673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax76           0          0  0.1216363907 -0.071129492 -0.222522656</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax77           0          0 -0.0319328308 -0.199081557 -0.315383014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax78           0          0  0.1473607903 -0.004398266 -0.126129548</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax79           0          0 -0.3031539917 -0.404156390 -0.528745015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax80           0          0 -0.0143079758 -0.209676595 -0.375500577</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax81           0          0  0.0494556427 -0.025893722 -0.121369373</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax82           0          0 -0.0192165375 -0.155803226 -0.278460843</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax83           0          0 -0.2355022430 -0.373329605 -0.520634447</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax84           0          0  0.0820016861 -0.036866245 -0.180258172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax85           0          0 -0.1920685598 -0.345510920 -0.449190861</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax86           0          0  0.2061395759 -0.008849053 -0.131104946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax87           0          0  0.2097320557  0.051986626 -0.071768590</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax88           0          0  0.2531499863  0.155812332 -0.036142054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax89           0          0  0.0626783371 -0.052957399 -0.169116361</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax90           0          0 -0.0049295425 -0.091969467 -0.212799084</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax91           0          0 -0.2236728668 -0.460049504 -0.592726742</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax92           0          0  0.1746749878  0.157088825  0.021476416</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax93           0          0 -0.0069417953 -0.181022201 -0.308449234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax94           0          0  0.2017435630  0.227754968  0.129988404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax95           0          0 -0.1663780212 -0.260507833 -0.419550907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax96           0          0  0.0104255676 -0.116120634 -0.240984871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax97           0          0  0.3375120163  0.281471093  0.099471683</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax98           0          0  0.0932779199 -0.016630979 -0.159824201</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax99           0          0  0.3137340546  0.111407780 -0.040524278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax100          0          0  0.1327896118  0.065236796 -0.063064348</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

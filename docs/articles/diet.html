@@ -139,7 +139,36 @@ variation in the gaps between samples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">reads</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/ts_from_dfs.html">ts_from_dfs</a></span><span class="op">(</span><span class="va">interventions</span>, <span class="va">samples</span>, <span class="va">subject</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">interpolate</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">interpolate</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ts</span></span>
+<span><span class="co">#&gt; # A ts_inter object | 191 taxa | 20 subjects | 14.40 ± 1.56 timepoints:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Plant5:</span></span>
+<span><span class="co">#&gt;                  Plant5_T1        Plant5_T2        Plant5_T3        Plant5_T4  </span></span>
+<span><span class="co">#&gt; Otu000001 10.2182984901644 9.14941182693663 8.39212694793041 9.39899720494429 …</span></span>
+<span><span class="co">#&gt; Otu000002                0                0 5.15032449125274 8.45355572278925 …</span></span>
+<span><span class="co">#&gt; Otu000003 6.41298639815534                0  3.5089592334818 3.56986494940344 …</span></span>
+<span><span class="co">#&gt; Otu000004 7.45977126049619 6.99747111345779 6.85504008284069  8.0400754435393 …</span></span>
+<span><span class="co">#&gt;                          ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Plant7:</span></span>
+<span><span class="co">#&gt;                  Plant7_T1        Plant7_T2        Plant7_T3        Plant7_T4  </span></span>
+<span><span class="co">#&gt; Otu000001 9.31064796332915 9.36846144577821 8.05207430379548 9.73394258993618 …</span></span>
+<span><span class="co">#&gt; Otu000002                0                0 4.83763438231674 1.84428530870696 …</span></span>
+<span><span class="co">#&gt; Otu000003 7.20133580603692 7.57511920224131 5.67443724637428 7.12722792269608 …</span></span>
+<span><span class="co">#&gt; Otu000004  9.3751864834759 9.59128858883673 8.31292026544233 9.43524314853652 …</span></span>
+<span><span class="co">#&gt;                          ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Plant4:</span></span>
+<span><span class="co">#&gt;                  Plant4_T1        Plant4_T2        Plant4_T3        Plant4_T4  </span></span>
+<span><span class="co">#&gt; Otu000001 8.17627997254723 8.34395378172844 8.51162759090965 8.39781378157364 …</span></span>
+<span><span class="co">#&gt; Otu000002 4.54496581622368 2.27248290811184                0                0 …</span></span>
+<span><span class="co">#&gt; Otu000003 8.47143621467469 8.34883898826139  8.2262417618481 7.95354321069363 …</span></span>
+<span><span class="co">#&gt; Otu000004                0                0                0                0 …</span></span>
+<span><span class="co">#&gt;                          ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; and 17 more subjects.</span></span></code></pre></div>
 <p>Before doing any modeling, let’s visualize some of the raw data. The
 plot below shows interpolated series for the seven most abundant taxa.
 For some subjects, there is a clear, nearly universal affect – e.g.,
@@ -160,7 +189,7 @@ uncertainty quantification.</p>
 <span><span class="va">values_df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">taxon</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">interaction_hm</span><span class="op">(</span><span class="va">top_taxa</span>, <span class="st">"diet"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/interaction_hm.html">interaction_hm</a></span><span class="op">(</span><span class="va">top_taxa</span>, <span class="st">"diet"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="diet_files/figure-html/unnamed-chunk-5-1.png" width="960"></p>
 </div>
 <div class="section level3">
@@ -352,12 +381,12 @@ series to diverge after the intervention appears.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Otu000001    -<span style="color: #BB0000;">4</span>  0       0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Otu000001    -<span style="color: #BB0000;">3</span>  0       0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Otu000001    -<span style="color: #BB0000;">2</span>  0       0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Otu000001    -<span style="color: #BB0000;">1</span>  0.103   0.103   0.103 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Otu000001    -<span style="color: #BB0000;">1</span>  0.101   0.101   0.101 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Otu000001     0  0.260   0.260   0.260 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Otu000001     1  0.330   0.330   0.330 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Otu000001     2  0.321   0.321   0.321 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Otu000001     3  0.176   0.176   0.176 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Otu000001     4 -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.017</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.017</span><span style="color: #BB0000; text-decoration: underline;">9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Otu000001     2  0.322   0.322   0.322 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Otu000001     3  0.180   0.180   0.180 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Otu000001     4 -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 942 more rows</span></span></span></code></pre></div>
 <p>We can now visualize the trajectories of the selected taxa. We can
 organize the taxa so that those with similar trajectory differences are
@@ -421,7 +450,7 @@ investigates subject-level variation using</p>
 <span>    value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    taxon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">taxon</span>, levels <span class="op">=</span> <span class="va">taxa_hm</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">interaction_hm</span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">taxa_hm</span>, <span class="st">"diet"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/interaction_hm.html">interaction_hm</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">taxa_hm</span>, <span class="st">"diet"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Subject"</span>, fill <span class="op">=</span> <span class="st">"Rank"</span>, color <span class="op">=</span> <span class="st">"Rank"</span><span class="op">)</span></span></code></pre></div>
@@ -446,9 +475,8 @@ original display.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
 <span>    panel.spacing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0</span>, <span class="st">"line"</span><span class="op">)</span>,</span>
 <span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
-<span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>,</span>
+<span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>,</span>
 <span>    axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="st">"null"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
@@ -457,7 +485,7 @@ original display.</p>
 <span>    value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    taxon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">taxon</span>, levels <span class="op">=</span> <span class="va">focus_taxa</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">interaction_hm</span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">focus_taxa</span>, <span class="st">"diet"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/interaction_hm.html">interaction_hm</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">focus_taxa</span>, <span class="st">"diet"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#eaf7f7"</span>, high <span class="op">=</span> <span class="st">"#037F8C"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Subject"</span>, fill <span class="op">=</span> <span class="st">"Rank"</span>, color <span class="op">=</span> <span class="st">"Rank"</span>, title <span class="op">=</span> <span class="st">"(b) Original Data"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -465,10 +493,9 @@ original display.</p>
 <span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="diet_files/figure-html/unnamed-chunk-18-1.png" width="960"></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"diet-combined.png"</span>, width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

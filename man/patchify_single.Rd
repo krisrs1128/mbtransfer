@@ -23,5 +23,8 @@ data, which can then be organized into matrices for prediction.
 }
 \examples{
 data(sim_ts)
-patchify_single(sim_ts[[1]])
+patches <- patchify_single(sim_ts[[1]])
+head(patches$x[[1]])
+head(patches$w[[1]])
+head(patches$y[[1]])
 }

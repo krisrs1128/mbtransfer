@@ -11,6 +11,7 @@ Build a  \code{ts}
 }
 \examples{
 library(readr)
+library(tibble)
 subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
 interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
 column_to_rownames("sample")

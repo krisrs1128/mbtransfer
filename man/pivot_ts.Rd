@@ -11,6 +11,6 @@ Joined ts dfs
 }
 \examples{
 data(sim_ts)
-pivoted <- pivot_longer(sim_ts)
+pivoted <- pivot_ts(sim_ts)
 head(pivoted)
 }

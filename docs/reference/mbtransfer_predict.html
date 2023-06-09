@@ -74,29 +74,32 @@ method will make predictions for every timepoint that appears in the
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="mbtransfer.html">mbtransfer</a></span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ts_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="subset_values.html">subset_values</a></span><span class="op">(</span><span class="va">sim_ts</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">ts_subset</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A ts_inter object | 50 taxa | 50 subjects | 27.00 ± 0.00 timepoints:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A ts_inter object | 100 taxa | 50 subjects | 27.00 ± 0.00 timepoints:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           S1T1      S1T2      S1T3      S1T4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax1  8.257869  4.545194  9.035324  7.964213 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax2 14.451270  5.302726  6.776493 13.652936 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax3 15.483504  9.090387  9.035324 27.305872 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax4  3.096701 12.120516 27.105971 26.168127 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	⋮	⋮	⋮	⋮	⋮</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           S2T1      S2T2      S2T3      S2T4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax1  4.165919  8.131791 19.938083 10.115363 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax2  9.720479 14.230635 13.956658  5.057681 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax3 26.384157 12.197687  8.972137 13.149972 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax4  0.000000  8.131791  4.984521 19.219189 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	⋮	⋮	⋮	⋮	⋮</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          S3T1      S3T2       S3T3      S3T4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax1 19.30403  9.595690 10.4895283  2.029521 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax2 10.72446 13.085032 21.9326500  9.132847 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax3 26.81115 13.085032  0.9535935  6.088564 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tax4 16.08669  8.723354 13.3503087 15.221411 …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	⋮	⋮	⋮	⋮	⋮</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> S1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      S1_T1 S1_T2 S1_T3 S1_T4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1     5     7     5     3 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2    23    43    19     3 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3    17    40    42    25 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4    30    12    15     7 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          ⋮     ⋮     ⋮     ⋮ ⋱</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> S2:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      S2_T1 S2_T2 S2_T3 S2_T4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1     6     4    11     8 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2    53    12    15     1 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3     6     8    23     5 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4    24    11    12    15 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          ⋮     ⋮     ⋮     ⋮ ⋱</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> S3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      S3_T1 S3_T2 S3_T3 S3_T4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax1     5     3     6     5 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax2     9    13    26     3 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax3    60    13     4     6 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tax4    22    17     6     8 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          ⋮     ⋮     ⋮     ⋮ ⋱</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and 47 more subjects.</span>
 </code></pre></div>
     </div>

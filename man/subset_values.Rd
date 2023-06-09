@@ -7,5 +7,11 @@
 subset_values(ts, ix)
 }
 \description{
-Subset values of a ts object
+This is a helper to filter the number of timepoints across all \code{values} slots
+in a \code{ts_inter} class.
+}
+\examples{
+data(sim_ts)
+subset_values(sim_ts, 1:2)
+subset_values(sim_ts, 4:8)
 }

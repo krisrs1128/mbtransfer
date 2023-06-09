@@ -23,5 +23,7 @@ different regression methods.
 }
 \examples{
 data(sim_ts)
-patchify_single_df(sim_ts[[1]], 2, 2)
+patches <- patchify_single_df(sim_ts[[1]], 2, 2)
+head(patches$x)
+head(patches$y)
 }
