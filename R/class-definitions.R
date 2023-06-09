@@ -77,6 +77,13 @@ multi_subset <- function(x, i = NULL, j = NULL, ..., drop = FALSE) {
 
 #' Subset values of a ts object
 #' 
+#' This is a helper to filter the number of timepoints across all `values` slots
+#' in a `ts_inter` class.
+#' 
+#' @examples
+#' data(sim_ts)
+#' subset_values(sim_ts, 1:2)
+#' subset_values(sim_ts, 4:8)
 #' @export
 subset_values <- function(ts, ix) {
   ts_missing <- ts
@@ -126,10 +133,12 @@ print_ts_inter <- function(object) {
     length(taxa(object)), length(object), mean(n_time), 1.9 * sd(n_time)
   ))
   for (i in seq_len(min(3, length(n_time)))) {
+    n_col <- min(4, ncol(values(object[[i]])))
+    
     cat(sprintf("\n%s:\n", names(object)[i]))
-    v <- data.frame(values(object[[i]])[1:4, 1:4])
-    v <- cbind(v, " " = rep("\U2026", 4))
-    v <- rbind(v, " " = c(rep("\U22EE", 4), "\U22F1"))
+    v <- data.frame(values(object[[i]])[1:n_col, 1:n_col])
+    v <- cbind(v, " " = rep("\U2026", n_col))
+    v <- rbind(v, " " = c(rep("\U22EE", n_col), "\U22F1"))
     print(v)
   }
   
@@ -147,13 +156,14 @@ print_ts_inter_single <- function(object) {
   ))
   
   cat("taxa:\n")
-  v <- data.frame(values(object)[1:4, 1:4])
-  v <- cbind(v, " " = rep("\U2026", 4))
-  v <- rbind(v, " " = c(rep("\U22EE", 4), "\U22F1"))
+  n_col <- min(4, ncol(values(object[[i]])))
+  v <- data.frame(values(object)[1:n_col, 1:n_col])
+  v <- cbind(v, " " = rep("\U2026", n_col))
+  v <- rbind(v, " " = c(rep("\U22EE", n_col), "\U22F1"))
   print(v)
 
   cat("interventions:\n")
-  i <- interventions(object)[, 1:4, drop = FALSE]
+  i <- interventions(object)[, 1:n_col, drop = FALSE]
   i <- as.data.frame(i)
   i <- cbind(i, " " = "\U2026")
   print(i)

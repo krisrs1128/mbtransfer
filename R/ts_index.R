@@ -31,6 +31,22 @@ replace_subject <- function(ts, new_subject) {
   ts
 }
 
+#' Randomly subset a `ts_inter` object
+#' 
+#' There are times we want to randomly sample patches from across timepoints and
+#' subjects. This is a helper function that does this random sampling adapted to
+#' `ts_inter` objects, subsetting taxa and intervention timepoints
+#' simultaneously.
+#' 
+#' @param ts A `ts_inter` object whose random patches we want to sample.
+#' @param n The number of randomly sampled time series to return.
+#' @param patch_len The length of the randomly sampled patches
+#' @param intervention_len We will sample random patches padded by an extra
+#'   intervention_len set of timepoints.
+#' 
+#' @examples
+#' data(sim_ts)
+#' sample_ts(sim_ts, 10, 4, 1)
 #' @export
 sample_ts <- function(ts, n, patch_len = 5, intervention_len = NULL) {
   # randomly subset series

@@ -15,7 +15,10 @@
 #' @export
 #' @examples
 #' data(sim_ts)
-#' patchify_single(sim_ts[[1]])
+#' patches <- patchify_single(sim_ts[[1]])
+#' head(patches$x[[1]])
+#' head(patches$w[[1]])
+#' head(patches$y[[1]])
 patchify_single <- function(ts_inter, p = 2, q = 3) {
   ix <- seq_len(ncol(ts_inter))
   x_indices <- slide(ix, ~ ., .before = p, .after = -1)
@@ -59,7 +62,9 @@ patchify_single <- function(ts_inter, p = 2, q = 3) {
 #'   
 #' @examples
 #' data(sim_ts)
-#' patchify_single_df(sim_ts[[1]], 2, 2)
+#' patches <- patchify_single_df(sim_ts[[1]], 2, 2)
+#' head(patches$x)
+#' head(patches$y)
 #' @importFrom glue glue
 #' @export
 patchify_single_df <- function(ts_inter, p, q) {
@@ -105,7 +110,8 @@ patchify_single_df <- function(ts_inter, p, q) {
 #' @importFrom dplyr select bind_cols
 #' @examples
 #' data(sim_ts)
-#' patchify_df(sim_ts)
+#' result <- patchify_df(sim_ts)
+#' lapply(result, head)
 #' @export
 patchify_df <- function(ts_inter, p = 2, q = 3) {
   patches <- list()
@@ -125,7 +131,13 @@ patchify_df <- function(ts_inter, p = 2, q = 3) {
 }
 
 #' Create uniform column names for patchified df
+#' 
+#' @examples
+#' data(sim_ts)
+#' predictor_names(c(2, 3), c(2, 2))
+#' predictor_names(c(5, 2), c(1, 1))
 #' @importFrom glue glue
+#' @export
 predictor_names <- function(x_dim, w_dim) {
   n1 <- rep(glue("taxon{seq_len(x_dim[1])}"), x_dim[2])
   n2 <- rep(glue("lag{seq(x_dim[2], 1)}"), each = x_dim[1])
@@ -145,6 +157,7 @@ predictor_names <- function(x_dim, w_dim) {
 #' @importFrom utils strcapture
 #' @examples
 #' lag_from_names(c("taxon1_lag1", "taxon1_lag2", "taxon1_lag3"))
+#' @export
 lag_from_names <- function(names, group = "taxon") {
   names_ix <- names[grepl(group, names)]
   names_value <- strcapture("(lag[0-9]+)", names_ix, data.frame(chr=character()))
@@ -161,7 +174,8 @@ lag_from_names <- function(names, group = "taxon") {
 #' @examples
 #' data(sim_ts)
 #' fit <- mbtransfer(sim_ts)
-#' time_lags(fit)
+#' time_lags(fit@parameters[[1]])
+#' @export
 time_lags <- function(fit) {
   # different names for gbm and lasso, resp.
   if (!is.null(fit$feature_names)) {

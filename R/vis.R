@@ -1,5 +1,7 @@
 
-#' @export
+#' @importFrom dplyr filter select mutate
+#' @importFrom tibble column_to_rownames
+#' @importFrom tidyr pivot_wider unite
 subject_order <- function(values_df, taxa, r = 0) {
   values_wide <- values_df |>
     filter(taxon %in% taxa) |>
@@ -14,7 +16,37 @@ subject_order <- function(values_df, taxa, r = 0) {
   rownames(values_wide)[hclust(dist(values_wide))$order]
 }
 
+#' Visualize Time Series Heatmaps
+#' 
+#' This is a helper function to visualize time series for a subset of taxa
+#' across all subjects. It is used in the raw data figures in the case studies
+#' section of the accompanying manuscript.
+#' 
+#' @param values_df A data.frame containing joined information from a `ts_inter`
+#'   object. Each row should be one count from one taxon/subject pair. The
+#'   output of `pivot_ts` reshape data to this format.
+#' @param taxa A character vector of taxa to filter down to in the final
+#'   visualization.
+#' @param condition A subject-level variable to use during faceting. Defaults to
+#'   no faceting.
+#' @param r When ordering subjects, we consider averages after rounding
+#'   timepoints into bins. Large `r` corresponds to fine-grained binning,
+#'   negative `r` are more coarse bins. Defaults to 0. See `subject_order` for
+#'   details.
+#' 
 #' @importFrom ggplot2 scale_color_gradient scale_fill_gradient
+#' @examples
+#' library(dplyr)
+#' data(sim_ts)
+#' pivoted <- sim_ts |>
+#'   pivot_ts() |>
+#'   mutate(v_pos = V1 > 0)
+#' interaction_hm(pivoted, c("tax1", "tax2"), "v_pos")
+#' 
+#' pivoted |>
+#'   group_by(taxon) |>
+#'   mutate(value = rank(value) / n()) |>
+#'   interaction_hm(c("tax1", "tax2"), "v_pos")
 #' @export
 interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   p <- values_df |>

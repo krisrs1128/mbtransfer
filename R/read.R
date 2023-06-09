@@ -3,6 +3,7 @@
 #' @importFrom dplyr pull filter left_join distinct
 #' @examples
 #' library(readr)
+#' library(tibble)
 #' subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
 #' interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
 #' column_to_rownames("sample")
@@ -80,7 +81,7 @@ ts_to_dfs <- function(ts) {
 #' @export
 #' @examples
 #' data(sim_ts)
-#' pivoted <- pivot_longer(sim_ts)
+#' pivoted <- pivot_ts(sim_ts)
 #' head(pivoted)
 #' @export
 pivot_ts <- function(ts) {
