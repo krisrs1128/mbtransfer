@@ -24,7 +24,7 @@ significance of the intervention on individual taxa,
 simulate trajectory differences between counterfactual treatments,
 
 <center>
-<img src="https://krisrs1128.github.io/mbtransfer/articles/diet_files/figure-html/unnamed-chunk-16-1.png"/>
+<img src="https://krisrs1128.github.io/mbtransfer/articles/diet_files/figure-html/unnamed-chunk-18-1.png"/>
 </center>
 
 You can read more about the methodology in our preprint and can browse
