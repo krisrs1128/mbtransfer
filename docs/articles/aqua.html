@@ -9,9 +9,9 @@
 <title>Modulating pH in an Aquaculture Microbiome • mbtransfer</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.5/font.css" rel="stylesheet">
-<link href="../deps/JetBrains_Mono-0.4.5/font.css" rel="stylesheet">
-<link href="../deps/Cormorant-0.4.5/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/Cormorant-0.4.7/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Modulating pH in an Aquaculture Microbiome">
@@ -135,31 +135,49 @@ analysis on just these tanks.</p>
 <span></span>
 <span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="va">ts</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">ts</span></span>
-<span><span class="co">#&gt; # A ts_inter object | 128 taxa | 3 subjects | 128.00 ± 0.00 timepoints:</span></span>
+<span><span class="co">#&gt; # A ts_inter object | 128 taxa | 3 subjects | 128.00 &lt;U+00B1&gt; 0.00 timepoints:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; T1:</span></span>
-<span><span class="co">#&gt;                   T1_T1            T1_T2            T1_T3            T1_T4  </span></span>
-<span><span class="co">#&gt; X_0001 7.03778541128485 7.45767754885108 7.93698596426871 7.93698596426871 …</span></span>
-<span><span class="co">#&gt; X_0002 9.36465890506611 9.23355614317955 8.68215423068849 8.68215423068849 …</span></span>
-<span><span class="co">#&gt; X_0003  4.1791203926653                0                0                0 …</span></span>
-<span><span class="co">#&gt; X_0005 9.23574398101079 9.12712790546265 8.57758473216123 8.57758473216123 …</span></span>
-<span><span class="co">#&gt;                       ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt;                   T1_T1            T1_T2            T1_T3            T1_T4</span></span>
+<span><span class="co">#&gt; X_0001 7.03778541128485 7.45767754885108 7.93698596426871 7.93698596426871</span></span>
+<span><span class="co">#&gt; X_0002 9.36465890506611 9.23355614317955 8.68215423068849 8.68215423068849</span></span>
+<span><span class="co">#&gt; X_0003  4.1791203926653                0                0                0</span></span>
+<span><span class="co">#&gt; X_0005 9.23574398101079 9.12712790546265 8.57758473216123 8.57758473216123</span></span>
+<span><span class="co">#&gt;                &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
+<span><span class="co">#&gt;                </span></span>
+<span><span class="co">#&gt; X_0001 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0002 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0003 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0005 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt;        &lt;U+22F1&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; T2:</span></span>
-<span><span class="co">#&gt;                   T2_T1            T2_T2            T2_T3            T2_T4  </span></span>
-<span><span class="co">#&gt; X_0001 7.12221100629411 8.05174333821918 8.82707180494662 7.74321425524817 …</span></span>
-<span><span class="co">#&gt; X_0002 9.28345802278409 8.78476591364709 9.38906240630534 9.26845023218197 …</span></span>
-<span><span class="co">#&gt; X_0003 2.47911692193252                0                0                0 …</span></span>
-<span><span class="co">#&gt; X_0005 9.02152679338404 8.55019368053109 9.37673130353225 9.35122053398331 …</span></span>
-<span><span class="co">#&gt;                       ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt;                   T2_T1            T2_T2            T2_T3            T2_T4</span></span>
+<span><span class="co">#&gt; X_0001 7.12221100629411 8.05174333821918 8.82707180494662 7.74321425524817</span></span>
+<span><span class="co">#&gt; X_0002 9.28345802278409 8.78476591364709 9.38906240630534 9.26845023218197</span></span>
+<span><span class="co">#&gt; X_0003 2.47911692193252                0                0                0</span></span>
+<span><span class="co">#&gt; X_0005 9.02152679338404 8.55019368053109 9.37673130353225 9.35122053398331</span></span>
+<span><span class="co">#&gt;                &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
+<span><span class="co">#&gt;                </span></span>
+<span><span class="co">#&gt; X_0001 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0002 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0003 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0005 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt;        &lt;U+22F1&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; T3:</span></span>
-<span><span class="co">#&gt;                   T3_T1            T3_T2            T3_T3            T3_T4  </span></span>
-<span><span class="co">#&gt; X_0001 7.07580111301836 3.84144474543419  8.5004907163074 9.75633559832993 …</span></span>
-<span><span class="co">#&gt; X_0002 9.14856161199074 6.99170777941835 6.57757197962165 8.25611654924185 …</span></span>
-<span><span class="co">#&gt; X_0003 2.32831174152647                0 4.70300514682592 4.97584445523894 …</span></span>
-<span><span class="co">#&gt; X_0005 9.70721940463161 9.36456033056579 9.48344599434155 9.63700743308452 …</span></span>
-<span><span class="co">#&gt;                       ⋮                ⋮                ⋮                ⋮ ⋱</span></span></code></pre></div>
+<span><span class="co">#&gt;                   T3_T1            T3_T2            T3_T3            T3_T4</span></span>
+<span><span class="co">#&gt; X_0001 7.07580111301836 3.84144474543419  8.5004907163074 9.75633559832993</span></span>
+<span><span class="co">#&gt; X_0002 9.14856161199074 6.99170777941835 6.57757197962165 8.25611654924185</span></span>
+<span><span class="co">#&gt; X_0003 2.32831174152647                0 4.70300514682592 4.97584445523894</span></span>
+<span><span class="co">#&gt; X_0005 9.70721940463161 9.36456033056579 9.48344599434155 9.63700743308452</span></span>
+<span><span class="co">#&gt;                &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
+<span><span class="co">#&gt;                </span></span>
+<span><span class="co">#&gt; X_0001 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0002 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0003 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; X_0005 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt;        &lt;U+22F1&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="prediction">Prediction<a class="anchor" aria-label="anchor" href="#prediction"></a>

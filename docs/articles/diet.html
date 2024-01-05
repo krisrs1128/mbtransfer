@@ -9,9 +9,9 @@
 <title>Diet Interventions as Ecological Shifts • mbtransfer</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.5/font.css" rel="stylesheet">
-<link href="../deps/JetBrains_Mono-0.4.5/font.css" rel="stylesheet">
-<link href="../deps/Cormorant-0.4.5/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/Cormorant-0.4.7/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Diet Interventions as Ecological Shifts">
@@ -142,31 +142,49 @@ variation in the gaps between samples.</p>
 <span>  <span class="fu">interpolate</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ts</span></span>
-<span><span class="co">#&gt; # A ts_inter object | 191 taxa | 20 subjects | 14.40 ± 1.56 timepoints:</span></span>
+<span><span class="co">#&gt; # A ts_inter object | 191 taxa | 20 subjects | 14.40 &lt;U+00B1&gt; 1.56 timepoints:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Plant5:</span></span>
-<span><span class="co">#&gt;                  Plant5_T1        Plant5_T2        Plant5_T3        Plant5_T4  </span></span>
-<span><span class="co">#&gt; Otu000001 10.2182984901644 9.14941182693663 8.39212694793041 9.39899720494429 …</span></span>
-<span><span class="co">#&gt; Otu000002                0                0 5.15032449125274 8.45355572278925 …</span></span>
-<span><span class="co">#&gt; Otu000003 6.41298639815534                0  3.5089592334818 3.56986494940344 …</span></span>
-<span><span class="co">#&gt; Otu000004 7.45977126049619 6.99747111345779 6.85504008284069  8.0400754435393 …</span></span>
-<span><span class="co">#&gt;                          ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt;                  Plant5_T1        Plant5_T2        Plant5_T3        Plant5_T4</span></span>
+<span><span class="co">#&gt; Otu000001 10.2182984901644 9.14941182693663 8.39212694793041 9.39899720494429</span></span>
+<span><span class="co">#&gt; Otu000002                0                0 5.15032449125274 8.45355572278925</span></span>
+<span><span class="co">#&gt; Otu000003 6.41298639815534                0  3.5089592334818 3.56986494940344</span></span>
+<span><span class="co">#&gt; Otu000004 7.45977126049619 6.99747111345779 6.85504008284069  8.0400754435393</span></span>
+<span><span class="co">#&gt;                   &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
+<span><span class="co">#&gt;                   </span></span>
+<span><span class="co">#&gt; Otu000001 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000002 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000003 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000004 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt;           &lt;U+22F1&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Plant7:</span></span>
-<span><span class="co">#&gt;                  Plant7_T1        Plant7_T2        Plant7_T3        Plant7_T4  </span></span>
-<span><span class="co">#&gt; Otu000001 9.31064796332915 9.36846144577821 8.05207430379548 9.73394258993618 …</span></span>
-<span><span class="co">#&gt; Otu000002                0                0 4.83763438231674 1.84428530870696 …</span></span>
-<span><span class="co">#&gt; Otu000003 7.20133580603692 7.57511920224131 5.67443724637428 7.12722792269608 …</span></span>
-<span><span class="co">#&gt; Otu000004  9.3751864834759 9.59128858883673 8.31292026544233 9.43524314853652 …</span></span>
-<span><span class="co">#&gt;                          ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt;                  Plant7_T1        Plant7_T2        Plant7_T3        Plant7_T4</span></span>
+<span><span class="co">#&gt; Otu000001 9.31064796332915 9.36846144577821 8.05207430379548 9.73394258993618</span></span>
+<span><span class="co">#&gt; Otu000002                0                0 4.83763438231674 1.84428530870696</span></span>
+<span><span class="co">#&gt; Otu000003 7.20133580603692 7.57511920224131 5.67443724637428 7.12722792269608</span></span>
+<span><span class="co">#&gt; Otu000004  9.3751864834759 9.59128858883673 8.31292026544233 9.43524314853652</span></span>
+<span><span class="co">#&gt;                   &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
+<span><span class="co">#&gt;                   </span></span>
+<span><span class="co">#&gt; Otu000001 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000002 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000003 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000004 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt;           &lt;U+22F1&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Plant4:</span></span>
-<span><span class="co">#&gt;                  Plant4_T1        Plant4_T2        Plant4_T3        Plant4_T4  </span></span>
-<span><span class="co">#&gt; Otu000001 8.17627997254723 8.34395378172844 8.51162759090965 8.39781378157364 …</span></span>
-<span><span class="co">#&gt; Otu000002 4.54496581622368 2.27248290811184                0                0 …</span></span>
-<span><span class="co">#&gt; Otu000003 8.47143621467469 8.34883898826139  8.2262417618481 7.95354321069363 …</span></span>
-<span><span class="co">#&gt; Otu000004                0                0                0                0 …</span></span>
-<span><span class="co">#&gt;                          ⋮                ⋮                ⋮                ⋮ ⋱</span></span>
+<span><span class="co">#&gt;                  Plant4_T1        Plant4_T2        Plant4_T3        Plant4_T4</span></span>
+<span><span class="co">#&gt; Otu000001 8.17627997254723 8.34395378172844 8.51162759090965 8.39781378157364</span></span>
+<span><span class="co">#&gt; Otu000002 4.54496581622368 2.27248290811184                0                0</span></span>
+<span><span class="co">#&gt; Otu000003 8.47143621467469 8.34883898826139  8.2262417618481 7.95354321069363</span></span>
+<span><span class="co">#&gt; Otu000004                0                0                0                0</span></span>
+<span><span class="co">#&gt;                   &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
+<span><span class="co">#&gt;                   </span></span>
+<span><span class="co">#&gt; Otu000001 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000002 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000003 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt; Otu000004 &lt;U+2026&gt;</span></span>
+<span><span class="co">#&gt;           &lt;U+22F1&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; and 17 more subjects.</span></span></code></pre></div>
 <p>Before doing any modeling, let’s visualize some of the raw data. The
@@ -227,8 +245,8 @@ out.</p>
 <code class="sourceCode R"><span><span class="va">fits</span><span class="op">[[</span><span class="st">"out-of-sample"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mbtransfer.html">mbtransfer</a></span><span class="op">(</span><span class="va">ts</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">11</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span><span class="op">]</span>, P <span class="op">=</span> <span class="fl">2</span>, Q <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">ts_preds</span><span class="op">[[</span><span class="st">"out-of-sample"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span><span class="op">[[</span><span class="st">"out-of-sample"</span><span class="op">]</span><span class="op">]</span>, <span class="va">ts_missing</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">16</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s compare the two types of prediction performance. We’ll consider
-several time horizons (using the sequence of <span class="math inline">\(\hat{y}_{t + h}\)</span> to make predictions of
-<span class="math inline">\(\hat{y}_{t + h + 1}\)</span>) and
+several time horizons – using the sequence of <span class="math inline">\(\hat{y}_{t + h}\)</span> to make predictions of
+<span class="math inline">\(\hat{y}_{t + h + 1}\)</span> – and
 distinguish between taxa with lower/higher overall abundance. Our
 predictions seem reasonable for the higher abundance taxa. However, the
 blue points are more spread out than the purple in the bottom panels,
@@ -373,7 +391,7 @@ series to diverge after the intervention appears.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="fu">ribbon_data</span><span class="op">(</span><span class="va">sim_ts</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">sim_ts</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">focus_taxa</span><span class="op">)</span></span>
 <span><span class="va">rdata</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 952 × 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 952 x 5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Groups:   taxon [68]</span></span></span>
 <span><span class="co">#&gt;    taxon      time q_lower  median q_upper</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -381,13 +399,13 @@ series to diverge after the intervention appears.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Otu000001    -<span style="color: #BB0000;">4</span>  0       0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Otu000001    -<span style="color: #BB0000;">3</span>  0       0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Otu000001    -<span style="color: #BB0000;">2</span>  0       0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Otu000001    -<span style="color: #BB0000;">1</span>  0.101   0.101   0.101 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Otu000001     0  0.260   0.260   0.260 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Otu000001     1  0.330   0.330   0.330 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Otu000001     2  0.322   0.322   0.322 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Otu000001     3  0.180   0.180   0.180 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Otu000001     4 -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 942 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Otu000001    -<span style="color: #BB0000;">1</span>  0.088<span style="text-decoration: underline;">4</span>  0.088<span style="text-decoration: underline;">4</span>  0.088<span style="text-decoration: underline;">4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Otu000001     0  0.237   0.237   0.237 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Otu000001     1  0.299   0.299   0.299 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Otu000001     2  0.286   0.286   0.286 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Otu000001     3  0.161   0.161   0.161 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Otu000001     4 -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">1</span> -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">1</span> -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># i 942 more rows</span></span></span></code></pre></div>
 <p>We can now visualize the trajectories of the selected taxa. We can
 organize the taxa so that those with similar trajectory differences are
 placed next to one other. Below, we do this by projecting onto the first
