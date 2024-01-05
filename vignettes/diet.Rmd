@@ -155,8 +155,8 @@ ts_preds[["out-of-sample"]] <- predict(fits[["out-of-sample"]], ts_missing[c(6:1
 ```
 
 Let's compare the two types of prediction performance. We'll consider several
-time horizons (using the sequence of $\hat{y}_{t + h}$ to make predictions of
-$\hat{y}_{t + h + 1}$) and distinguish between taxa with lower/higher overall
+time horizons -- using the sequence of $\hat{y}_{t + h}$ to make predictions of
+$\hat{y}_{t + h + 1}$ -- and distinguish between taxa with lower/higher overall
 abundance. Our predictions seem reasonable for the higher abundance taxa.
 However, the blue points are more spread out than the purple in the bottom
 panels, meaning that our model has overfit the lower abundance taxa. This is
