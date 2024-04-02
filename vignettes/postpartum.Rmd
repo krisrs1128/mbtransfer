@@ -100,8 +100,8 @@ day) resolution using the `interpolate` function.
 
 ````{r}
 ts <- reads |>
- ts_from_dfs(interventions, samples, subject_data) |>
- interpolate(delta = 14, method = "linear")
+  ts_from_dfs(interventions, samples, subject_data) |>
+  interpolate(delta = 14, method = "linear")
 
 ts
 ```
@@ -180,25 +180,25 @@ has a different $y$ axis. The clearest patterns are that,
 
 ```{r, fig.width = 10, fig.height = 6}
 map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
-    filter(h > 0, h < 50) |>
-    mutate(h = 10 * floor(h / 10)) |>
-    ggplot() +
-    geom_abline(slope = 1, col = "#400610") +
-    geom_point(aes(y, y_hat, col = generalization), size = .7, alpha = .6) +
-    facet_grid(factor(quantile, rev(levels(quantile))) ~ glue("lags {h + 1} - {h + 10}"), scales = "free_y") +
-    labs(x = expression(y), y = expression(hat(y)), col = "Generalization") +
-    scale_x_continuous(expand = c(0, 0), n.breaks = 3) +
-    scale_y_continuous(expand = c(0, 0), n.breaks = 3) +
-    scale_color_manual(values = c("#A65883", "#6593A6")) +
-    guides("color" = guide_legend(override.aes = list(size = 4, alpha = 1))) +
-    theme(
-      axis.text = element_text(size = 10),
-      panel.spacing = unit(0, "line"),
-      strip.text.y = element_text(angle = 0, size = 12),
-      strip.text.x = element_text(angle = 0, size = 12),
-      legend.title = element_text(size = 14),
-      legend.text = element_text(size = 11),
-    )
+  filter(h > 0, h < 50) |>
+  mutate(h = 10 * floor(h / 10)) |>
+  ggplot() +
+  geom_abline(slope = 1, col = "#400610") +
+  geom_point(aes(y, y_hat, col = generalization), size = .7, alpha = .6) +
+  facet_grid(factor(quantile, rev(levels(quantile))) ~ glue("lags {h + 1} - {h + 10}"), scales = "free_y") +
+  labs(x = expression(y), y = expression(hat(y)), col = "Generalization") +
+  scale_x_continuous(expand = c(0, 0), n.breaks = 3) +
+  scale_y_continuous(expand = c(0, 0), n.breaks = 3) +
+  scale_color_manual(values = c("#A65883", "#6593A6")) +
+  guides("color" = guide_legend(override.aes = list(size = 4, alpha = 1))) +
+  theme(
+    axis.text = element_text(size = 10),
+    panel.spacing = unit(0, "line"),
+    strip.text.y = element_text(angle = 0, size = 12),
+    strip.text.x = element_text(angle = 0, size = 12),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 11),
+  )
 ```
 
 ### Attribution Analysis: Selecting Important Taxa
@@ -234,7 +234,7 @@ still guarantee FDR control, and you will still be able to run the rest of the
 vignette even if you set `n_splits` to a value like 3 or 4.
 
 ```{r}
-#staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
+# staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
 staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-postpartum.rds"))
 ```
 
@@ -318,7 +318,7 @@ rdata <- sim_bc |>
   map_dfr(~ ribbon_data(.[[2]], .[[1]], focus_taxa, delta = 7), .id = "BC") |>
   mutate(
     BC = fct_recode(BC, No = "1", Yes = "2")
-    ) |>
+  ) |>
   filter(time > -25, time < 80)
 
 pal <- c("#F2785C", "#144673")
@@ -328,7 +328,7 @@ ribbon_plot(rdata, group = "BC") +
   scale_color_manual(values = pal) +
   scale_fill_manual(values = pal) +
   theme(
-    axis.title = element_text(size = 12), 
+    axis.title = element_text(size = 12),
     strip.text = element_text(size = 12)
   )
 ```
@@ -379,7 +379,7 @@ p2 <- values_df |>
   mutate(
     value = rank(value) / n(),
     taxon = factor(taxon, levels = c("Lactobacillus", "L.iners", "L.jensenii", "Atopobium", "Prevotella_6", "Porphyromonas"))
-  )|>
+  ) |>
   interaction_hm(taxa = focus_taxa, "BirthControlYesNo", -1, width = 14) +
   scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
   scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +

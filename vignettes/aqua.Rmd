@@ -137,7 +137,7 @@ ws <- steps(c("pH" = TRUE, "AS" = FALSE), lengths = 4, L = 4) |>
 ws[[1]]["AS", ] <- 38
 ws[[2]]["AS", ] <- 38
 
-#staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 4, 4, alpha = 1e-3, eta = 0.01), n_splits = 25)
+# staxa <- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 4, 4, alpha = 1e-3, eta = 0.01), n_splits = 25)
 staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-aqua.rds"))
 
 taxa <- staxa$ms |>
@@ -201,7 +201,7 @@ pivot_ts(ts) |>
   filter(taxon %in% focus_taxa, taxon %in% taxa(ts)[vis_taxa]) |>
   ggplot() +
   geom_point(aes(pH, value), alpha = 0.4, size = 0.3) +
-  facet_wrap(~ taxon, ncol = 8)
+  facet_wrap(~taxon, ncol = 8)
 ```
 
 Next, we'll see how these taxa vary in response to intermediate shifts pH, not
@@ -259,15 +259,15 @@ sim_ts |>
   mutate(
     pH = factor(round(plateaus[as.integer(counterfactual)], 3)),
     taxon = factor(taxon, levels = taxa(ts)[taxa_order])
-    ) |>
+  ) |>
   group_by(taxon, time, pH) |>
   summarise(q50 = median(value)) |>
   ggplot() +
-   geom_line(aes(time, q50, col = pH)) +
-   geom_vline(col = "#c1c1c1c1", xintercept = L, linewidth = 1) +
-   facet_wrap(~ taxon, scales = "free_y") +
-   scale_fill_manual(values = pal) +
-   scale_color_manual(values = pal)
+  geom_line(aes(time, q50, col = pH)) +
+  geom_vline(col = "#c1c1c1c1", xintercept = L, linewidth = 1) +
+  facet_wrap(~taxon, scales = "free_y") +
+  scale_fill_manual(values = pal) +
+  scale_color_manual(values = pal)
 ```
 
 ```{r, fig.width = 10, fig.height = 4}
@@ -279,7 +279,7 @@ p1 <- pivot_ts(ts) |>
   ggplot() +
   geom_point(aes(pH, value), alpha = 0.4, size = 0.3) +
   labs(x = "pH", y = "Abundance", title = "(a) pH vs. Abundance") +
-  facet_wrap(~ taxon, scales = "free_y", nrow = 1) +
+  facet_wrap(~taxon, scales = "free_y", nrow = 1) +
   theme(plot.margin = unit(c(0, 0, 0, 0), "null"))
 
 p2 <- sim_ts |>
@@ -287,16 +287,16 @@ p2 <- sim_ts |>
   mutate(
     pH = factor(round(plateaus[as.integer(counterfactual)], 3)),
     taxon = factor(taxon, levels = taxa(ts)[taxa_order])
-    ) |>
+  ) |>
   group_by(taxon, time, pH) |>
   summarise(q50 = median(value)) |>
   ggplot() +
-   geom_line(aes(time, q50, col = pH)) +
-   geom_vline(col = "#c1c1c1c1", xintercept = L, linewidth = 1) +
-   facet_grid(. ~ taxon) +
-   scale_fill_manual(values = pal) +
-   labs(x = "Time", y = "Median Abundance", title = "(b) Counterfactual Trajectories") +
-   scale_color_manual(values = pal)
+  geom_line(aes(time, q50, col = pH)) +
+  geom_vline(col = "#c1c1c1c1", xintercept = L, linewidth = 1) +
+  facet_grid(. ~ taxon) +
+  scale_fill_manual(values = pal) +
+  labs(x = "Time", y = "Median Abundance", title = "(b) Counterfactual Trajectories") +
+  scale_color_manual(values = pal)
 
 p1 / p2 +
   plot_layout(heights = c(1, 2), guides = "collect") &

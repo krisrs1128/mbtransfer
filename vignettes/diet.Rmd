@@ -70,9 +70,9 @@ be used by our `ts_from_dfs` function.
 ```{r}
 subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
 interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
- column_to_rownames("sample")
+  column_to_rownames("sample")
 reads <- read_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
- column_to_rownames("sample")
+  column_to_rownames("sample")
 samples <- read_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
 ```
 
@@ -166,27 +166,27 @@ make reasonable generalizations for less abundant taxa.
 
 ```{r, fig.width = 10, fig.height = 6}
 reshaped_preds <- map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
-    filter(h > 0, h < 6)
+  filter(h > 0, h < 6)
 
 reshaped_preds |>
-    mutate(h = glue("lag {h}")) |>
-    ggplot() +
-    geom_abline(slope = 1, col = "#400610") +
-    geom_point(aes(y, y_hat, col = generalization), size = .7, alpha = .6) +
-    facet_grid(factor(quantile, rev(levels(quantile))) ~ h, scales = "free_y") +
-    labs(x = expression(y), y = expression(hat(y)), col = "Generalization") +
-    scale_x_continuous(expand = c(0, 0), n.breaks = 3) +
-    scale_y_continuous(expand = c(0, 0), n.breaks = 3) +
-    scale_color_manual(values = c("#A65883", "#6593A6")) +
-    guides("color" = guide_legend(override.aes = list(size = 4, alpha = 1))) +
-    theme(
-      axis.text = element_text(size = 10),
-      panel.spacing = unit(0, "line"),
-      strip.text.y = element_text(angle = 0, size = 12),
-      strip.text.x = element_text(angle = 0, size = 12),
-      legend.title = element_text(size = 14),
-      legend.text = element_text(size = 11),
-    )
+  mutate(h = glue("lag {h}")) |>
+  ggplot() +
+  geom_abline(slope = 1, col = "#400610") +
+  geom_point(aes(y, y_hat, col = generalization), size = .7, alpha = .6) +
+  facet_grid(factor(quantile, rev(levels(quantile))) ~ h, scales = "free_y") +
+  labs(x = expression(y), y = expression(hat(y)), col = "Generalization") +
+  scale_x_continuous(expand = c(0, 0), n.breaks = 3) +
+  scale_y_continuous(expand = c(0, 0), n.breaks = 3) +
+  scale_color_manual(values = c("#A65883", "#6593A6")) +
+  guides("color" = guide_legend(override.aes = list(size = 4, alpha = 1))) +
+  theme(
+    axis.text = element_text(size = 10),
+    panel.spacing = unit(0, "line"),
+    strip.text.y = element_text(angle = 0, size = 12),
+    strip.text.x = element_text(angle = 0, size = 12),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 11),
+  )
 ```
 
 We can make this interpretation more precise by calculating in and out-of-sample
@@ -241,7 +241,7 @@ value and still work through the rest of this vignette (many taxa will still be
 easily detectable).
 
 ```{r}
-#staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
+# staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
 staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-diet.rds"))
 ```
 
@@ -336,12 +336,12 @@ rdata_wide <- rdata |>
 
 rdata_order <- rdata_wide |>
   select(-taxon) %>%
-  recipe(~ ., data = .) |>
+  recipe(~., data = .) |>
   step_pca() |>
   prep() |>
   juice() |>
   mutate(taxon = rdata_wide$taxon)
-  
+
 rdata |>
   left_join(rdata_order) |>
   ribbon_plot(reorder_var = "1") +
