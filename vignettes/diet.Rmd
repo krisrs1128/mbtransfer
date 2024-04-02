@@ -165,12 +165,15 @@ participants, but the person-to-person variability might be too high for us to
 make reasonable generalizations for less abundant taxa.
 
 ```{r, fig.width = 10, fig.height = 6}
-map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
-    filter(h > 0, h < 6) |>
+reshaped_preds <- map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
+    filter(h > 0, h < 6)
+
+reshaped_preds |>
+    mutate(h = glue("lag {h}")) |>
     ggplot() +
     geom_abline(slope = 1, col = "#400610") +
     geom_point(aes(y, y_hat, col = generalization), size = .7, alpha = .6) +
-    facet_grid(factor(quantile, rev(levels(quantile))) ~ glue("lag {h}"), scales = "free_y") +
+    facet_grid(factor(quantile, rev(levels(quantile))) ~ h, scales = "free_y") +
     labs(x = expression(y), y = expression(hat(y)), col = "Generalization") +
     scale_x_continuous(expand = c(0, 0), n.breaks = 3) +
     scale_y_continuous(expand = c(0, 0), n.breaks = 3) +
@@ -185,6 +188,27 @@ map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
       legend.text = element_text(size = 11),
     )
 ```
+
+We can make this interpretation more precise by calculating in and out-of-sample
+correlations across panels. Overall, the out-of-sample correlation between the
+truth and predictions is a little over $\hat{\rho} = 0.57$. This can vary quite
+significantly on the lag and quantile of abundance, though, ranging from
+$\hat{\rho} = 0.123$ to 0.558.
+
+```{r}
+reshaped_preds |>
+  group_by(h, quantile, generalization) |>
+  summarise(correlation = round(cor(y, y_hat), 4)) |>
+  pivot_wider(names_from = "generalization", values_from = "correlation") |>
+  arrange(desc(quantile), h) |>
+  write_csv("~/Downloads/diet-correlations.csv")
+
+reshaped_preds |>
+  filter(generalization == "out-of-sample") |>
+  select(y, y_hat) |>
+  summarise(overall = cor(y, y_hat))
+```
+
 
 ### Attribution Analysis: Selecting Important Taxa
 
