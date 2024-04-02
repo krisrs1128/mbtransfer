@@ -1,0 +1,166 @@
+---
+title: "Example with Generalized Lotka Volterra"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example with Generalized Lotka Volterra}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(glue)
+library(mbtransfer)
+library(seqtime)
+library(tidyverse)
+theme_set(tfPaper::my_theme())
+set.seed(20240401)
+
+pivot_glv <- function(ts, n_subject = 16) {
+  if (is.null(colnames(ts@series[[1]]))) {
+    for (i in seq_along(ts@series)) {
+      colnames(ts@series[[i]]@values) <- names(ts@series[[i]]@time)
+    }
+  }
+
+  pivot_ts(ts) |>
+    filter(subject %in% 1:n_subject)
+}
+
+plot_ts <- function(ts, ts_preds) {
+  diff <- ts - ts_preds
+  ts_df <- bind_rows(
+    pivot_glv(ts),
+    pivot_glv(ts_preds),
+    .id = "source"
+  ) |>
+    mutate(
+      source = ifelse(source == "1", "True", "Predicted"),
+      source = factor(source, c("True", "Predicted")),
+      subject = factor(
+        subject,
+        levels = order(
+          map_dbl(diff@series, ~ sum(abs(.@values)))
+        )
+      )
+    )
+
+  ggplot(ts_df) +
+    geom_area(
+      aes(time, value, fill = taxon, col = taxon, linetype = source), 
+      alpha = 0.2, position = "identity", linewidth = 0.9
+    ) +
+    scale_y_continuous(expand = c(0, 0, 0, 0.01)) +
+    facet_wrap(~ subject) +
+    labs(x = "Time", y = "Value") +
+    theme(
+      legend.title = element_text(size = 16),
+      strip.text = element_text(size = 14),
+      legend.text = element_text(size = 14)
+    )
+}
+
+simulate_oscillator <- function(n_time = 90, n_series = 500, perturb = FALSE) {
+  growthchanges <- c(.3, -.3, 0)
+  if (perturb) {
+    t_external <- seq(10, n_time, by = 50)
+    duration <- rep(16, length(t_external))
+    pert <- perturbation(times = t_external, duration = duration, growthchanges = growthchanges)
+    t_perturb <- map(0:duration, ~ . + t_external) |>
+      unlist()
+  } else {
+    t_perturb <- c()
+  }
+
+  growth_rates <- rep(1, 3)
+  A <- -matrix(c(10, 6, 12, 14, 10, 2, 8, 18, 10), 3, 3, byrow = TRUE)
+  series <- list()
+  for (i in seq_len(n_series)) {
+    y0 <- runif(3, 0, 0.1)
+    if (perturb) {
+      series[[i]] <- glv(n_species, A, growth_rates, y = y0, tend = n_time, tstep = 3, perturb = pert)
+    } else{
+      series[[i]] <- glv(n_species, A, growth_rates, y = y0, tend = n_time, tstep = 3)
+    }
+  }
+  list(series = series, t_perturb = t_perturb)
+}
+
+to_ts <- function(glv_sim) {
+  series <- glv_sim[[1]]
+  t_perturb <- glv_sim[[2]]
+
+  reads <- map_dfr(series, ~ as_tibble(.) |> 
+      mutate(taxon = row_number()) |>
+      pivot_longer(-taxon, names_to = "time"),
+      .id = "subject"
+      ) |>
+    mutate(
+      time = 1 + as.integer(time),
+      sample = glue("s{subject}_{time}")
+    )
+
+  interventions <- reads |>
+    select(sample) |>
+    mutate(P = 0) |>
+    unique() |>
+    column_to_rownames("sample")
+
+  metadata <- select(reads, -value) |>
+    select(subject, time, sample) |>
+    unique()
+  subject <- data.frame(subject = unique(metadata$subject), property = 0)
+  rownames(metadata) <- metadata$sample
+  rownames(interventions) <- metadata$sample
+
+  if (length(t_perturb) > 0) {
+    interventions <- interventions |>
+      rownames_to_column("sample") |> 
+      left_join(metadata) |>
+      mutate(P = 1 * (time %in% t_perturb)) |>
+      select(P, sample) |>
+      column_to_rownames("sample")
+  }
+
+  reads |>
+    select(sample, taxon, value) |>
+    pivot_wider(names_from = "taxon", values_from = "value") |>
+    column_to_rownames("sample") |>
+    ts_from_dfs(interventions, metadata, subject)
+}
+```
+
+
+```{r}
+ts <- simulate_oscillator() |>
+  to_ts()
+
+fit <- mbtransfer(ts[, 1:20], P = 4, Q = 1, alpha = 0, lambda = 3e-4)
+ts_missing <- subset_values(ts, 1:20)
+ts_preds <- predict(fit, ts_missing[1:16])
+plot_ts(ts[1:16], ts_preds) +
+  geom_vline(xintercept = 60, alpha = 0.4)
+```
+
+An example with perturbations.
+
+```{r}
+ts <- simulate_oscillator(perturb = TRUE) |>
+  to_ts()
+
+fit <- mbtransfer(ts[, 1:20], P = 4, Q = 4, alpha = 0, lambda = 4e-4)
+ts_missing <- subset_values(ts, 1:20)
+ts_preds <- predict(fit, ts_missing[1:16])
+plot_ts(ts[1:16], ts_preds) +
+  geom_vline(xintercept = 60) +
+  geom_rect(xmin = 10, xmax = 26, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6") +
+  geom_rect(xmin = 60, xmax = 76, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6") 
+```
