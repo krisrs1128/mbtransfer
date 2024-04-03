@@ -43,24 +43,36 @@ plot_ts <- function(ts, ts_preds) {
     .id = "source"
   ) |>
     mutate(
+      taxon = ifelse(taxon == "1", "Prey", "Predator"),
       source = ifelse(source == "1", "True", "Predicted"),
       source = factor(source, c("True", "Predicted")),
+      subject = glue("Subject {subject}"),
       subject = factor(
         subject,
-        levels = order(
+        levels = unique(subject)[order(
           map_dbl(diff@series, ~ sum(abs(.@values)))
-        )
+        )]
       )
     )
 
+  pal <- c("#D9420B", "#8AA1BF")
   ggplot(ts_df) +
     geom_area(
       aes(time, value, fill = taxon, col = taxon, linetype = source),
       alpha = 0.2, position = "identity", linewidth = 0.9
     ) +
+    scale_x_continuous(expand = c(0, 0)) +
     scale_y_continuous(expand = c(0, 0, 0, 0.01)) +
-    facet_wrap(~subject, nrow = 2) +
-    labs(x = "Time", y = "Value") +
+    facet_wrap(~subject, nrow = 2, scales = "free_y") +
+    scale_fill_manual(values = pal) +
+    scale_color_manual(values = pal) +
+    labs(
+      x = "Time", 
+      y = "Value", 
+      fill = "Species", 
+      color = "Species", 
+      linetype = "Source"
+    ) +
     theme(
       legend.title = element_text(size = 16),
       strip.text = element_text(size = 14),
@@ -68,21 +80,22 @@ plot_ts <- function(ts, ts_preds) {
     )
 }
 
-simulate_oscillator <- function(n_time = 10, n_series = 500, perturb = FALSE) {
-  growthchanges <- c(2, 0)
+simulate_oscillator <- function(n_time = 10, n_series = 1000, perturb = FALSE) {
+  A <- matrix(c(0, 1, -1, 0), nrow = 2)
+  growth_rates <- c(2, -1)
+  growthchanges <- c(-1, 0)
+  n_species <- nrow(A)
+
   if (perturb) {
     t_external <- seq(3, n_time, by = floor(n_time / n_species))
-    duration <- rep(2, length(t_external))
+    duration <- rep(1, length(t_external))
     pert <- perturbation(times = t_external, duration = duration, growthchanges = growthchanges)
-    t_perturb <- map(0:duration, ~ . + t_external) |>
+    t_perturb <- map(seq(0, duration[1], by = 0.2), ~ . + t_external) |>
       unlist()
   } else {
     t_perturb <- c()
   }
 
-  A <- matrix(c(0, 1, -1, 0), nrow = 2)
-  growth_rates <- c(2, -1)
-  n_species <- nrow(A)
   series <- list()
   for (i in seq_len(n_series)) {
     y0 <- runif(n_species, 0, 4)
@@ -99,6 +112,7 @@ to_ts <- function(glv_sim) {
   series <- glv_sim[[1]]
   t_perturb <- glv_sim[[2]]
 
+  time_delta <- as.numeric(colnames(series[[1]])[2])
   reads <- map_dfr(series, ~ as_tibble(.) |>
     mutate(taxon = row_number()) |>
     pivot_longer(-taxon, names_to = "time"),
@@ -106,7 +120,7 @@ to_ts <- function(glv_sim) {
   ) |>
     mutate(
       time = as.numeric(time),
-      time = time / time[2], # round to integers
+      time = time / time_delta, # round to integers
       sample = glue("s{subject}_{time}")
     )
 
@@ -127,7 +141,10 @@ to_ts <- function(glv_sim) {
     interventions <- interventions |>
       rownames_to_column("sample") |>
       left_join(metadata) |>
-      mutate(P = 1 * (time %in% t_perturb)) |>
+      mutate(
+        P = time * time_delta,
+        P = (P >= 3 | P <= 4 | P >= 8 | P <= 9)
+      ) |>
       select(P, sample) |>
       column_to_rownames("sample")
   }
@@ -140,14 +157,13 @@ to_ts <- function(glv_sim) {
 }
 ```
 
-
 ```{r}
 ts <- simulate_oscillator() |>
   to_ts()
 
-fit <- mbtransfer(ts[, 1:35], P = 5, Q = 1, alpha = 0, lambda = 0) # 1e-6)
+fit <- mbtransfer(ts[, 1:35], P = 3, Q = 1, alpha = 0, lambda = 0) # 1e-6)
 ts_missing <- subset_values(ts, 1:35)
-ts_preds <- predict(fit, ts_missing[1:10])
+ts_preds <- predict(fit, ts_missing[1:8])
 plot_ts(ts[1:10], ts_preds) +
   geom_vline(xintercept = 35, alpha = 0.4)
 ```
@@ -155,14 +171,14 @@ plot_ts(ts[1:10], ts_preds) +
 An example with perturbations.
 
 ```{r}
-ts <- simulate_oscillator(perturb = TRUE, n_series = 20) |>
+ts <- simulate_oscillator(perturb = TRUE) |>
   to_ts()
 
-fit <- mbtransfer(ts[, 1:35], P = 5, Q = 5, alpha = 0, lambda = 0)
+fit <- mbtransfer(ts[, 1:35], P = 3, Q = 1, alpha = 0, lambda = 0)
 ts_missing <- subset_values(ts, 1:35)
-ts_preds <- predict(fit, ts_missing[1:16])
-plot_ts(ts[1:16], ts_preds) +
-  geom_vline(xintercept = 35)
-#  geom_rect(xmin = 10, xmax = 26, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6") +
-#  geom_rect(xmin = 60, xmax = 76, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6")
+ts_preds <- predict(fit, ts_missing[1:8])
+plot_ts(ts[1:8], ts_preds) +
+  geom_vline(xintercept = 35) +
+  geom_rect(xmin = 15, xmax = 20, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6") +
+  geom_rect(xmin = 40, xmax = 45, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6")
 ```
