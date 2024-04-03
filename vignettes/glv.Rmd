@@ -59,7 +59,7 @@ plot_ts <- function(ts, ts_preds) {
       alpha = 0.2, position = "identity", linewidth = 0.9
     ) +
     scale_y_continuous(expand = c(0, 0, 0, 0.01)) +
-    facet_wrap(~subject) +
+    facet_wrap(~subject, nrow = 2) +
     labs(x = "Time", y = "Value") +
     theme(
       legend.title = element_text(size = 16),
@@ -68,11 +68,11 @@ plot_ts <- function(ts, ts_preds) {
     )
 }
 
-simulate_oscillator <- function(n_time = 90, n_series = 500, perturb = FALSE) {
-  growthchanges <- c(.3, -.3, 0)
+simulate_oscillator <- function(n_time = 10, n_series = 500, perturb = FALSE) {
+  growthchanges <- c(2, 0)
   if (perturb) {
-    t_external <- seq(10, n_time, by = 50)
-    duration <- rep(16, length(t_external))
+    t_external <- seq(3, n_time, by = floor(n_time / n_species))
+    duration <- rep(2, length(t_external))
     pert <- perturbation(times = t_external, duration = duration, growthchanges = growthchanges)
     t_perturb <- map(0:duration, ~ . + t_external) |>
       unlist()
@@ -80,15 +80,16 @@ simulate_oscillator <- function(n_time = 90, n_series = 500, perturb = FALSE) {
     t_perturb <- c()
   }
 
-  growth_rates <- rep(1, 3)
-  A <- -matrix(c(10, 6, 12, 14, 10, 2, 8, 18, 10), 3, 3, byrow = TRUE)
+  A <- matrix(c(0, 1, -1, 0), nrow = 2)
+  growth_rates <- c(2, -1)
+  n_species <- nrow(A)
   series <- list()
   for (i in seq_len(n_series)) {
-    y0 <- runif(3, 0, 0.1)
+    y0 <- runif(n_species, 0, 4)
     if (perturb) {
-      series[[i]] <- glv(n_species, A, growth_rates, y = y0, tend = n_time, tstep = 3, perturb = pert)
+      series[[i]] <- glv(n_species, A, growth_rates, y = y0, tend = n_time, tstep = 0.2, perturb = pert)
     } else {
-      series[[i]] <- glv(n_species, A, growth_rates, y = y0, tend = n_time, tstep = 3)
+      series[[i]] <- glv(n_species, A, growth_rates, y = y0, tend = n_time, tstep = 0.2)
     }
   }
   list(series = series, t_perturb = t_perturb)
@@ -104,7 +105,8 @@ to_ts <- function(glv_sim) {
   .id = "subject"
   ) |>
     mutate(
-      time = 1 + as.integer(time),
+      time = as.numeric(time),
+      time = time / time[2], # round to integers
       sample = glue("s{subject}_{time}")
     )
 
@@ -143,24 +145,24 @@ to_ts <- function(glv_sim) {
 ts <- simulate_oscillator() |>
   to_ts()
 
-fit <- mbtransfer(ts[, 1:20], P = 4, Q = 1, alpha = 0, lambda = 3e-4)
-ts_missing <- subset_values(ts, 1:20)
-ts_preds <- predict(fit, ts_missing[1:16])
-plot_ts(ts[1:16], ts_preds) +
-  geom_vline(xintercept = 60, alpha = 0.4)
+fit <- mbtransfer(ts[, 1:35], P = 5, Q = 1, alpha = 0, lambda = 0) # 1e-6)
+ts_missing <- subset_values(ts, 1:35)
+ts_preds <- predict(fit, ts_missing[1:10])
+plot_ts(ts[1:10], ts_preds) +
+  geom_vline(xintercept = 35, alpha = 0.4)
 ```
 
 An example with perturbations.
 
 ```{r}
-ts <- simulate_oscillator(perturb = TRUE) |>
+ts <- simulate_oscillator(perturb = TRUE, n_series = 20) |>
   to_ts()
 
-fit <- mbtransfer(ts[, 1:20], P = 4, Q = 4, alpha = 0, lambda = 4e-4)
-ts_missing <- subset_values(ts, 1:20)
+fit <- mbtransfer(ts[, 1:35], P = 5, Q = 5, alpha = 0, lambda = 0)
+ts_missing <- subset_values(ts, 1:35)
 ts_preds <- predict(fit, ts_missing[1:16])
 plot_ts(ts[1:16], ts_preds) +
-  geom_vline(xintercept = 60) +
-  geom_rect(xmin = 10, xmax = 26, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6") +
-  geom_rect(xmin = 60, xmax = 76, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6")
+  geom_vline(xintercept = 35)
+#  geom_rect(xmin = 10, xmax = 26, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6") +
+#  geom_rect(xmin = 60, xmax = 76, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6")
 ```
