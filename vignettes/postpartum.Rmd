@@ -185,7 +185,7 @@ map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
   ggplot() +
   geom_abline(slope = 1, col = "#400610") +
   geom_point(aes(y, y_hat, col = generalization), size = .7, alpha = .6) +
-  facet_grid(factor(quantile, rev(levels(quantile))) ~ glue("lags {h + 1} - {h + 10}"), scales = "free_y") +
+  facet_grid(factor(quantile, rev(levels(quantile))) ~ h, scales = "free_y") +
   labs(x = expression(y), y = expression(hat(y)), col = "Generalization") +
   scale_x_continuous(expand = c(0, 0), n.breaks = 3) +
   scale_y_continuous(expand = c(0, 0), n.breaks = 3) +
@@ -234,8 +234,8 @@ still guarantee FDR control, and you will still be able to run the rest of the
 vignette even if you set `n_splits` to a value like 3 or 4.
 
 ```{r}
-# staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
-staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-postpartum.rds"))
+staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
+#staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-postpartum.rds"))
 ```
 
 The `ms` element of this object includes the raw mirror statistics that led to
