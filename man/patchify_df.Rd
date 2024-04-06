@@ -4,7 +4,7 @@
 \alias{patchify_df}
 \title{Sliding Windows for a ts_inter object}
 \usage{
-patchify_df(ts_inter, p = 2, q = 3)
+patchify_df(ts_inter, p = 2, q = 3, interactions = "none")
 }
 \arguments{
 \item{ts_inter}{An object of class \code{ts_inter} over which to generate

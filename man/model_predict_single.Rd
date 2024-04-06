@@ -4,7 +4,7 @@
 \alias{model_predict_single}
 \title{Prediction for a Single Subject}
 \usage{
-model_predict_single(fit, ts_inter, lags, subject = NULL)
+model_predict_single(fit, ts_inter, lags, subject = NULL, interactions = NULL)
 }
 \arguments{
 \item{fit}{An object of class \code{mbtransfer_model}, as generated using the

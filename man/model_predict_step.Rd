@@ -4,7 +4,7 @@
 \alias{model_predict_step}
 \title{Predictions for a single timepoint and subject}
 \usage{
-model_predict_step(ts_inter, fit, lags, subject = NULL)
+model_predict_step(ts_inter, fit, lags, subject = NULL, interactions = NULL)
 }
 \arguments{
 \item{ts_inter}{A new \code{ts_inter_single} object over which to perform

@@ -14,6 +14,7 @@ mbtransfer(
   lambda = 0.1,
   alpha = 0.01,
   eta = 0.1,
+  interactions = "none",
   ...
 )
 }

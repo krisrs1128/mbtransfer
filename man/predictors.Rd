@@ -4,7 +4,7 @@
 \alias{predictors}
 \title{Generate a Predictor Matrix}
 \usage{
-predictors(ts_inter, lags, subject)
+predictors(ts_inter, lags, subject, interactions = NULL)
 }
 \arguments{
 \item{ts_inter}{An object of class \code{ts_inter_single} over which to generate
