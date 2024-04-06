@@ -164,7 +164,7 @@ to_ts <- function(glv_sim) {
     ts_from_dfs(interventions, metadata, subject)
 }
 
-plot_cp_profile <- function(cp_profile, max_value = 8.5) {
+plot_cp_profile <- function(cp_profile) {
   p1 <- cp_profile |>
     filter(`_vname_` == "intervention1_lag0", intervention1_lag0 %in% c(0, 1)) |>
     select(`_ids_`, taxon1_lag1, `_yhat_`, intervention1_lag0) |>
@@ -172,12 +172,12 @@ plot_cp_profile <- function(cp_profile, max_value = 8.5) {
     mutate(diff = as.numeric(`1` - `0`)) |>
     ggplot() +
       geom_histogram(aes(diff)) +
-      scale_x_continuous(expand = c(0, 0), limits = c(-0.3, 0.1)) +
+      #scale_x_continuous(expand = c(0, 0), limits = c(-0.3, 0.1)) +
       scale_y_continuous(expand = c(0, 0, 0, 1))
 
   p2 <- cp_profile |>
     filter(`_vname_` %in% c("taxon1_lag1", "taxon2_lag1")) |>
-    group_by(g1 = cut(taxon1_lag1, 100), g2 = cut(taxon2_lag1, 20)) |>
+    group_by(g1 = cut(taxon1_lag1, 10), g2 = cut(taxon2_lag1, 10)) |>
     mutate(
       g1 = str_extract(g1, "[\\-|\\.|0-9]+") |> as.numeric(),
       g2 = str_extract(g2, "[\\-|\\.|0-9]+") |> as.numeric()
@@ -190,14 +190,14 @@ plot_cp_profile <- function(cp_profile, max_value = 8.5) {
     ggplot() +
       geom_ribbon(aes(g1, ymin = y_hat_25, ymax = y_hat_75, group = g2, fill = g2), alpha = 0.3) +
       geom_line(aes(g1, y_hat_median, group = g2, col = g2), linewidth = 0.5) +
-      scale_fill_scico(palette = "glasgow", midpoint = 12) +
-      scale_color_scico(palette = "glasgow", midpoint = 12) +
+      scale_fill_scico(palette = "glasgow", midpoint = 5) +
+      scale_color_scico(palette = "glasgow", midpoint = 5) +
       scale_x_continuous(expand = c(0, 0)) +
-      scale_y_continuous(limits = c(0, max_value), expand = c(0, 0))
+      scale_y_continuous(expand = c(0, 0))
 
   p3 <- cp_profile |>
     filter(`_vname_` %in% c("taxon1_lag1", "taxon2_lag1")) |>
-    group_by(g1 = cut(taxon1_lag1, 20, label = F), g2 = cut(taxon2_lag1, 100, label = F)) |>
+    group_by(g1 = cut(taxon1_lag1, 10, label = F), g2 = cut(taxon2_lag1, 10, label = F)) |>
     summarise(
       y_hat_25 = quantile(`_yhat_`, 0.25),
       y_hat_median = quantile(`_yhat_`, 0.50),
@@ -206,10 +206,10 @@ plot_cp_profile <- function(cp_profile, max_value = 8.5) {
     ggplot() +
       geom_ribbon(aes(g2, ymin = y_hat_25, ymax = y_hat_75, group = g1, fill = g1), alpha = 0.3) +
       geom_line(aes(g2, y_hat_median, group = g1, col = g1), linewidth = 0.5) +
-      scale_fill_scico(palette = "glasgow", midpoint = 12) +
-      scale_color_scico(palette = "glasgow", midpoint = 12) +
+      scale_fill_scico(palette = "glasgow", midpoint = 5) +
+      scale_color_scico(palette = "glasgow", midpoint = 5) +
       scale_x_continuous(expand = c(0, 0)) +
-      scale_y_continuous(limits = c(0, max_value), expand = c(0, 0)) +
+      scale_y_continuous(expand = c(0, 0)) +
       theme(legend.position = "none")
   list(p1 = p1, p2 = p2, p3 = p3)
 }
@@ -220,7 +220,8 @@ An example with perturbations.
 ```{r}
 ts <- simulate_oscillator(perturb = TRUE) |>
   to_ts()
-fit <- mbtransfer(ts[, 1:35], P = 1, Q = 1, alpha = 1e-4)
+#fit <- mbtransfer(ts[, 1:35], alpha = 1e-3, lambda = 1e-5, interactions = "search")
+fit <- mbtransfer(ts[, 1:35], alpha = 1e-3, lambda = 1e-4, interactions = "search")
 ts_missing <- subset_values(ts, 1:35)
 ts_preds <- predict(fit, ts_missing)
 ```
@@ -242,8 +243,10 @@ ggsave("glv_dynamics.png", width=11, height=5)
 ```
 
 ```{r}
-patches <- mbtransfer:::patchify_df(ts, 1, 1)
-ix <- sample(1:nrow(patches$x), 5000)
+patches <- patchify_df(ts[ ,1:35], 1, 1, interaction = "search")
+patches$x <- mbtransfer:::append_interactions(patches$x, patches$interactions)
+
+ix <- sample(nrow(patches$x), 1e4)
 explainer <- explain(fit@parameters[[1]], patches$x, patches$y[, 1])
 cp_profile <- predict_profile(explainer, patches$x[ix, ])
 tax1 <- plot_cp_profile(cp_profile)
@@ -252,7 +255,7 @@ tax1 <- plot_cp_profile(cp_profile)
 ```{r}
 explainer <- explain(fit@parameters[[2]], patches$x, patches$y[, 1])
 cp_profile <- predict_profile(explainer, patches$x[ix, ])
-tax2 <- plot_cp_profile(cp_profile, 20)
+tax2 <- plot_cp_profile(cp_profile)
 ```
 
 ```{r}
