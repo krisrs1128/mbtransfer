@@ -90,6 +90,36 @@ patchify_single_df <- function(ts_inter, p, q) {
   result
 }
 
+#' Search for Candidate Interactions
+#' @importFrom insight check_if_installed
+#' @importFrom xyz xyz_search
+interaction_search <- function(x, y, interactions = "none", ...) {
+  if (interactions == "none") {
+    return (NULL)
+  } else if (interactions == "search") {
+    check_if_installed("xyz", "to search for candidate interaction effects. Please install using devtools::install_github('gathanei/xyz)")
+    interactions <- t(xyz_search(x, rowMeans(y), binary = FALSE, ...)[[1]])
+    return (interactions[interactions[, 1] != interactions[, 2], ])
+  }
+  stop("'interactions' must be one of \"none\" or \"search\".")
+}
+
+#' Add Interactions to Predictor Matrix
+#' @param x The original matrix containing the source of the interaction terms.
+#' @param interactions An n_interactions x 2 matrix containing interactions
+#'   to add to the original matrix x.
+#' @return The matrix x with new columns associated wtih each interaction.
+append_interactions <- function(x, interactions = NULL) {
+  new_cols <- list()
+  for (k in 1:nrow(interactions)) {
+    nm <- paste0(colnames(x)[interactions[k, ]], collapse = "*")
+    new_cols[[nm]] <- apply(x[, interactions[k, ], drop=FALSE], 1, prod)
+  }
+  new_cols <- do.call(cbind, new_cols)
+  return (cbind(x, new_cols))
+}
+
+
 #' Sliding Windows for a ts_inter object
 #' 
 #' This creates sliding windows of intervention and community composition
@@ -113,7 +143,7 @@ patchify_single_df <- function(ts_inter, p, q) {
 #' result <- patchify_df(sim_ts)
 #' lapply(result, head)
 #' @export
-patchify_df <- function(ts_inter, p = 2, q = 3) {
+patchify_df <- function(ts_inter, p = 2, q = 3, interactions = "none") {
   patches <- list()
   for (i in seq_along(ts_inter)) {
     patches[[i]] <- patchify_single_df(ts_inter[[i]], p, q)
@@ -126,8 +156,10 @@ patchify_df <- function(ts_inter, p = 2, q = 3) {
   
   x <- map_dfr(patches, ~ as_tibble(.$x)) |>
     as.matrix()
+  
   y <- map_dfr(patches, ~ as_tibble(.$y))
-  list(x = x, y = y)
+  z <- interaction_search(x, y, interactions)
+  list(x = x, y = y, interactions = z)
 }
 
 #' Create uniform column names for patchified df
@@ -160,8 +192,9 @@ predictor_names <- function(x_dim, w_dim) {
 #' @export
 lag_from_names <- function(names, group = "taxon") {
   names_ix <- names[grepl(group, names)]
-  names_value <- strcapture("(lag[0-9]+)", names_ix, data.frame(chr=character()))
-  gsub("lag", "", names_value$chr) |>
+  regex <- paste0(group, "([0-9]+_lag[0-9]+)")
+  names_value <- strcapture(regex, names_ix, data.frame(chr=character()))
+  gsub("[0-9]+_lag", "", names_value$chr) |>
     as.numeric() |>
     max()
 }
@@ -215,15 +248,15 @@ pad_lag <- function(x, lag) {
 #' ts <- subset_values(sim_ts, 1:5)
 #' predictors(ts[[1]], c(2, 2), NULL)
 #' @export
-predictors <- function(ts_inter, lags, subject) {
+predictors <- function(ts_inter, lags, subject, interactions = NULL) {
   x <- values(ts_inter) |>
     pad_lag(lags[1])
   w <- interventions(ts_inter) |>
     pad_lag(lags[2])
   n_time <- ncol(x)
   
-  x_prev <- x[, seq(n_time - lags[1] + 1, by = 1, length.out = lags[1]), drop = FALSE]
-  w_prev <- w[, seq(n_time - lags[2] + 2, by = 1, length.out = lags[2]), drop = FALSE]
+  x_prev <- x[, seq(n_time - lags[1], by = 1, length.out = lags[1]), drop = FALSE]
+  w_prev <- w[, seq(n_time - lags[2] + 1, by = 1, length.out = lags[2]), drop = FALSE]
   
   xw <- cbind(matrix(x_prev, nrow = 1), matrix(w_prev, nrow = 1)) |>
     as.data.frame() |>
@@ -233,6 +266,9 @@ predictors <- function(ts_inter, lags, subject) {
   if (!is.null(subject)) {
     xw  <- cbind(xw, subject[rep(1, nrow(xw)),, drop = FALSE])
   }
-  
+  if (!is.null(interactions)) {
+    xw <- append_interactions(xw, interactions)
+  }
+
   xw
 }

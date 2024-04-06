@@ -46,10 +46,13 @@
 #' fit@parameters[[1]]
 mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
                        early_stopping_rounds = 5, verbose = 0, lambda = 1e-1,
-                       alpha = 1e-2, eta = 0.1, ...) {
-  train_data <- patchify_df(ts_inter, P, Q)
-  fit <- list()
+                       alpha = 1e-2, eta = 0.1, interactions = "none", ...) {
+  train_data <- patchify_df(ts_inter, P, Q, interactions)
+  if (!is.null(train_data$interactions)) {
+    train_data$x <- append_interactions(train_data$x, train_data$interactions)
+  }
 
+  fit <- list()
   pb <- progress_bar$new(total = length(train_data$y), format = "[:bar] :percent ETA: :eta")
   for (j in seq_along(train_data$y)) {
     pb$tick()
@@ -62,7 +65,7 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
   }
 
   hyper <- list(P = P, Q = Q, nrounds = nrounds, ...)
-  new("mbtransfer_model", parameters = fit, method = "mbtransfer", hyper = hyper)
+  new("mbtransfer_model", parameters = fit, method = "mbtransfer", hyper = hyper, interactions = train_data$interactions)
 }
 
 #' Prediction method for `mbtransfer` objects
@@ -91,7 +94,8 @@ mbtransfer_predict <- function(object, newdata) {
       object@parameters,
       newdata[[i]],
       lags,
-      subject[i,, drop = FALSE]
+      subject[i,, drop = FALSE],
+      object@interactions
     )
   }
 
@@ -116,11 +120,11 @@ mbtransfer_predict <- function(object, newdata) {
 #' @param subject A static data frame of subject-level variables. This will be
 #'   concatenated to time-varying intervention and taxonomic covariates when
 #'   making predictions. This is analogous to the training process.
-model_predict_single <- function(fit, ts_inter, lags, subject = NULL) {
+model_predict_single <- function(fit, ts_inter, lags, subject = NULL, interactions = NULL) {
   n_time <- ncol(ts_inter)
   w <- interventions(ts_inter)
   while(ncol(ts_inter) < ncol(w)) {
-    ts_inter <- model_predict_step(ts_inter, fit, lags, subject)
+    ts_inter <- model_predict_step(ts_inter, fit, lags, subject, interactions)
   }
 
   colnames(values(ts_inter)) <- colnames(w)
@@ -144,8 +148,8 @@ model_predict_single <- function(fit, ts_inter, lags, subject = NULL) {
 #' @param subject A static data frame of subject-level variables. This will be
 #'   concatenated to time-varying intervention and taxonomic covariates when
 #'   making predictions. This is analogous to the training process.
-model_predict_step <- function(ts_inter, fit, lags, subject = NULL) {
-  xz <- predictors(ts_inter, lags, subject)
+model_predict_step <- function(ts_inter, fit, lags, subject = NULL, interactions = NULL) {
+  xz <- predictors(ts_inter, lags, subject, interactions)
   y_hat <- vector(length = nrow(ts_inter))
   for (j in seq_len(nrow(ts_inter))) {
     y_hat[j] <- predict(fit[[j]], xz)
@@ -167,7 +171,8 @@ setClass(
   slots = c(
     parameters = "ANY",
     method = "character",
-    hyper = "list"
+    hyper = "list",
+    interactions = "ANY"
   )
 )
 
