@@ -19,20 +19,24 @@ knitr::opts_chunk$set(
 ```{r}
 library(glue)
 library(mbtransfer)
+library(patchwork)
+library(scico)
 library(seqtime)
 library(tidyverse)
+library(DALEX)
 theme_set(tfPaper::my_theme())
-set.seed(20240401)
+set.seed(20240404)
+```
 
-pivot_glv <- function(ts, n_subject = 16) {
+```{r, echo = FALSE}
+pivot_glv <- function(ts) {
   if (is.null(colnames(ts@series[[1]]))) {
     for (i in seq_along(ts@series)) {
       colnames(ts@series[[i]]@values) <- names(ts@series[[i]]@time)
     }
   }
 
-  pivot_ts(ts) |>
-    filter(subject %in% 1:n_subject)
+  pivot_ts(ts)
 }
 
 plot_ts <- function(ts, ts_preds) {
@@ -43,6 +47,7 @@ plot_ts <- function(ts, ts_preds) {
     .id = "source"
   ) |>
     mutate(
+      time = time / 5,
       taxon = ifelse(taxon == "1", "Prey", "Predator"),
       source = ifelse(source == "1", "True", "Predicted"),
       source = factor(source, c("True", "Predicted")),
@@ -57,6 +62,9 @@ plot_ts <- function(ts, ts_preds) {
 
   pal <- c("#D9420B", "#8AA1BF")
   ggplot(ts_df) +
+    geom_vline(xintercept = 7) +
+    geom_rect(xmin = 3, xmax = 4, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#aeaeae") +
+    geom_rect(xmin = 8, xmax = 9, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#aeaeae") +
     geom_area(
       aes(time, value, fill = taxon, col = taxon, linetype = source),
       alpha = 0.2, position = "identity", linewidth = 0.9
@@ -68,7 +76,7 @@ plot_ts <- function(ts, ts_preds) {
     scale_color_manual(values = pal) +
     labs(
       x = "Time", 
-      y = "Value", 
+      y = "Population Size", 
       fill = "Species", 
       color = "Species", 
       linetype = "Source"
@@ -80,7 +88,7 @@ plot_ts <- function(ts, ts_preds) {
     )
 }
 
-simulate_oscillator <- function(n_time = 10, n_series = 1000, perturb = FALSE) {
+simulate_oscillator <- function(n_time = 10, n_series = 500, perturb = FALSE) {
   A <- matrix(c(0, 1, -1, 0), nrow = 2)
   growth_rates <- c(2, -1)
   growthchanges <- c(-1, 0)
@@ -89,7 +97,7 @@ simulate_oscillator <- function(n_time = 10, n_series = 1000, perturb = FALSE) {
   if (perturb) {
     t_external <- seq(3, n_time, by = floor(n_time / n_species))
     duration <- rep(1, length(t_external))
-    pert <- perturbation(times = t_external, duration = duration, growthchanges = growthchanges)
+    pert <- perturbation(times = t_external, duration = duration, growthchanges = growthchanges, numberchanges = growthchanges)
     t_perturb <- map(seq(0, duration[1], by = 0.2), ~ . + t_external) |>
       unlist()
   } else {
@@ -143,7 +151,7 @@ to_ts <- function(glv_sim) {
       left_join(metadata) |>
       mutate(
         P = time * time_delta,
-        P = (P >= 3 | P <= 4 | P >= 8 | P <= 9)
+        P = ((P >= 3 & P <= 4) | (P > 8 & P <= 9))
       ) |>
       select(P, sample) |>
       column_to_rownames("sample")
@@ -155,17 +163,56 @@ to_ts <- function(glv_sim) {
     column_to_rownames("sample") |>
     ts_from_dfs(interventions, metadata, subject)
 }
-```
 
-```{r}
-ts <- simulate_oscillator() |>
-  to_ts()
+plot_cp_profile <- function(cp_profile, max_value = 8.5) {
+  p1 <- cp_profile |>
+    filter(`_vname_` == "intervention1_lag0", intervention1_lag0 %in% c(0, 1)) |>
+    select(`_ids_`, taxon1_lag1, `_yhat_`, intervention1_lag0) |>
+    pivot_wider(names_from = `intervention1_lag0`, values_from = `_yhat_`) |>
+    mutate(diff = as.numeric(`1` - `0`)) |>
+    ggplot() +
+      geom_histogram(aes(diff)) +
+      scale_x_continuous(expand = c(0, 0), limits = c(-0.3, 0.1)) +
+      scale_y_continuous(expand = c(0, 0, 0, 1))
 
-fit <- mbtransfer(ts[, 1:35], P = 3, Q = 1, alpha = 0, lambda = 0) # 1e-6)
-ts_missing <- subset_values(ts, 1:35)
-ts_preds <- predict(fit, ts_missing[1:8])
-plot_ts(ts[1:10], ts_preds) +
-  geom_vline(xintercept = 35, alpha = 0.4)
+  p2 <- cp_profile |>
+    filter(`_vname_` %in% c("taxon1_lag1", "taxon2_lag1")) |>
+    group_by(g1 = cut(taxon1_lag1, 100), g2 = cut(taxon2_lag1, 20)) |>
+    mutate(
+      g1 = str_extract(g1, "[\\-|\\.|0-9]+") |> as.numeric(),
+      g2 = str_extract(g2, "[\\-|\\.|0-9]+") |> as.numeric()
+    ) |>
+    summarise(
+      y_hat_25 = quantile(`_yhat_`, 0.25),
+      y_hat_median = quantile(`_yhat_`, 0.50),
+      y_hat_75 = quantile(`_yhat_`, 0.75)
+    ) |>
+    ggplot() +
+      geom_ribbon(aes(g1, ymin = y_hat_25, ymax = y_hat_75, group = g2, fill = g2), alpha = 0.3) +
+      geom_line(aes(g1, y_hat_median, group = g2, col = g2), linewidth = 0.5) +
+      scale_fill_scico(palette = "glasgow", midpoint = 12) +
+      scale_color_scico(palette = "glasgow", midpoint = 12) +
+      scale_x_continuous(expand = c(0, 0)) +
+      scale_y_continuous(limits = c(0, max_value), expand = c(0, 0))
+
+  p3 <- cp_profile |>
+    filter(`_vname_` %in% c("taxon1_lag1", "taxon2_lag1")) |>
+    group_by(g1 = cut(taxon1_lag1, 20, label = F), g2 = cut(taxon2_lag1, 100, label = F)) |>
+    summarise(
+      y_hat_25 = quantile(`_yhat_`, 0.25),
+      y_hat_median = quantile(`_yhat_`, 0.50),
+      y_hat_75 = quantile(`_yhat_`, 0.75)
+    ) |>
+    ggplot() +
+      geom_ribbon(aes(g2, ymin = y_hat_25, ymax = y_hat_75, group = g1, fill = g1), alpha = 0.3) +
+      geom_line(aes(g2, y_hat_median, group = g1, col = g1), linewidth = 0.5) +
+      scale_fill_scico(palette = "glasgow", midpoint = 12) +
+      scale_color_scico(palette = "glasgow", midpoint = 12) +
+      scale_x_continuous(expand = c(0, 0)) +
+      scale_y_continuous(limits = c(0, max_value), expand = c(0, 0)) +
+      theme(legend.position = "none")
+  list(p1 = p1, p2 = p2, p3 = p3)
+}
 ```
 
 An example with perturbations.
@@ -173,12 +220,48 @@ An example with perturbations.
 ```{r}
 ts <- simulate_oscillator(perturb = TRUE) |>
   to_ts()
-
-fit <- mbtransfer(ts[, 1:35], P = 3, Q = 1, alpha = 0, lambda = 0)
+fit <- mbtransfer(ts[, 1:35], P = 1, Q = 1, alpha = 1e-4)
 ts_missing <- subset_values(ts, 1:35)
-ts_preds <- predict(fit, ts_missing[1:8])
-plot_ts(ts[1:8], ts_preds) +
-  geom_vline(xintercept = 35) +
-  geom_rect(xmin = 15, xmax = 20, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6") +
-  geom_rect(xmin = 40, xmax = 45, ymin = -Inf, ymax = Inf, alpha = 0.01, fill = "#f6f6f6")
+ts_preds <- predict(fit, ts_missing)
+```
+
+```{r}
+errors <- list()
+diff <- ts_preds - ts
+for (i in seq_along(diff)) {
+  errors[[i]] <- mean(abs(diff@series[[i]]@values))
+}
+
+ix <- order(unlist(errors))[c(1, 2, 124, 125, 249, 250, 499, 500)]
+plot_ts(ts[ix], ts_preds[ix]) +
+  guides(
+    linetype = guide_legend(override.aes = list(linewidth = 2, col = "#4c4c4c")),
+    col = guide_legend(override.aes = list(linewidth = 2))
+  )
+ggsave("glv_dynamics.png", width=11, height=5)
+```
+
+```{r}
+patches <- mbtransfer:::patchify_df(ts, 1, 1)
+ix <- sample(1:nrow(patches$x), 5000)
+explainer <- explain(fit@parameters[[1]], patches$x, patches$y[, 1])
+cp_profile <- predict_profile(explainer, patches$x[ix, ])
+tax1 <- plot_cp_profile(cp_profile)
+```
+
+```{r}
+explainer <- explain(fit@parameters[[2]], patches$x, patches$y[, 1])
+cp_profile <- predict_profile(explainer, patches$x[ix, ])
+tax2 <- plot_cp_profile(cp_profile, 20)
+```
+
+```{r}
+((tax1[[1]] + labs(x = "ΔPrey", y = "Frequency", title = expression("(a)"~ hat(f)[1](..., w[t])))) +
+ (tax1[[2]] + labs(x = expression(Prey[t]), y = expression(hat(Prey)[t + 1]), fill = "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(b)" ~ hat(f)[1](y[t1], ...)))) +
+ (tax1[[3]] + labs(x = expression(Predator[t]), y = expression(hat(Prey)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(c)" ~ hat(f)[1](..., y[t2], ...))))) /
+ ((tax2[[1]] + labs(x = "ΔPredator", y = "Frequency", title = expression("(d)"~ hat(f)[2](..., w[t])), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)")) +
+ (tax2[[2]] + labs(x = expression(Prey[t]), y = expression(hat(Predator)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(e)" ~ hat(f)[2](y[t1], ...)))) +
+ (tax2[[3]] + labs(x = expression(Predator[t]), y = expression(hat(Predator)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(f)" ~ hat(f)[2](..., y[t2], ...))))) +
+  plot_layout(guides = "collect")
+ggsave("glv_profiles.png", width=10, height=6)
 ```
