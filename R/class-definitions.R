@@ -156,7 +156,7 @@ print_ts_inter_single <- function(object) {
   ))
   
   cat("taxa:\n")
-  n_col <- min(4, ncol(values(object[[1]])))
+  n_col <- min(4, ncol(values(object)))
   v <- data.frame(round(values(object)[1:n_col, 1:n_col], 3))
   v <- cbind(v, " " = rep("\U2026", n_col))
   v <- rbind(v, " " = c(rep("\U22EE", n_col), "\U22F1"))
