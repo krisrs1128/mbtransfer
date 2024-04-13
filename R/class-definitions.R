@@ -136,7 +136,7 @@ print_ts_inter <- function(object) {
     n_col <- min(4, ncol(values(object[[i]])))
     
     cat(sprintf("\n%s:\n", names(object)[i]))
-    v <- data.frame(values(object[[i]])[1:n_col, 1:n_col])
+    v <- data.frame(round(values(object[[i]])[1:n_col, 1:n_col], 3))
     v <- cbind(v, " " = rep("\U2026", n_col))
     v <- rbind(v, " " = c(rep("\U22EE", n_col), "\U22F1"))
     print(v)
@@ -156,8 +156,8 @@ print_ts_inter_single <- function(object) {
   ))
   
   cat("taxa:\n")
-  n_col <- min(4, ncol(values(object[[i]])))
-  v <- data.frame(values(object)[1:n_col, 1:n_col])
+  n_col <- min(4, ncol(values(object[[1]])))
+  v <- data.frame(round(values(object)[1:n_col, 1:n_col], 3))
   v <- cbind(v, " " = rep("\U2026", n_col))
   v <- rbind(v, " " = c(rep("\U22EE", n_col), "\U22F1"))
   print(v)
