@@ -28,12 +28,12 @@
 #'   performance be printed? Allowable values are 2 (all information), 1 (some
 #'   information), and 0 (no information, default).
 #' @param lambda The l2-regularization value in the linear gradient boosting
-#'   model. Defaults to 1e-2.
+#'   model. Defaults to 1e-1.
 #' @param alpha The l1-regularization value in the linear gradient boosting
 #'   model. Defaults to 1e-2. This value generally leads to less sparse fits,
 #'   which creates useful variation in potential downstream mirror statistics
 #'   calculations.
-#' @param eta The learning rate. Defaults to 0.05. This is slower than the
+#' @param eta The learning rate. Defaults to 0.1. This is slower than the
 #'   default in xgboost (0.3) but has been found to improve stability when
 #'   needing to train on taxa with a wide range of abundances.
 #' @importFrom progress progress_bar
@@ -46,7 +46,7 @@
 #' fit@parameters[[1]]
 mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
                        early_stopping_rounds = 5, verbose = 0, lambda = 1e-1,
-                       alpha = 1e-2, eta = 0.1, interactions = "none", ...) {
+                       alpha = 1e-2, eta = 0.1, interactions = "search", nthread=-1, ...) {
   train_data <- patchify_df(ts_inter, P, Q, interactions)
   if (!is.null(train_data$interactions)) {
     train_data$x <- append_interactions(train_data$x, train_data$interactions)
@@ -59,7 +59,7 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
     fit[[j]] <- xgboost(
       data = train_data$x, label = train_data$y[[j]], nrounds = nrounds,
       booster = "gblinear", alpha = alpha, lambda = lambda,
-      eta = eta,
+      eta = eta, nthread = nthread,
       early_stopping_rounds = early_stopping_rounds, verbose = verbose, ...
     )
   }

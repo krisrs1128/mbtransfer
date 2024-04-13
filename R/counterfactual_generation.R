@@ -93,8 +93,8 @@ pulses <- function(p_states, lags = 1, L = 3, w_star = c(0, 1)) {
 #' and creates new intervention series according to the values of w0 and w1
 #' (starting from the truncation point).
 #' 
-#' @param ts The starting ts_inter object from which to build the
-#'   counterfactuals.
+#' @param ts The starting ts_inter object from which to build the '
+#'  counterfactuals. By default, this is the last timepoint in the current series.
 #' @param w0 The first version of the intervention series to consider.
 #' @param w1 The second version of the intervention series to consider.
 #' @param start_ix The truncation position for the original ts. Defaults to no
@@ -115,8 +115,8 @@ counterfactual_ts <- function(ts, w0, w1, start_ix = NULL) {
   
   for (i in seq_along(ts)) {
     times_ <- ts[[i]]@time
-    ts[[i]] <- ts[[i]][, seq_len(start_ix[i] - 1)]
-    ts[[i]]@time <- times_[seq_len(start_ix[i] + ncol(w0) - 1)]
+    ts[[i]] <- ts[[i]][, seq_len(start_ix[i])]
+    ts[[i]]@time <- times_[seq_len(start_ix[i] + ncol(w0))]
   }
 
   ts0 <- replace_inter(ts, w0, start_ix)
