@@ -254,10 +254,9 @@ predictors <- function(ts_inter, lags, subject, interactions = NULL) {
   w <- interventions(ts_inter) |>
     pad_lag(lags[2])
   n_time <- ncol(x)
-  
-  x_prev <- x[, seq(n_time - lags[1], by = 1, length.out = lags[1]), drop = FALSE]
-  w_prev <- w[, seq(n_time - lags[2] + 1, by = 1, length.out = lags[2]), drop = FALSE]
-  
+
+  x_prev <- x[, seq(n_time - lags[1] + 1, n_time), drop = FALSE]
+  w_prev <- w[, seq(n_time - lags[2] + 2, n_time + 1), drop = FALSE]
   xw <- cbind(matrix(x_prev, nrow = 1), matrix(w_prev, nrow = 1)) |>
     as.data.frame() |>
     set_names(predictor_names(dim(x_prev), dim(w_prev))) |>

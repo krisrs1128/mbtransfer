@@ -1,7 +1,7 @@
 
 #' ts is a single element of a ts_inter class
 replace_inter_ <- function(ts, new_inter, start_ix = NULL) {
-  inter <- interventions(ts)[, seq_len(start_ix - 1), drop = FALSE]
+  inter <- interventions(ts)[, seq_len(start_ix), drop = FALSE]
   interventions(ts) <- cbind(inter, new_inter)
   ts
 }
@@ -41,14 +41,14 @@ replace_subject <- function(ts, new_subject) {
 #' @param ts A `ts_inter` object whose random patches we want to sample.
 #' @param n The number of randomly sampled time series to return.
 #' @param patch_len The length of the randomly sampled patches
-#' @param intervention_len We will sample random patches padded by an extra
-#'   intervention_len set of timepoints.
+#' @param intervention_len We will pad the @time slot by an extra
+#'   intervention_len set of timepoints. Defaults to 0.
 #' 
 #' @examples
 #' data(sim_ts)
 #' sample_ts(sim_ts, 10, 4, 1)
 #' @export
-sample_ts <- function(ts, n, patch_len = 5, intervention_len = NULL) {
+sample_ts <- function(ts, n, patch_len = 5, intervention_len = 0) {
   # randomly subset series
   weights <- map_dbl(ts, ncol)
   weights <- weights / sum(weights)
@@ -57,9 +57,9 @@ sample_ts <- function(ts, n, patch_len = 5, intervention_len = NULL) {
   
   # randomly subset windows
   for (i in seq_along(ts_star)) {
-    start_ix <- sample(seq_len(ncol(ts_star[[i]]) - patch_len), 1)
-    tmp <- ts_star[[i]]@time[seq(start_ix, start_ix + patch_len + intervention_len)]
-    ts_star[[i]] <- ts_star[[i]][, seq(start_ix, start_ix + patch_len)]
+    start_ix <- sample(seq_len(ncol(ts_star[[i]]) - patch_len - 1), 1)
+    tmp <- ts_star[[i]]@time[seq(start_ix, start_ix + patch_len + intervention_len - 1)]
+    ts_star[[i]] <- ts_star[[i]][, seq(start_ix, start_ix + patch_len - 1)]
     ts_star[[i]]@time <- tmp
   }
   
