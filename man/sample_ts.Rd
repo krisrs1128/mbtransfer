@@ -4,7 +4,7 @@
 \alias{sample_ts}
 \title{Randomly subset a \code{ts_inter} object}
 \usage{
-sample_ts(ts, n, patch_len = 5, intervention_len = NULL)
+sample_ts(ts, n, patch_len = 5, intervention_len = 0)
 }
 \arguments{
 \item{ts}{A \code{ts_inter} object whose random patches we want to sample.}
@@ -13,8 +13,8 @@ sample_ts(ts, n, patch_len = 5, intervention_len = NULL)
 
 \item{patch_len}{The length of the randomly sampled patches}
 
-\item{intervention_len}{We will sample random patches padded by an extra
-intervention_len set of timepoints.}
+\item{intervention_len}{We will pad the @time slot by an extra
+intervention_len set of timepoints. Defaults to 0.}
 }
 \description{
 There are times we want to randomly sample patches from across timepoints and

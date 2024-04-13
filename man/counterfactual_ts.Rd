@@ -7,8 +7,8 @@
 counterfactual_ts(ts, w0, w1, start_ix = NULL)
 }
 \arguments{
-\item{ts}{The starting ts_inter object from which to build the
-counterfactuals.}
+\item{ts}{The starting ts_inter object from which to build the '
+counterfactuals. By default, this is the last timepoint in the current series.}
 
 \item{w0}{The first version of the intervention series to consider.}
 

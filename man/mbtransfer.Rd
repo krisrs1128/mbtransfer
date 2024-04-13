@@ -14,7 +14,8 @@ mbtransfer(
   lambda = 0.1,
   alpha = 0.01,
   eta = 0.1,
-  interactions = "none",
+  interactions = "search",
+  nthread = -1,
   ...
 )
 }
@@ -45,14 +46,14 @@ performance be printed? Allowable values are 2 (all information), 1 (some
 information), and 0 (no information, default).}
 
 \item{lambda}{The l2-regularization value in the linear gradient boosting
-model. Defaults to 1e-2.}
+model. Defaults to 1e-1.}
 
 \item{alpha}{The l1-regularization value in the linear gradient boosting
 model. Defaults to 1e-2. This value generally leads to less sparse fits,
 which creates useful variation in potential downstream mirror statistics
 calculations.}
 
-\item{eta}{The learning rate. Defaults to 0.05. This is slower than the
+\item{eta}{The learning rate. Defaults to 0.1. This is slower than the
 default in xgboost (0.3) but has been found to improve stability when
 needing to train on taxa with a wide range of abundances.}
 }
