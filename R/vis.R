@@ -34,7 +34,7 @@ subject_order <- function(values_df, taxa, r = 0) {
 #'   negative `r` are more coarse bins. Defaults to 0. See `subject_order` for
 #'   details.
 #' 
-#' @importFrom ggplot2 scale_color_gradient scale_fill_gradient
+#' @importFrom ggplot2 scale_color_gradient scale_fill_gradient scale_y_discrete
 #' @examples
 #' library(dplyr)
 #' data(sim_ts)
@@ -55,6 +55,7 @@ interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
     ggplot() +
     geom_tile(aes(time, subject, fill = value, col = value), ...) +
     scale_x_continuous(expand = c(0, 0)) +
+    scale_y_discrete(expand = c(0, 0)) +
     scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
     scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
     theme(
@@ -130,7 +131,7 @@ ribbon_data <- function(ts1, ts0, focus_taxa = NULL, delta = NULL, q_lower = 0.2
 #' @export
 ribbon_plot <- function(rdata, group = NULL, reorder_var = NULL) {
   p <- ggplot(rdata, aes(x = time)) +
-    geom_hline(yintercept = 0, size = .25, col = "#787878") +
+    geom_hline(yintercept = 0, linewidth = .25, col = "#787878") +
     scale_x_continuous(expand = c(0, 0)) +
     theme(axis.text = element_text(size = 8))
   
@@ -138,7 +139,7 @@ ribbon_plot <- function(rdata, group = NULL, reorder_var = NULL) {
   if (!is.null(group)) {
     p <- p + 
       geom_ribbon(aes(ymin = q_lower, ymax = q_upper, fill = .data[[group]], group = .data[[group]]), alpha = 0.6) +
-      geom_line(aes(y = median, col = .data[[group]], group = .data[[group]]), size = 1) +
+      geom_line(aes(y = median, col = .data[[group]], group = .data[[group]]), linewidth = 1) +
       scale_fill_brewer(palette = "Set2") +
       scale_color_brewer(palette = "Set2")
   } else {
