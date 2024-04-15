@@ -1,4 +1,3 @@
-
 #' @importFrom dplyr filter select mutate
 #' @importFrom tibble column_to_rownames
 #' @importFrom tidyr pivot_wider unite
@@ -11,17 +10,17 @@ subject_order <- function(values_df, taxa, r = 0) {
     pivot_wider(names_from = txtime) |>
     column_to_rownames("subject") |>
     as.matrix()
-  
+
   values_wide[is.na(values_wide)] <- 0
   rownames(values_wide)[hclust(dist(values_wide))$order]
 }
 
 #' Visualize Time Series Heatmaps
-#' 
+#'
 #' This is a helper function to visualize time series for a subset of taxa
 #' across all subjects. It is used in the raw data figures in the case studies
 #' section of the accompanying manuscript.
-#' 
+#'
 #' @param values_df A data.frame containing joined information from a `ts_inter`
 #'   object. Each row should be one count from one taxon/subject pair. The
 #'   output of `pivot_ts` reshape data to this format.
@@ -33,7 +32,7 @@ subject_order <- function(values_df, taxa, r = 0) {
 #'   timepoints into bins. Large `r` corresponds to fine-grained binning,
 #'   negative `r` are more coarse bins. Defaults to 0. See `subject_order` for
 #'   details.
-#' 
+#'
 #' @importFrom ggplot2 scale_color_gradient scale_fill_gradient scale_y_discrete
 #' @examples
 #' library(dplyr)
@@ -42,7 +41,7 @@ subject_order <- function(values_df, taxa, r = 0) {
 #'   pivot_ts() |>
 #'   mutate(v_pos = V1 > 0)
 #' interaction_hm(pivoted, c("tax1", "tax2"), "v_pos")
-#' 
+#'
 #' pivoted |>
 #'   group_by(taxon) |>
 #'   mutate(value = rank(value) / n()) |>
@@ -64,12 +63,12 @@ interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
       panel.border = element_rect(linewidth = 1, fill = NA, color = "#545454"),
       panel.spacing = unit(0, "cm")
     )
-  
+
   if (!is.null(condition)) {
-    p <- p + 
+    p <- p +
       facet_grid(.data[[condition]] ~ reorder(taxon, -value), scales = "free", space = "free")
   }
-  
+
   p
 }
 
@@ -93,13 +92,13 @@ interaction_barcode <- function(values_df, taxa, condition = NULL, r = 0, ...) {
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank()
     )
-  
+
   if (!is.null(condition)) {
-    p <- p + 
-      #ggh4x::facet_nested(reorder(.data[[condition]], -value) + subject ~ ., scales = "free", space = "free")
+    p <- p +
+      # ggh4x::facet_nested(reorder(.data[[condition]], -value) + subject ~ ., scales = "free", space = "free")
       facet_grid(reorder(.data[[condition]], -value) + subject ~ ., scales = "free", space = "free")
   }
-  
+
   p
 }
 
@@ -108,7 +107,7 @@ interaction_barcode <- function(values_df, taxa, condition = NULL, r = 0, ...) {
 ribbon_data <- function(ts1, ts0, focus_taxa = NULL, delta = NULL, q_lower = 0.25, q_upper = 0.75) {
   result <- (ts1 - ts0) |>
     pivot_ts()
-    
+
   if (!is.null(focus_taxa)) {
     result <- filter(result, taxon %in% focus_taxa)
   }
@@ -134,29 +133,29 @@ ribbon_plot <- function(rdata, group = NULL, reorder_var = NULL) {
     geom_hline(yintercept = 0, linewidth = .25, col = "#787878") +
     scale_x_continuous(expand = c(0, 0)) +
     theme(axis.text = element_text(size = 8))
-  
+
   # filled or grey ribbons
   if (!is.null(group)) {
-    p <- p + 
+    p <- p +
       geom_ribbon(aes(ymin = q_lower, ymax = q_upper, fill = .data[[group]], group = .data[[group]]), alpha = 0.6) +
       geom_line(aes(y = median, col = .data[[group]], group = .data[[group]]), linewidth = 1) +
       scale_fill_brewer(palette = "Set2") +
       scale_color_brewer(palette = "Set2")
   } else {
-    p <- p + 
+    p <- p +
       geom_ribbon(aes(ymin = q_lower, ymax = q_upper), fill = "#d3d3d3") +
       geom_line(aes(y = median), col = "#8e8e8e", size = 1)
   }
-  
+
   # order facets (or not)
   if (!is.null(reorder_var)) {
-    p <- p + 
+    p <- p +
       facet_wrap(~ reorder(taxon, .data[[reorder_var]]), scales = "free_y")
   } else if (n_distinct(rdata$taxon) > 1) {
     p <- p +
-      facet_wrap(~ taxon, scales = "free_y")
+      facet_wrap(~taxon, scales = "free_y")
   }
-  
+
   p
 }
 
@@ -170,13 +169,13 @@ reshape_preds <- function(ts, ts_pred, n_quantile = 4, lag = 3) {
     mutate(h = time - lag) |>
     full_join(pivot_ts(ts)) |>
     rename(y = value)
-  
+
   taxa_totals <- ts_df |>
     group_by(taxon) |>
     summarise(total = median(y)) |>
     ungroup() |>
-    mutate(quantile = cut(total, unique(quantile(total, 0:n_quantile/n_quantile)), include.lowest = TRUE))
-  
+    mutate(quantile = cut(total, unique(quantile(total, 0:n_quantile / n_quantile)), include.lowest = TRUE))
+
   ts_df |>
     left_join(taxa_totals)
 }

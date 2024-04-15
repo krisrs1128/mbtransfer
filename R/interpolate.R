@@ -1,4 +1,3 @@
-
 #' @importFrom glue glue
 #' @export
 interpolate <- function(ts_inter, delta = 1, method = "constant") {
@@ -13,17 +12,17 @@ interpolate <- function(ts_inter, delta = 1, method = "constant") {
 approx_mat <- function(time, y_mat, times_out, method) {
   n <- length(times_out)
   new_y <- matrix(nrow = nrow(y_mat), ncol = n, dimnames = list(rownames(y_mat), seq_len(n)))
-  
+
   for (i in seq_len(nrow(y_mat))) {
     new_y[i, ] <- approx(
-      time, 
-      y_mat[i, ], 
+      time,
+      y_mat[i, ],
       times_out,
       method = method,
       ties = mean
     )$y
   }
-  
+
   colnames(new_y) <- str_c("T", seq_len(ncol(new_y)))
   new_y
 }

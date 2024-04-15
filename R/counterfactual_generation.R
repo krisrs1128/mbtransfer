@@ -1,4 +1,3 @@
-
 ###############################################################################
 # Helpers to generate counterfactual ts_inter objects
 ###############################################################################
@@ -13,7 +12,7 @@ to_vector <- function(x) {
 #' Hypothetical Step Interventions
 #' @examples
 #' steps(c("P1" = TRUE), 1:3, 2:3, 4)
-#' 
+#'
 #' @importFrom glue glue
 #' @export
 steps <- function(p_states, starts = 1, lengths = 1:3, L = 3, w_star = c(0, 1)) {
@@ -38,15 +37,15 @@ steps <- function(p_states, starts = 1, lengths = 1:3, L = 3, w_star = c(0, 1)) 
       }
     }
   }
-  
+
   unique(result)
 }
 
 #' Hypothetical Pulse Interventions
-#' 
+#'
 #' Create counterfactual perturbations with specific 0/1 intervention and total
 #' length patterns.
-#' 
+#'
 #' @param p_stats A list specifying the row names and whether they should
 #'   include interventions. Any name set to TRUE will include intervention
 #'   effects, while those with FALSE will not.
@@ -54,12 +53,12 @@ steps <- function(p_states, starts = 1, lengths = 1:3, L = 3, w_star = c(0, 1)) 
 #' @param L The total length returned, including both intervention and non-intervention timepoints
 #' @param w_star The unique values to include in and out of the intervention.
 #'   Defaults to 1/0, respectively.
-#' 
+#'
 #' @examples
 #' library(mbtransfer)
 #' pulses(c("P1" = TRUE), 1, 4)
 #' pulses(c("P1" = TRUE), 1:3, 4)
-#" pulses(c("P1" = TRUE), 1:3, 4, seq(0, 1, .2))
+# " pulses(c("P1" = TRUE), 1:3, 4, seq(0, 1, .2))
 #' @importFrom glue glue
 #' @export
 pulses <- function(p_states, lags = 1, L = 3, w_star = c(0, 1)) {
@@ -68,7 +67,7 @@ pulses <- function(p_states, lags = 1, L = 3, w_star = c(0, 1)) {
   colnames(w0) <- glue("Tn_{seq_len(ncol(w0))}")
   lengths <- to_vector(lengths)
   active_p <- names(p_states[p_states])
-  
+
   result <- list()
   k <- 1
   for (i in seq_along(w_star)) {
@@ -81,18 +80,18 @@ pulses <- function(p_states, lags = 1, L = 3, w_star = c(0, 1)) {
       k <- k + 1
     }
   }
-  
+
   result
 }
 
 #' Generate Counterfactual versions of a ts_inter object
-#' 
+#'
 #' mbtransfer makes predictions starting from ts_inter objects, so in order to
 #' simulate counterfactuals we need to provide alternative versions of those
 #' objects as input. This function truncates an existing ts object at start_ix
 #' and creates new intervention series according to the values of w0 and w1
 #' (starting from the truncation point).
-#' 
+#'
 #' @param ts The starting ts_inter object from which to build the '
 #'  counterfactuals. By default, this is the last timepoint in the current series.
 #' @param w0 The first version of the intervention series to consider.
@@ -112,7 +111,7 @@ counterfactual_ts <- function(ts, w0, w1, start_ix = NULL) {
   } else if (length(start_ix) == 1) {
     start_ix <- rep(start_ix, length(ts))
   }
-  
+
   for (i in seq_along(ts)) {
     times_ <- ts[[i]]@time
     ts[[i]] <- ts[[i]][, seq_len(start_ix[i])]

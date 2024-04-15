@@ -1,13 +1,12 @@
-
 #' Transfer Function Model for `ts_inter` objects
-#' 
+#'
 #' This is the main prediction function in the `mbtransfer` package. Given an
 #' object of class `ts_inter` (see `ts_from_dfs()`), this will fit a collection
 #' of linear gradient boosting-based transfer function models. The output is an
 #' object of class `mbtransfer_model`. Each component boosting model is
 #' contained in the `@parameters` slot, which is a list whose j^th element is
 #' the model for the j^th taxon (row) within each `ts`'s values matrix.
-#' 
+#'
 #' @param ts_inter An object of class `ts_inter` containing the time-varying
 #'   microbiome community, environmental interventions, and static host features
 #'   data. The columns for each element of the `values` matrix are expected to
@@ -46,7 +45,7 @@
 #' fit@parameters[[1]]
 mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
                        early_stopping_rounds = 5, verbose = 0, lambda = 1e-1,
-                       alpha = 1e-2, eta = 0.1, interactions = "search", nthread=-1, ...) {
+                       alpha = 1e-2, eta = 0.1, interactions = "search", nthread = -1, ...) {
   train_data <- patchify_df(ts_inter, P, Q, interactions)
   if (!is.null(train_data$interactions)) {
     train_data$x <- append_interactions(train_data$x, train_data$interactions)
@@ -69,7 +68,7 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
 }
 
 #' Prediction method for `mbtransfer` objects
-#' 
+#'
 #' @param object An object of class `mbtransfer_model`, as generated using the
 #'   `mbtransfer` function. This includes trained boosting models for every
 #'   taxon, stored within the `@parameters` slot.
@@ -94,7 +93,7 @@ mbtransfer_predict <- function(object, newdata) {
       object@parameters,
       newdata[[i]],
       lags,
-      subject[i,, drop = FALSE],
+      subject[i, , drop = FALSE],
       object@interactions
     )
   }
@@ -104,11 +103,11 @@ mbtransfer_predict <- function(object, newdata) {
 }
 
 #' Prediction for a Single Subject
-#' 
+#'
 #' This loops over all timepoints for a single subject and makes predictions by
 #' comparing the number of timepoints in @interventions and in @values. The gap
 #' will be filled in one step at a time using `mbtransfer_predict_step()`.
-#' 
+#'
 #' @param fit An object of class `mbtransfer_model`, as generated using the
 #'   `mbtransfer` function. This includes trained boosting models for every
 #'   taxon, stored within the `@parameters` slot.
@@ -123,7 +122,7 @@ mbtransfer_predict <- function(object, newdata) {
 model_predict_single <- function(fit, ts_inter, lags, subject = NULL, interactions = NULL) {
   n_time <- ncol(ts_inter)
   w <- interventions(ts_inter)
-  while(ncol(ts_inter) < ncol(w)) {
+  while (ncol(ts_inter) < ncol(w)) {
     ts_inter <- model_predict_step(ts_inter, fit, lags, subject, interactions)
   }
 
@@ -132,11 +131,11 @@ model_predict_single <- function(fit, ts_inter, lags, subject = NULL, interactio
 }
 
 #' Predictions for a single timepoint and subject
-#' 
+#'
 #' This make predictions for all taxa for a single timestep ahead in one
 #' subject. It loops over the trained boosting models for each taxon predicts a
 #' single value for each.
-#' 
+#'
 #' @param fit An object of class `mbtransfer_model`, as generated using the
 #'   `mbtransfer` function. This includes trained boosting models for every
 #'   taxon, stored within the `@parameters` slot.
@@ -162,7 +161,7 @@ model_predict_step <- function(ts_inter, fit, lags, subject = NULL, interactions
 #' Transfer Function Model Class
 #' @slot parameters The model training result. For mbtransfer models, this is a
 #'   list of all the boosting models that have been trained, one for each taxon.
-#' @slot method The model type used for prediction. 
+#' @slot method The model type used for prediction.
 #' @slot hyper A list. containing any hyperparameters used during model
 #'   training.
 #' @export
@@ -184,4 +183,4 @@ setClass(
 #' y_hat <- predict(fit, sim_sub)
 #' plot(values(sim_ts[[1]])[, 27], values(y_hat[[1]])[, 27], xlab = "Truth", ylab = "Predicted")
 #' @export
-setMethod("predict",  c(object = "mbtransfer_model"), mbtransfer_predict)
+setMethod("predict", c(object = "mbtransfer_model"), mbtransfer_predict)

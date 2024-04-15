@@ -1,24 +1,24 @@
-setClassUnion("data.frameOrNull", members=c("data.frame", "NULL"))
+setClassUnion("data.frameOrNull", members = c("data.frame", "NULL"))
 
 #' An S4 class to represent a single subject's series
-#' 
+#'
 #' Taxonomic abundances, binary/continuous interventions, and underlying
 #' timepoints for a single subject are stored in this unified data structure. A
 #' `ts_inter` object is list of these `ts_inter_single` classes (together wtih
 #' static subject data).
-#' 
+#'
 #' @slot values A matrix whose rows are taxa and whose columns are samples.
 #' @slot time A vector of the timepoints associated with the samples in `values`.
 #' @slot interventions A matrix whose rows are perturbations, columns are
 #'   samples, and values are either binary interventions or continuous input
 #'   series, representing the value of the exogenous influence.
-#' 
+#'
 #' @examples
 #' data(sim_ts)
 #' sim_ts[[1]]
 #' @export
 setClass(
-  "ts_inter_single", 
+  "ts_inter_single",
   slots = c(
     values = "matrix",
     time = "numeric",
@@ -27,11 +27,11 @@ setClass(
 )
 
 #' An S4 class representing a collection of time series under environmental shifts
-#' 
+#'
 #' While `ts_inter_single` represents shifts for a single subject, `ts_inter`
 #' includes shifts across a collection of subjects. It includes an additional
 #' slot, `subject_data` to store non-time-varying subject metadata.
-#' 
+#'
 #' @slot series A list of `ts_inter_single` objects, each representing
 #'   interventions and compositional responses for a subject.
 #' @slot subject_data An optional data.frame storing static host-level metadata
@@ -76,10 +76,10 @@ multi_subset <- function(x, i = NULL, j = NULL, ..., drop = FALSE) {
 }
 
 #' Subset values of a ts object
-#' 
+#'
 #' This is a helper to filter the number of timepoints across all `values` slots
 #' in a `ts_inter` class.
-#' 
+#'
 #' @examples
 #' data(sim_ts)
 #' subset_values(sim_ts, 1:2)
@@ -102,9 +102,9 @@ setMethod("dim", "ts_inter_single", function(x) dim(x@values))
 setMethod("[", c("ts_inter_single", "numeric", "numeric"), single_subset)
 setMethod("[", c("ts_inter_single", "numeric", "missing"), single_subset)
 setMethod("[", c("ts_inter_single", "missing", "numeric"), single_subset)
-setMethod("[", c("ts_inter", "numeric", "missing", "ANY"), function(x, i, j, ..., drop=TRUE) initialize(x, series=x@series[i], subject_data = x@subject_data[i, ]))
+setMethod("[", c("ts_inter", "numeric", "missing", "ANY"), function(x, i, j, ..., drop = TRUE) initialize(x, series = x@series[i], subject_data = x@subject_data[i, ]))
 setMethod("[[", c("ts_inter", "numeric", "missing"), function(x, i, j, ...) x@series[[i]])
-setMethod("[", c("ts_inter", "logical", "missing", "ANY"), function(x, i, j, ..., drop=TRUE) initialize(x, series=x@series[i], subject_data = x@subject_data[i, ]))
+setMethod("[", c("ts_inter", "logical", "missing", "ANY"), function(x, i, j, ..., drop = TRUE) initialize(x, series = x@series[i], subject_data = x@subject_data[i, ]))
 setMethod("[[", c("ts_inter", "logical", "missing"), function(x, i, j, ...) x@series[[i]])
 setMethod("[", c("ts_inter", "missing", "numeric", "ANY"), multi_subset)
 setMethod("[", c("ts_inter", "numeric", "numeric", "ANY"), multi_subset)
@@ -134,19 +134,19 @@ print_ts_inter <- function(object) {
   ))
   for (i in seq_len(min(3, length(n_time)))) {
     n_col <- min(4, ncol(values(object[[i]])))
-    
+
     cat(sprintf("\n%s:\n", names(object)[i]))
     v <- data.frame(round(values(object[[i]])[1:n_col, 1:n_col], 3))
     v <- cbind(v, " " = rep("\U2026", n_col))
     v <- rbind(v, " " = c(rep("\U22EE", n_col), "\U22F1"))
     print(v)
   }
-  
+
   if (length(n_time) > 3) {
     cat(sprintf("\nand %d more subjects.", length(n_time) - 3))
   }
 }
-  
+
 setMethod("show", "ts_inter", print_ts_inter)
 
 print_ts_inter_single <- function(object) {
@@ -154,7 +154,7 @@ print_ts_inter_single <- function(object) {
     "# A ts_inter_single object | %d taxa | %d timepoints:\n",
     length(nrow(values(object))), ncol(values(object))
   ))
-  
+
   cat("taxa:\n")
   n_col <- min(4, ncol(values(object)))
   v <- data.frame(round(values(object)[1:n_col, 1:n_col], 3))
@@ -168,7 +168,7 @@ print_ts_inter_single <- function(object) {
   i <- cbind(i, " " = "\U2026")
   print(i)
 }
-  
+
 setMethod("show", "ts_inter_single", print_ts_inter_single)
 
 
@@ -209,7 +209,7 @@ setMethod("taxa", "ts_inter", function(x) {
 setMethod("names", "ts_inter", function(x) names(x@series))
 
 #' @export
-setMethod("names<-", "ts_inter", function(x, value) { 
-  names(x@series) <- value 
+setMethod("names<-", "ts_inter", function(x, value) {
+  names(x@series) <- value
   x
 })

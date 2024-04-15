@@ -1,6 +1,5 @@
-
 #' Mirror Statistics from a Single Split
-#' 
+#'
 #' This is based on the mirror statistic in Dai et al. (2022). The idea is that,
 #' if a feature is null, the sign of the effect is as likely to be positive or
 #' negative (this symmetry supports FDR estimation). If there is a real effect,
@@ -14,7 +13,7 @@
 #' effects <- matrix(rnorm(500), 250, 2)
 #' m <- consistency_mirror(effects)
 #' hist(m, 20)
-#' 
+#'
 #' # long tail on the right is the real effect
 #' effects[1:5, ] <- runif(10, 2, 4)
 #' m <- consistency_mirror(effects)
@@ -26,7 +25,7 @@ consistency_mirror <- function(effects) {
 }
 
 #' Compute Mirrors across Splits
-#' 
+#'
 #' The mirror of `consistency_mirror` works on effects derived from a single
 #' split. In practice, we will want to have mirror statistics across a multiple
 #' splits. This is a small wrapper of that function that computes mirrors for
@@ -48,7 +47,7 @@ consistency_mirror_multisplit <- function(effects) {
   for (s in seq_along(effects)) {
     for (lag in seq_len(dim(effects[[s]])[3])) {
       ms[[k]] <- tibble(
-        m = consistency_mirror(effects[[s]][,, lag]),
+        m = consistency_mirror(effects[[s]][, , lag]),
         lag = lag,
         multisplit = s
       ) |>
@@ -101,7 +100,7 @@ pd_splits <- function(ts, w0, w1, tr_fun, n_splits = 20, ...) {
     fits <- map(ts_split, tr_fun)
 
     for (i in seq_along(ts_split)) {
-      effects[[s]][, i,] <- pd_effects(fits[[i]], ts_split[[i]], w0, w1, ...)
+      effects[[s]][, i, ] <- pd_effects(fits[[i]], ts_split[[i]], w0, w1, ...)
     }
   }
 
@@ -118,7 +117,7 @@ pd_summary <- function(y0, y1, ix, summary_fun = mean) {
 }
 
 #' Counterfactual Partial Dependence Effects
-#' 
+#'
 #' Our selection algorithm, `select_taxa` depends on estimates for
 #' counterfactual partial dependence effects across all taxa and time lags. This
 #' supports estimation of these effects for a single random data split pair.
@@ -162,7 +161,7 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
 }
 
 #' Significant Taxa using Mirror Statistics
-#' 
+#'
 #' This selects taxa through a data splitting procedure. It retrains an
 #' mbtransfer model across random splits of the data. Partial dependence
 #' profiles for pairs of splits are compared with one another -- if they agree
@@ -170,7 +169,7 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
 #' true effect on the response. This function only supports inference of the
 #' effects of interventions on taxa responses, but the same principle could
 #' apply to estimate significant relationships between taxa.
-#' 
+#'
 #' @param ts An object of class `ts_inter` containing the time-varying
 #'   microbiome community, environmental interventions, and static host features
 #'   data. The columns for each element of the `values` matrix are expected to
@@ -201,14 +200,14 @@ pd_effects <- function(fit, ts, w0, w1, n_sample = NULL, patch_len = 8, interven
 select_taxa <- function(ts, w0, w1, tr_fun, qvalue = 0.2, ...) {
   effects <- pd_splits(ts, w0, w1, tr_fun, ...)
   ms <- consistency_mirror_multisplit(effects)
-  
+
   taxa <- ms |>
     select(multisplit, m, lag)
 
   taxa <- split(taxa, taxa$lag)
-  taxa <-  map(taxa, ~ split(., .$multisplit) |> map(~ pull(., m))) |>
+  taxa <- map(taxa, ~ split(., .$multisplit) |> map(~ pull(., m))) |>
     map(~ which(multiple_data_splitting(., q = qvalue))) |>
     map(~ taxa(ts)[.])
-  
+
   list(taxa = taxa, ms = ms, effects = effects)
 }
