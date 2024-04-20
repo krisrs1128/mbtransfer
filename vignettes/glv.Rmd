@@ -172,8 +172,9 @@ plot_cp_profile <- function(cp_profile) {
     mutate(diff = as.numeric(`1` - `0`)) |>
     ggplot() +
       geom_histogram(aes(diff)) +
-      #scale_x_continuous(expand = c(0, 0), limits = c(-0.3, 0.1)) +
-      scale_y_continuous(expand = c(0, 0, 0, 1))
+      scale_y_continuous(expand = c(0, 0, 0, 1)) +
+      scale_x_continuous(labels = scales::number_format(accuracy=0.0001)) +
+      theme(axis.text.x = element_text(size = 8))
 
   p2 <- cp_profile |>
     filter(`_vname_` %in% c("taxon1_lag1", "taxon2_lag1")) |>
@@ -220,8 +221,7 @@ An example with perturbations.
 ```{r}
 ts <- simulate_oscillator(perturb = TRUE) |>
   to_ts()
-#fit <- mbtransfer(ts[, 1:35], alpha = 1e-3, lambda = 1e-5, interactions = "search")
-fit <- mbtransfer(ts[, 1:35], alpha = 1e-3, lambda = 1e-4, interactions = "search")
+fit <- mbtransfer(ts[, 1:35], 1, 1, alpha = 1e-2, lambda = 1e-2, eta = 0.01, nrounds = 5e3)
 ts_missing <- subset_values(ts, 1:35)
 ts_preds <- predict(fit, ts_missing)
 ```
