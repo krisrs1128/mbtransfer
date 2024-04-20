@@ -1,6 +1,6 @@
 Package: mbtransfer
 Title: Microbiome Intervention Analysis via Transfer Functions and Mirror Statistics
-Version: 1.0
+Version: 0.1
 Authors@R: 
     c(person("Kris", "Sankaran", email = "ksankaran@wisc.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9415-1971")),

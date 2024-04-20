@@ -134,7 +134,7 @@ print_ts_inter <- function(object) {
   ))
   for (i in seq_len(min(3, length(n_time)))) {
     n_col <- min(4, ncol(values(object[[i]])))
-    n_col <- min(n_col, nrow(values(object)))
+    n_col <- min(n_col, nrow(values(object[[i]])))
 
     cat(sprintf("\n%s:\n", names(object)[i]))
     v <- data.frame(round(values(object[[i]])[1:n_col, 1:n_col], 3))
@@ -144,7 +144,7 @@ print_ts_inter <- function(object) {
   }
 
   if (length(n_time) > 3) {
-    cat(sprintf("\nand %d more subjects.", length(n_time) - 3))
+    cat(sprintf("\nand %d more subjects.\n", length(n_time) - 3))
   }
 }
 
