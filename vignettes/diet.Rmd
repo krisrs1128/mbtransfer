@@ -6,7 +6,6 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -190,23 +189,17 @@ reshaped_preds |>
 ```
 
 We can make this interpretation more precise by calculating in and out-of-sample
-correlations across panels. Overall, the out-of-sample correlation between the
-truth and predictions is a little over $\hat{\rho} = 0.57$. This can vary quite
-significantly on the lag and quantile of abundance, though, ranging from
-$\hat{\rho} = 0.123$ to 0.558.
+correlations across panels. Correlation can vary substantially across lag and
+quantile of abundance, though, ranging from $\hat{\rho} = 0.148$ to 0.578.  In
+contrast, the within-subject forecasts are much better, ranging from 0.725 to
+0.896.
 
 ```{r}
 reshaped_preds |>
   group_by(h, quantile, generalization) |>
   summarise(correlation = round(cor(y, y_hat), 4)) |>
   pivot_wider(names_from = "generalization", values_from = "correlation") |>
-  arrange(desc(quantile), h) |>
-  write_csv("~/Downloads/diet-correlations.csv")
-
-reshaped_preds |>
-  filter(generalization == "out-of-sample") |>
-  select(y, y_hat) |>
-  summarise(overall = cor(y, y_hat))
+  arrange(desc(quantile), h)
 ```
 
 
@@ -241,8 +234,9 @@ value and still work through the rest of this vignette (many taxa will still be
 easily detectable).
 
 ```{r}
-# staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
-staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-diet.rds"))
+#staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
+save(staxa, file = "~/Desktop/staxa-diet.rds")
+#staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-diet.rds"))
 ```
 
 In addition to the selected set of taxa, this function returns the mirror

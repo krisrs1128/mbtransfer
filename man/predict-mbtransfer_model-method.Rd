@@ -2,12 +2,14 @@
 % Please edit documentation in R/model.R
 \name{predict,mbtransfer_model-method}
 \alias{predict,mbtransfer_model-method}
-\title{Prediction method for mbtransfer models}
+\title{Prediction method for mbtransfer models
+update method}
 \usage{
 \S4method{predict}{mbtransfer_model}(object, newdata)
 }
 \description{
 Prediction method for mbtransfer models
+update method
 }
 \examples{
 data(sim_ts)
