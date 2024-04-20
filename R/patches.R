@@ -181,46 +181,6 @@ predictor_names <- function(x_dim, w_dim) {
   c(x_names, w_names)
 }
 
-#' Detect the time lags based on column names
-#'
-#' This is a helper function for deciding on P and Q in transfer function models
-#' using just the names of an example set of covariates.
-#' @importFrom utils strcapture
-#' @examples
-#' lag_from_names(c("taxon1_lag1", "taxon1_lag2", "taxon1_lag3"))
-#' @export
-lag_from_names <- function(names, group = "taxon") {
-  names_ix <- names[grepl(group, names)]
-  regex <- paste0(group, "([0-9]+_lag[0-9]+)")
-  names_value <- strcapture(regex, names_ix, data.frame(chr = character()))
-  gsub("[0-9]+_lag", "", names_value$chr) |>
-    as.numeric() |>
-    max()
-}
-
-#' Detect the time lags over which a model was trained
-#'
-#' This is a helper for determining the P, Q associated with a fitted mbtransfer
-#' model.
-#'
-#' @examples
-#' data(sim_ts)
-#' fit <- mbtransfer(sim_ts)
-#' time_lags(fit@parameters[[1]])
-#' @export
-time_lags <- function(fit) {
-  # different names for gbm and lasso, resp.
-  if (!is.null(fit$feature_names)) {
-    inputs <- fit$feature_names
-  } else {
-    inputs <- rownames(fit$beta)
-  }
-
-  P <- lag_from_names(inputs, "taxon")
-  Q <- lag_from_names(inputs, "intervention") + 1
-  c(P, Q)
-}
-
 pad_lag <- function(x, lag) {
   if (ncol(x) < lag) {
     x <- cbind(matrix(0, nrow(x), lag - ncol(x)), x)
