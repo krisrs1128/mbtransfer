@@ -82,7 +82,7 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
 #' ts_subset <- subset_values(sim_ts, 1:25)
 #' predict(fit, ts_subset)
 mbtransfer_predict <- function(object, newdata) {
-  lags <- time_lags(object@parameters[[1]])
+  lags <- unlist(object@hyper[c("P", "Q")])
   result <- list()
   subject <- subject_data(newdata) |>
     select(-subject) |>
