@@ -1,9 +1,10 @@
-pandoc: 3.1.3
+pandoc: 3.1.12.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   aqua: aqua.html
   diet: diet.html
+  glv: glv.html
   postpartum: postpartum.html
-last_built: 2024-01-05T03:21Z
+last_built: 2024-04-20T22:31Z
 

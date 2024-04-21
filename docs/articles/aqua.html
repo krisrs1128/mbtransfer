@@ -8,10 +8,10 @@
 <meta name="description" content="mbtransfer">
 <title>Modulating pH in an Aquaculture Microbiome • mbtransfer</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.7/font.css" rel="stylesheet">
-<link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
-<link href="../deps/Cormorant-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.9/font.css" rel="stylesheet">
+<link href="../deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet">
+<link href="../deps/Cormorant-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Modulating pH in an Aquaculture Microbiome">
@@ -29,7 +29,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">mbtransfer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/aqua.html">Modulating pH in an Aquaculture Microbiome</a>
     <a class="dropdown-item" href="../articles/diet.html">Diet Interventions as Ecological Shifts</a>
+    <a class="dropdown-item" href="../articles/glv.html">Example with Generalized Lotka Volterra</a>
     <a class="dropdown-item" href="../articles/postpartum.html">Postpartum Community Remodeling</a>
   </div>
 </li>
@@ -94,7 +95,7 @@ defining <code>th</code> just sets <code>ggplot2</code> color
 themes.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mbtransfer</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue" class="external-link">glue</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/" class="external-link">glue</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">th</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -135,49 +136,31 @@ analysis on just these tanks.</p>
 <span></span>
 <span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="va">ts</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">ts</span></span>
-<span><span class="co">#&gt; # A ts_inter object | 128 taxa | 3 subjects | 128.00 &lt;U+00B1&gt; 0.00 timepoints:</span></span>
+<span><span class="co">#&gt; # A ts_inter object | 128 taxa | 3 subjects | 128.00 ± 0.00 timepoints:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; T1:</span></span>
-<span><span class="co">#&gt;                   T1_T1            T1_T2            T1_T3            T1_T4</span></span>
-<span><span class="co">#&gt; X_0001 7.03778541128485 7.45767754885108 7.93698596426871 7.93698596426871</span></span>
-<span><span class="co">#&gt; X_0002 9.36465890506611 9.23355614317955 8.68215423068849 8.68215423068849</span></span>
-<span><span class="co">#&gt; X_0003  4.1791203926653                0                0                0</span></span>
-<span><span class="co">#&gt; X_0005 9.23574398101079 9.12712790546265 8.57758473216123 8.57758473216123</span></span>
-<span><span class="co">#&gt;                &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
-<span><span class="co">#&gt;                </span></span>
-<span><span class="co">#&gt; X_0001 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0002 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0003 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0005 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt;        &lt;U+22F1&gt;</span></span>
+<span><span class="co">#&gt;        T1_T1 T1_T2 T1_T3 T1_T4  </span></span>
+<span><span class="co">#&gt; X_0001 7.038 7.458 7.937 7.937 …</span></span>
+<span><span class="co">#&gt; X_0002 9.365 9.234 8.682 8.682 …</span></span>
+<span><span class="co">#&gt; X_0003 4.179     0     0     0 …</span></span>
+<span><span class="co">#&gt; X_0005 9.236 9.127 8.578 8.578 …</span></span>
+<span><span class="co">#&gt;            ⋮     ⋮     ⋮     ⋮ ⋱</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; T2:</span></span>
-<span><span class="co">#&gt;                   T2_T1            T2_T2            T2_T3            T2_T4</span></span>
-<span><span class="co">#&gt; X_0001 7.12221100629411 8.05174333821918 8.82707180494662 7.74321425524817</span></span>
-<span><span class="co">#&gt; X_0002 9.28345802278409 8.78476591364709 9.38906240630534 9.26845023218197</span></span>
-<span><span class="co">#&gt; X_0003 2.47911692193252                0                0                0</span></span>
-<span><span class="co">#&gt; X_0005 9.02152679338404 8.55019368053109 9.37673130353225 9.35122053398331</span></span>
-<span><span class="co">#&gt;                &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
-<span><span class="co">#&gt;                </span></span>
-<span><span class="co">#&gt; X_0001 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0002 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0003 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0005 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt;        &lt;U+22F1&gt;</span></span>
+<span><span class="co">#&gt;        T2_T1 T2_T2 T2_T3 T2_T4  </span></span>
+<span><span class="co">#&gt; X_0001 7.122 8.052 8.827 7.743 …</span></span>
+<span><span class="co">#&gt; X_0002 9.283 8.785 9.389 9.268 …</span></span>
+<span><span class="co">#&gt; X_0003 2.479     0     0     0 …</span></span>
+<span><span class="co">#&gt; X_0005 9.022  8.55 9.377 9.351 …</span></span>
+<span><span class="co">#&gt;            ⋮     ⋮     ⋮     ⋮ ⋱</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; T3:</span></span>
-<span><span class="co">#&gt;                   T3_T1            T3_T2            T3_T3            T3_T4</span></span>
-<span><span class="co">#&gt; X_0001 7.07580111301836 3.84144474543419  8.5004907163074 9.75633559832993</span></span>
-<span><span class="co">#&gt; X_0002 9.14856161199074 6.99170777941835 6.57757197962165 8.25611654924185</span></span>
-<span><span class="co">#&gt; X_0003 2.32831174152647                0 4.70300514682592 4.97584445523894</span></span>
-<span><span class="co">#&gt; X_0005 9.70721940463161 9.36456033056579 9.48344599434155 9.63700743308452</span></span>
-<span><span class="co">#&gt;                &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;         &lt;U+22EE&gt;</span></span>
-<span><span class="co">#&gt;                </span></span>
-<span><span class="co">#&gt; X_0001 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0002 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0003 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt; X_0005 &lt;U+2026&gt;</span></span>
-<span><span class="co">#&gt;        &lt;U+22F1&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;        T3_T1 T3_T2 T3_T3 T3_T4  </span></span>
+<span><span class="co">#&gt; X_0001 7.076 3.841   8.5 9.756 …</span></span>
+<span><span class="co">#&gt; X_0002 9.149 6.992 6.578 8.256 …</span></span>
+<span><span class="co">#&gt; X_0003 2.328     0 4.703 4.976 …</span></span>
+<span><span class="co">#&gt; X_0005 9.707 9.365 9.483 9.637 …</span></span>
+<span><span class="co">#&gt;            ⋮     ⋮     ⋮     ⋮ ⋱</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="prediction">Prediction<a class="anchor" aria-label="anchor" href="#prediction"></a>
@@ -202,7 +185,7 @@ ones.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_abline</a></span><span class="op">(</span>slope <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"#400610"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">y_hat</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">.7</span>, alpha <span class="op">=</span> <span class="fl">.6</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">quantile</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">quantile</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"lag {h - 93}"</span><span class="op">)</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">quantile</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">quantile</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">~</span> <span class="va">h</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hat</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, n.breaks <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, n.breaks <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
@@ -234,7 +217,7 @@ of that series across all the observed data.</p>
 <span><span class="va">ws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="st">"AS"</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">38</span></span>
 <span><span class="va">ws</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="st">"AS"</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">38</span></span>
 <span></span>
-<span><span class="co">#staxa &lt;- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 4, 4, alpha = 1e-3, eta = 0.01), n_splits = 25)</span></span>
+<span><span class="co"># staxa &lt;- select_taxa(ts, ws[[1]], ws[[2]], \(x) mbtransfer(x, 4, 4, alpha = 1e-3, eta = 0.01), n_splits = 25)</span></span>
 <span><span class="va">staxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></span><span class="op">(</span><span class="st">"https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-aqua.rds"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="va">staxa</span><span class="op">$</span><span class="va">ms</span> <span class="op">|&gt;</span></span>
@@ -245,9 +228,10 @@ of that series across all the observed data.</p>
 <p>Let’s check the mirror statistics associated with these taxa. We’re
 showing only the 50 taxa with the largest mirror statistics, but even
 among these, there are most don’t seem to be affected by pH strongly
-enough to be flagged at a <span class="math inline">\(q = 0.2\)</span>
-false discovery rate control level (the default used in mbtransfer,
-which can be modified in the <code>select_taxa</code> function).</p>
+enough to be flagged at a <span class="math inline">\(q =
+0.2\)</span> false discovery rate control level (the default used in
+mbtransfer, which can be modified in the <code>select_taxa</code>
+function).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vis_taxa</span> <span class="op">&lt;-</span> <span class="va">staxa</span><span class="op">$</span><span class="va">ms</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">taxon</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -295,7 +279,7 @@ effort.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">taxon</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">focus_taxa</span>, <span class="va">taxon</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu">taxa</span><span class="op">(</span><span class="va">ts</span><span class="op">)</span><span class="op">[</span><span class="va">vis_taxa</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">pH</span>, <span class="va">value</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, size <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">taxon</span>, ncol <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">taxon</span>, ncol <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <p><img src="aqua_files/figure-html/unnamed-chunk-9-1.png" width="1152"></p>
 <p>Next, we’ll see how these taxa vary in response to intermediate
 shifts pH, not just the acidic and basic extremes considered above. For
@@ -351,15 +335,15 @@ for these data.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    pH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">plateaus</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">counterfactual</span><span class="op">)</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    taxon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">taxon</span>, levels <span class="op">=</span> <span class="fu">taxa</span><span class="op">(</span><span class="va">ts</span><span class="op">)</span><span class="op">[</span><span class="va">taxa_order</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">taxon</span>, <span class="va">time</span>, <span class="va">pH</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>q50 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">q50</span>, col <span class="op">=</span> <span class="va">pH</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"#c1c1c1c1"</span>, xintercept <span class="op">=</span> <span class="va">L</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">taxon</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">q50</span>, col <span class="op">=</span> <span class="va">pH</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"#c1c1c1c1"</span>, xintercept <span class="op">=</span> <span class="va">L</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">taxon</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span></span></code></pre></div>
 <p><img src="aqua_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vis_taxa2</span> <span class="op">&lt;-</span> <span class="va">focus_taxa</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">focus_taxa</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">]</span></span>
@@ -370,7 +354,7 @@ for these data.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">pH</span>, <span class="va">value</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, size <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"pH"</span>, y <span class="op">=</span> <span class="st">"Abundance"</span>, title <span class="op">=</span> <span class="st">"(a) pH vs. Abundance"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">taxon</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">taxon</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="st">"null"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">sim_ts</span> <span class="op">|&gt;</span></span>
@@ -378,16 +362,16 @@ for these data.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    pH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">plateaus</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">counterfactual</span><span class="op">)</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    taxon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">taxon</span>, levels <span class="op">=</span> <span class="fu">taxa</span><span class="op">(</span><span class="va">ts</span><span class="op">)</span><span class="op">[</span><span class="va">taxa_order</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">taxon</span>, <span class="va">time</span>, <span class="va">pH</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>q50 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">q50</span>, col <span class="op">=</span> <span class="va">pH</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"#c1c1c1c1"</span>, xintercept <span class="op">=</span> <span class="va">L</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="va">taxon</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Median Abundance"</span>, title <span class="op">=</span> <span class="st">"(b) Counterfactual Trajectories"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">q50</span>, col <span class="op">=</span> <span class="va">pH</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"#c1c1c1c1"</span>, xintercept <span class="op">=</span> <span class="va">L</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="va">taxon</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Median Abundance"</span>, title <span class="op">=</span> <span class="st">"(b) Counterfactual Trajectories"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">pal</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span></span>

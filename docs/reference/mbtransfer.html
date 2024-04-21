@@ -4,7 +4,7 @@ object of class ts_inter (see ts_from_dfs()), this will fit a collection
 of linear gradient boosting-based transfer function models. The output is an
 object of class mbtransfer_model. Each component boosting model is
 contained in the @parameters slot, which is a list whose j^th element is
-the model for the j^th taxon (row) within each ts's values matrix."><title>Transfer Function Model for ts_inter objects — mbtransfer • mbtransfer</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.7/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet"><link href="../deps/Cormorant-0.4.7/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Transfer Function Model for ts_inter objects — mbtransfer"><meta property="og:description" content="This is the main prediction function in the mbtransfer package. Given an
+the model for the j^th taxon (row) within each ts's values matrix."><title>Transfer Function Model for ts_inter objects — mbtransfer • mbtransfer</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.9/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet"><link href="../deps/Cormorant-0.4.9/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Transfer Function Model for ts_inter objects — mbtransfer"><meta property="og:description" content="This is the main prediction function in the mbtransfer package. Given an
 object of class ts_inter (see ts_from_dfs()), this will fit a collection
 of linear gradient boosting-based transfer function models. The output is an
 object of class mbtransfer_model. Each component boosting model is
@@ -20,7 +20,7 @@ the model for the j^th taxon (row) within each ts's values matrix."><!-- mathjax
     
     <a class="navbar-brand me-2" href="../index.html">mbtransfer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,7 @@ the model for the j^th taxon (row) within each ts's values matrix."><!-- mathjax
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/aqua.html">Modulating pH in an Aquaculture Microbiome</a>
     <a class="dropdown-item" href="../articles/diet.html">Diet Interventions as Ecological Shifts</a>
+    <a class="dropdown-item" href="../articles/glv.html">Example with Generalized Lotka Volterra</a>
     <a class="dropdown-item" href="../articles/postpartum.html">Postpartum Community Remodeling</a>
   </div>
 </li>
@@ -75,6 +76,8 @@ the model for the j^th taxon (row) within each <code>ts</code>'s values matrix.<
 <span>  lambda <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>  eta <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  interactions <span class="op">=</span> <span class="st">"search"</span>,</span>
+<span>  nthread <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -120,7 +123,7 @@ information), and 0 (no information, default).</p></dd>
 
 <dt>lambda</dt>
 <dd><p>The l2-regularization value in the linear gradient boosting
-model. Defaults to 1e-2.</p></dd>
+model. Defaults to 1e-1.</p></dd>
 
 
 <dt>alpha</dt>
@@ -131,7 +134,7 @@ calculations.</p></dd>
 
 
 <dt>eta</dt>
-<dd><p>The learning rate. Defaults to 0.05. This is slower than the
+<dd><p>The learning rate. Defaults to 0.1. This is slower than the
 default in xgboost (0.3) but has been found to improve stability when
 needing to train on taxa with a wide range of abundances.</p></dd>
 
@@ -143,36 +146,27 @@ needing to train on taxa with a wide range of abundances.</p></dd>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">mbtransfer</span><span class="op">(</span><span class="va">sim_ts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span><span class="op">@</span><span class="va">parameters</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 2.6 Kb </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   xgb.train(params = params, data = dtrain, nrounds = nrounds, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     watchlist = watchlist, verbose = verbose, print_every_n = print_every_n, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     evals = evals, verbose = verbose, print_every_n = print_every_n, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     early_stopping_rounds = early_stopping_rounds, maximize = maximize, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     save_period = save_period, save_name = save_name, xgb_model = xgb_model, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     callbacks = callbacks, booster = "gblinear", alpha = ..2, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     lambda = ..3, eta = ..4)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> params (as set within xgb.train):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   booster = "gblinear", alpha = "0.01", lambda = "0.1", eta = "0.1", validate_parameters = "TRUE"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     lambda = ..3, eta = ..4, nthread = ..5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of features: 194 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of rounds:  500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xgb.attributes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   best_iteration, best_msg, best_ntreelimit, best_score, niter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    best_iteration, best_score </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> callbacks:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   cb.evaluation.log()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   cb.early.stop(stopping_rounds = early_stopping_rounds, maximize = maximize, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     verbose = verbose)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # of features: 102 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> niter: 500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_iteration : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_ntreelimit : 500 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_score : 4.437018 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> best_msg : [500]	train-rmse:4.437018 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 102 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    early_stop, evaluation_log </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     iter train_rmse</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1   4.779241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2   4.719598</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499   4.437026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      500   4.437018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      iter train_rmse</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;int&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         1   4.693780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         2   4.659525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       499   4.284943</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       500   4.284925</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
