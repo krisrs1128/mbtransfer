@@ -50,7 +50,10 @@ subject_order <- function(values_df, taxa, r = 0) {
 interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   p <- values_df |>
     filter(taxon %in% taxa) |>
-    mutate(subject = factor(subject, subject_order(values_df, taxa, r))) |>
+    mutate(
+      taxon = factor(taxon, levels = taxa),
+      subject = factor(subject, subject_order(values_df, taxa, r))
+    ) |>
     ggplot() +
     geom_tile(aes(time, subject, fill = value, col = value), ...) +
     scale_x_continuous(expand = c(0, 0)) +
@@ -66,7 +69,7 @@ interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
 
   if (!is.null(condition)) {
     p <- p +
-      facet_grid(.data[[condition]] ~ reorder(taxon, -value), scales = "free", space = "free")
+      facet_grid(.data[[condition]] ~ taxon, scales = "free", space = "free")
   }
 
   p

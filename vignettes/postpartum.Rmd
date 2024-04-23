@@ -179,10 +179,11 @@ has a different $y$ axis. The clearest patterns are that,
 * More abundant taxa appear slightly easier to predict. This partly reflects the high noise level of the underlying data. For rarer taxa, however, many errors come from the model's inability to predict exact zeros. This could potentially be improved by altering the model form.
 
 ```{r, fig.width = 10, fig.height = 6}
-map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
+reshaped_preds <- map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
   filter(h > 0, h < 50) |>
-  mutate(h = 10 * floor(h / 10)) |>
-  ggplot() +
+  mutate(h = 10 * floor(h / 10))
+
+ggplot(reshaped_preds) +
   geom_abline(slope = 1, col = "#400610") +
   geom_point(aes(y, y_hat, col = generalization), size = .7, alpha = .6) +
   facet_grid(factor(quantile, rev(levels(quantile))) ~ h, scales = "free_y") +
@@ -199,6 +200,14 @@ map_dfr(ts_preds, ~ reshape_preds(ts, .), .id = "generalization") |>
     legend.title = element_text(size = 14),
     legend.text = element_text(size = 11),
   )
+```
+
+```{r}
+reshaped_preds |>
+  group_by(h, quantile, generalization) |>
+  summarise(correlation = round(cor(y, y_hat), 4)) |>
+  pivot_wider(names_from = "generalization", values_from = "correlation") |>
+  arrange(desc(quantile), h)
 ```
 
 ### Attribution Analysis: Selecting Important Taxa
@@ -234,8 +243,8 @@ still guarantee FDR control, and you will still be able to run the rest of the
 vignette even if you set `n_splits` to a value like 3 or 4.
 
 ```{r}
-staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
-#staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-postpartum.rds"))
+#staxa <- select_taxa(ts, ws[[1]], ws[[2]], ~ mbtransfer(., 2, 2), n_splits = 25)
+staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-postpartum.rds"))
 ```
 
 The `ms` element of this object includes the raw mirror statistics that led to
@@ -319,7 +328,7 @@ rdata <- sim_bc |>
   mutate(
     BC = fct_recode(BC, No = "1", Yes = "2")
   ) |>
-  filter(time > -25, time < 80)
+  filter(time > -25, time %% 14 == 0)
 
 pal <- c("#F2785C", "#144673")
 ribbon_plot(rdata, group = "BC") +
@@ -352,17 +361,20 @@ values_df <- pivot_ts(ts) |>
   select(-BirthControlYesNo) |>
   left_join(subject_data)
 
-vis_taxa <- c("Lactobacillus", "L.iners", "Porphyromonas", "Prevotella_6")
-interaction_hm(values_df, vis_taxa, "BirthControlYesNo", -1, width = 14) +
+taxa_order <- c("Lactobacillus", "L.iners", "L.jensenii", "Atopobium", "Prevotella_6", "Porphyromonas")
+interaction_hm(values_df, taxa_order, "BirthControlYesNo", -1, width = 14) +
   theme(
     axis.text.y = element_blank(),
     strip.text = element_text(size = 12)
   )
 ```
+
+We can merge these into a single figure using the block below.
+
 ```{r, fig.width = 10, fig.height = 4}
 p1 <- rdata |>
   filter(taxon %in% focus_taxa) |>
-  mutate(taxon = factor(taxon, levels = c("Lactobacillus", "L.iners", "L.jensenii", "Atopobium", "Prevotella_6", "Porphyromonas"))) |>
+  mutate(taxon = factor(taxon, levels = taxa_order)) |>
   ribbon_plot(group = "BC") +
   scale_color_manual(values = pal) +
   scale_fill_manual(values = pal) +
@@ -376,11 +388,8 @@ p1 <- rdata |>
   )
 
 p2 <- values_df |>
-  mutate(
-    value = rank(value) / n(),
-    taxon = factor(taxon, levels = c("Lactobacillus", "L.iners", "L.jensenii", "Atopobium", "Prevotella_6", "Porphyromonas"))
-  ) |>
-  interaction_hm(taxa = focus_taxa, "BirthControlYesNo", -1, width = 14) +
+  mutate(value = rank(value) / n()) |>
+  interaction_hm(taxa = taxa_order, "BirthControlYesNo", -1, width = 14) +
   scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
   scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
   labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank", title = "(b) Original Data") +
