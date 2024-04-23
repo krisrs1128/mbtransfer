@@ -17,7 +17,7 @@ and environmental context. The fitted models can be used to measure the
 significance of the intervention on individual taxa,
 
 <center>
-<img src="https://krisrs1128.github.io/mbtransfer/articles/diet_files/figure-html/unnamed-chunk-13-1.png"/>
+<img src="https://krisrs1128.github.io/mbtransfer/articles/diet_files/figure-html/unnamed-chunk-14-1.png"/>
 </center>
 
 (larger mirror statistics correspond to stronger effects) and to
@@ -27,8 +27,9 @@ simulate trajectory differences between counterfactual treatments,
 <img src="https://krisrs1128.github.io/mbtransfer/articles/diet_files/figure-html/unnamed-chunk-18-1.png"/>
 </center>
 
-You can read more about the methodology in our [preprint](https://arxiv.org/abs/2306.06364) and can browse
-complete examples in the [package
+You can read more about the methodology in our
+[preprint]((https://arxiv.org/abs/2306.06364)) and can browse complete
+examples in the [package
 documentation](https://krisrs1128.github.io/mbtransfer).
 
 ## Installation
