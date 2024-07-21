@@ -186,6 +186,7 @@ reshaped_preds |>
     legend.title = element_text(size = 14),
     legend.text = element_text(size = 11),
   )
+ggsave("Fig7.tiff", width = 10, height = 6)
 ```
 
 We can make this interpretation more precise by calculating in and out-of-sample
@@ -278,6 +279,7 @@ staxa$ms |>
   scale_color_manual(values = c("#c6dbef", "#6baed6", "#2171b5", "#084594")) +
   labs(y = expression(M[j]), x = "Taxon") +
   theme(axis.text.x = element_text(angle = 90, size = 11))
+ggsave("diet_mirror_statistics.tiff")
 ```
 
 ### Comparing Counterfactual Trajectories
@@ -306,6 +308,7 @@ series are expected to be equal, but if there is a strong intervention effect,
 we would expect the series to diverge after the intervention appears.
 
 ```{r, fig.height = 5, fig.width = 9}
+focus_taxa <- c("Otu000080", "Otu000118", "Otu000060", "Otu000012", "Otu000432", "Otu000115", "Otu000018", "Otu000098", "Otu000006", "Otu000088", "Otu000065")
 rdata <- ribbon_data(sim_ts[[2]], sim_ts[[1]], focus_taxa)
 rdata
 ```
@@ -363,7 +366,7 @@ Overall, we recommend an overall workflow that first evaluates taxa using formal
 models and then investigates subject-level variation using
 
 ```{r, fig.height = 3, fig.width = 11}
-taxa_hm <- c("Otu000011", "Otu000095", "Otu000434", "Otu000236", "Otu000169", "Otu000017")
+taxa_hm <- c("Otu000080", "Otu000118", "Otu000060", "Otu000012", "Otu000432", "Otu000115", "Otu000018", "Otu000098", "Otu000006", "Otu000088", "Otu000065")
 
 hm_data <- values_df |>
   filter(diet == "Animal") |>
@@ -384,19 +387,20 @@ We can merge the two figures above so that it's easier to compare simulated with
 real data. We'll focus on every third taxon in the original display.
 
 ```{r, fig.width = 10, fig.height = 4}
-focus_taxa <- rdata_order |>
-  arrange(`1`) |>
-  filter(row_number() %% 6 == 0) |>
-  pull(taxon)
+# focus_taxa <- rdata_order |>
+#   arrange(`1`) |>
+#   filter(row_number() %% 6 == 0) |>
+#   pull(taxon)
 
 p1 <- rdata |>
   filter(taxon %in% focus_taxa) |>
   left_join(rdata_order) |>
-  ribbon_plot(reorder_var = "1") +
+  mutate(taxon = factor(taxon, levels = focus_taxa)) |>
+  ribbon_plot(reorder_var = NULL) +
   scale_x_continuous(breaks = seq(-5, 8, by = 3)) +
   scale_y_continuous(breaks = round(seq(-.2, 1, by = 0.2), 1)) +
-  facet_grid(. ~ reorder(taxon, `1`)) +
-  labs(title = "(a) Counterfactual Difference at Interventions", y = "Difference") +
+  facet_grid(. ~ taxon) +
+  labs(title = "(A) Counterfactual Difference at Interventions", y = "Difference") +
   theme(
     panel.spacing = unit(0, "line"),
     axis.text.x = element_text(size = 8),
@@ -413,11 +417,12 @@ p2 <- hm_data |>
   interaction_hm(taxa = focus_taxa, "diet") +
   scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
   scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
-  labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank", title = "(b) Original Data") +
+  labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank", title = "(B) Original Data") +
   theme(legend.position = "left")
 
 
 p1 / p2 +
   plot_layout(heights = c(1, 2), guides = "collect") &
   theme(legend.position = "right")
+ggsave("Fig8.tiff", width = 10, height = 4)
 ```

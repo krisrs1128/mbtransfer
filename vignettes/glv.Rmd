@@ -239,7 +239,7 @@ plot_ts(ts[ix], ts_preds[ix]) +
     linetype = guide_legend(override.aes = list(linewidth = 2, col = "#4c4c4c")),
     col = guide_legend(override.aes = list(linewidth = 2))
   )
-ggsave("glv_dynamics.png", width=11, height=5)
+ggsave("glv_dynamics.tiff", width=11, height=5)
 ```
 
 ```{r}
@@ -259,12 +259,12 @@ tax2 <- plot_cp_profile(cp_profile)
 ```
 
 ```{r}
-((tax1[[1]] + labs(x = "ΔPrey", y = "Frequency", title = expression("(a)"~ hat(f)[1](..., w[t])))) +
- (tax1[[2]] + labs(x = expression(Prey[t]), y = expression(hat(Prey)[t + 1]), fill = "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(b)" ~ hat(f)[1](y[t1], ...)))) +
- (tax1[[3]] + labs(x = expression(Predator[t]), y = expression(hat(Prey)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(c)" ~ hat(f)[1](..., y[t2], ...))))) /
- ((tax2[[1]] + labs(x = "ΔPredator", y = "Frequency", title = expression("(d)"~ hat(f)[2](..., w[t])), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)")) +
- (tax2[[2]] + labs(x = expression(Prey[t]), y = expression(hat(Predator)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(e)" ~ hat(f)[2](y[t1], ...)))) +
- (tax2[[3]] + labs(x = expression(Predator[t]), y = expression(hat(Predator)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(f)" ~ hat(f)[2](..., y[t2], ...))))) +
+((tax1[[1]] + labs(x = "ΔPrey", y = "Frequency", title = expression("(A)"~ hat(f)[1](..., w[t])))) +
+ (tax1[[2]] + labs(x = expression(Prey[t]), y = expression(hat(Prey)[t + 1]), fill = "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(B)" ~ hat(f)[1](y[t1], ...)))) +
+ (tax1[[3]] + labs(x = expression(Predator[t]), y = expression(hat(Prey)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(C)" ~ hat(f)[1](..., y[t2], ...))))) /
+ ((tax2[[1]] + labs(x = "ΔPredator", y = "Frequency", title = expression("(D)"~ hat(f)[2](..., w[t])), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)")) +
+ (tax2[[2]] + labs(x = expression(Prey[t]), y = expression(hat(Predator)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(E)" ~ hat(f)[2](y[t1], ...)))) +
+ (tax2[[3]] + labs(x = expression(Predator[t]), y = expression(hat(Predator)[t + 1]), fill =  "Quantile (Species not on x-axis)", col = "Quantile (Species not on x-axis)", title = expression("(F)" ~ hat(f)[2](..., y[t2], ...))))) +
   plot_layout(guides = "collect")
-ggsave("glv_profiles.png", width=10, height=6)
+ggsave("glv_profiles.tiff", width=10, height=6)
 ```

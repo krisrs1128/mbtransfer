@@ -98,7 +98,7 @@ timepoints were collected before birth. Our method is not able to handle
 nonuniform temporal sampling, unfortunately, so we downsample to biweekly (14
 day) resolution using the `interpolate` function.
 
-````{r}
+```{r}
 ts <- reads |>
   ts_from_dfs(interventions, samples, subject_data) |>
   interpolate(delta = 14, method = "linear")
@@ -379,7 +379,7 @@ p1 <- rdata |>
   scale_color_manual(values = pal) +
   scale_fill_manual(values = pal) +
   facet_grid(. ~ taxon) +
-  labs(title = "(a) Counterfactual Diference at Interventions", y = "Difference") +
+  labs(title = "(A) Counterfactual Diference at Interventions", y = "Difference") +
   theme(
     panel.spacing = unit(0, "line"),
     axis.text.x = element_text(size = 8),
@@ -392,7 +392,7 @@ p2 <- values_df |>
   interaction_hm(taxa = taxa_order, "BirthControlYesNo", -1, width = 14) +
   scale_color_gradient(low = "#eaf7f7", high = "#037F8C") +
   scale_fill_gradient(low = "#eaf7f7", high = "#037F8C") +
-  labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank", title = "(b) Original Data") +
+  labs(x = "Time", y = "Subject", fill = "Rank", color = "Rank", title = "(B) Original Data") +
   theme(
     axis.text.y = element_blank(),
     axis.ticks.y = element_blank()
@@ -401,4 +401,5 @@ p2 <- values_df |>
 p1 / p2 +
   plot_layout(heights = c(1, 2), guides = "collect") &
   theme(legend.position = "right")
+ggsave("Fig9.tiff", width = 10, height = 4)
 ```
