@@ -27,10 +27,10 @@ simulate trajectory differences between counterfactual treatments,
 <img src="https://krisrs1128.github.io/mbtransfer/articles/diet_files/figure-html/unnamed-chunk-18-1.png"/>
 </center>
 
-You can read more about the methodology in our
-[preprint]((https://arxiv.org/abs/2306.06364)) and can browse complete
-examples in the [package
-documentation](https://krisrs1128.github.io/mbtransfer).
+You can read more about the methodology in our 
+[paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012196)
+and can browse complete examples in the 
+[package documentation](https://krisrs1128.github.io/mbtransfer).
 
 ## Installation
 
