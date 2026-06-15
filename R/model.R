@@ -45,7 +45,7 @@
 #' fit@parameters[[1]]
 mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
                        early_stopping_rounds = 5, verbose = 0, lambda = 1e-1,
-                       alpha = 1e-2, eta = 0.1, interactions = "search", nthread = -1, ...) {
+                       alpha = 1e-2, eta = 0.1, interactions = "search", nthreads = 0, ...) {
   train_data <- patchify_df(ts_inter, P, Q, interactions)
   if (!is.null(train_data$interactions)) {
     train_data$x <- append_interactions(train_data$x, train_data$interactions)
@@ -55,12 +55,14 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
   pb <- progress_bar$new(total = length(train_data$y), format = "[:bar] :percent ETA: :eta")
   for (j in seq_along(train_data$y)) {
     pb$tick()
-    fit[[j]] <- xgboost(
-      data = train_data$x, label = train_data$y[[j]], nrounds = nrounds,
-      booster = "gblinear", alpha = alpha, lambda = lambda,
-      eta = eta, nthread = nthread,
-      early_stopping_rounds = early_stopping_rounds, verbose = verbose, ...
+    xgb_args <- list(
+      x = train_data$x, y = train_data$y[[j]], nrounds = nrounds,
+      booster = "gblinear", reg_alpha = alpha, reg_lambda = lambda,
+      learning_rate = eta,
+      early_stopping_rounds = early_stopping_rounds, verbosity = verbose,
+      nthreads = nthreads, ...
     )
+    fit[[j]] <- do.call(xgboost, xgb_args)
   }
 
   hyper <- list(P = P, Q = Q, nrounds = nrounds, ...)

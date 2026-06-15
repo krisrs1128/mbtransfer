@@ -96,7 +96,7 @@ interaction_search <- function(x, y, interactions = "none", ...) {
   if (interactions == "none") {
     return(NULL)
   } else if (interactions == "search") {
-    check_if_installed("xyz", "to search for candidate interaction effects. Please install using devtools::install_github('gathanei/xyz)")
+    check_if_installed("xyz", "to search for candidate interaction effects. Please install using devtools::install_github('gathanei/xyz')")
     interactions <- t(xyz_search(x, rowMeans(y), binary = FALSE, ...)[[1]])
     return(interactions[interactions[, 1] != interactions[, 2], ])
   }
