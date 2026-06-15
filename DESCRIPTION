@@ -1,6 +1,6 @@
 Package: mbtransfer
 Title: Microbiome Intervention Analysis via Transfer Functions and Mirror Statistics
-Version: 0.2
+Version: 0.3
 Authors@R: 
     c(person("Kris", "Sankaran", email = "ksankaran@wisc.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9415-1971")),
@@ -20,7 +20,7 @@ Depends:
     purrr,
     slider,
     insight,
-    xgboost
+    xgboost (>= 2.1.0)
 LazyData: true
 Suggests: 
     knitr,
@@ -29,3 +29,5 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Remotes:
+    gathanei/xyz
