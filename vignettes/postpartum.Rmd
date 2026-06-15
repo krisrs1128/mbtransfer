@@ -79,11 +79,11 @@ the subject-level data to numeric variables -- `mbtransfer` does not know how to
 handle factor inputs, so they must be coded first.
 
 ```{r}
-reads <- read_csv("https://figshare.com/ndownloader/files/40322782/reads.csv") |>
+reads <- read_figshare_csv("https://figshare.com/ndownloader/files/40322782/reads.csv") |>
   column_to_rownames("sample")
-samples <- read_csv("https://figshare.com/ndownloader/files/40322776/samples.csv")
-subject_data <- read_csv("https://figshare.com/ndownloader/files/40322773/subject.csv")
-interventions <- read_csv("https://figshare.com/ndownloader/files/40322770/interventions.csv") |>
+samples <- read_figshare_csv("https://figshare.com/ndownloader/files/40322776/samples.csv")
+subject_data <- read_figshare_csv("https://figshare.com/ndownloader/files/40322773/subject.csv")
+interventions <- read_figshare_csv("https://figshare.com/ndownloader/files/40322770/interventions.csv") |>
   column_to_rownames("sample")
 ```
 

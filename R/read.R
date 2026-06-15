@@ -1,14 +1,44 @@
+#' Read a CSV file hosted on Figshare
+#'
+#' Figshare's download redirector (`ndownloader`) can block a bare
+#' `read_csv(url)` call because R's URL connections do not always follow the
+#' full redirect chain that Figshare uses (typically a 302 → S3/CDN hop).
+#' This wrapper first downloads the file with [download.file()], which uses
+#' libcurl and follows redirects automatically, then hands the local copy to
+#' [readr::read_csv()].  Within an R session the file is kept in a
+#' temporary cache directory so repeated calls for the same URL skip the
+#' network entirely.
+#'
+#' @param url A Figshare `ndownloader` URL, e.g.
+#'   `"https://figshare.com/ndownloader/files/40275934/subject.csv"`.
+#' @param ... Additional arguments forwarded to [readr::read_csv()].
+#' @return A [tibble::tibble()] as returned by [readr::read_csv()].
+#' @importFrom readr read_csv
+#' @export
+read_figshare_csv <- function(url, ...) {
+  cache_dir <- file.path(tempdir(), "mbtransfer_figshare_cache")
+  dir.create(cache_dir, showWarnings = FALSE, recursive = TRUE)
+
+  dest <- file.path(cache_dir, basename(url))
+  if (!file.exists(dest)) {
+    message("Downloading ", basename(url), " from Figshare...")
+    download.file(url, destfile = dest, mode = "wb", quiet = TRUE)
+  }
+
+  read_csv(dest, ...)
+}
+
 #' Build a  `ts`
 #' @importFrom dplyr pull filter left_join distinct
 #' @examples
 #' library(readr)
 #' library(tibble)
-#' subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
-#' interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
+#' subject <- read_figshare_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
+#' interventions <- read_figshare_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
 #'   column_to_rownames("sample")
-#' reads <- read_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
+#' reads <- read_figshare_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
 #'   column_to_rownames("sample")
-#' samples <- read_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
+#' samples <- read_figshare_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
 #' ts <- as.matrix(reads) |>
 #'   ts_from_dfs(interventions, samples, subject)
 #' ts
