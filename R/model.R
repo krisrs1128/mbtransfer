@@ -37,7 +37,7 @@
 #'   needing to train on taxa with a wide range of abundances.
 #' @importFrom progress progress_bar
 #' @importFrom glue glue
-#' @importFrom xgboost xgboost
+#' @importFrom xgboost xgb.train xgb.DMatrix setinfo
 #' @export
 #' @examples
 #' data(sim_ts)
@@ -52,17 +52,21 @@ mbtransfer <- function(ts_inter, P = 1, Q = 1, nrounds = 500,
   }
 
   fit <- list()
+  dmat <- xgb.DMatrix(data = train_data$x)
+  params <- list(
+    booster = "gblinear", reg_alpha = alpha, reg_lambda = lambda,
+    eta = eta, nthread = nthreads, verbosity = verbose
+  )
   pb <- progress_bar$new(total = length(train_data$y), format = "[:bar] :percent ETA: :eta")
   for (j in seq_along(train_data$y)) {
     pb$tick()
-    xgb_args <- list(
-      x = train_data$x, y = train_data$y[[j]], nrounds = nrounds,
-      booster = "gblinear", reg_alpha = alpha, reg_lambda = lambda,
-      learning_rate = eta,
-      early_stopping_rounds = early_stopping_rounds, verbosity = verbose,
-      nthreads = nthreads, ...
+    setinfo(dmat, "label", train_data$y[[j]])
+    fit[[j]] <- xgb.train(
+      params = params, data = dmat, nrounds = nrounds,
+      evals = list(train = dmat),
+      early_stopping_rounds = early_stopping_rounds,
+      verbose = verbose, ...
     )
-    fit[[j]] <- do.call(xgboost, xgb_args)
   }
 
   hyper <- list(P = P, Q = Q, nrounds = nrounds, ...)
