@@ -151,7 +151,7 @@ The block below computes the in and out of sample prediction errors
 corresponding to these two models. On test samples, we are allowed to look at
 timepoints up to week 12. We stop here because some samples have birth events
 starting on week 13, and we want to predict the effect of an intervention from
-before any have occurred. 
+before any have occurred.
 
 By default, the predict function will fill in any timepoints that are present in
 the `intervention` but not the abundance `values` slot of each `ts_inter`
@@ -217,7 +217,7 @@ following-up with some more formal statistical inference. Specifically, we want
 to know which taxa are most affected by the intervention, but we some formal
 statistical guarantees that we aren't reading too much into anything that is
 just noise. To this end, we have included a `select_taxa` function that performs
-selective inference through data splitting, following `r Citep(bib, "Dai2020FalseDR")`. Roughly, we estimate marginal effects of 
+selective inference through data splitting, following `r Citep(bib, "Dai2020FalseDR")`. Roughly, we estimate marginal effects of
 different hypothetical interventions on each taxa. We do this over. many random
 splits of the data, and if a similar marginal effects is detected across the.
 splits, then we intuitively suspect that the intervention does influence that
