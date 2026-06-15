@@ -75,8 +75,7 @@ interaction_hm <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   p
 }
 
-#' @importFrom ggplot2 facet_grid ggplot geom_tile scale_x_continuous
-#'   scale_color_gradient scale_fill_gradient
+#' @importFrom ggplot2 facet_grid ggplot geom_tile scale_x_continuous scale_color_gradient scale_fill_gradient
 #' @export
 interaction_barcode <- function(values_df, taxa, condition = NULL, r = 0, ...) {
   p <- values_df |>
@@ -128,8 +127,7 @@ ribbon_data <- function(ts1, ts0, focus_taxa = NULL, delta = NULL, q_lower = 0.2
     )
 }
 
-#' @importFrom ggplot2 ggplot geom_ribbon aes geom_hline geom_line
-#'   scale_x_continuous theme facet_wrap
+#' @importFrom ggplot2 ggplot geom_ribbon aes geom_hline geom_line scale_x_continuous theme facet_wrap
 #' @export
 ribbon_plot <- function(rdata, group = NULL, reorder_var = NULL) {
   p <- ggplot(rdata, aes(x = time)) +
@@ -162,8 +160,7 @@ ribbon_plot <- function(rdata, group = NULL, reorder_var = NULL) {
   p
 }
 
-#' @importFrom dplyr rename select mutate full_join left_join group_by ungroup
-#'   summarise
+#' @importFrom dplyr rename select mutate full_join left_join group_by ungroup summarise
 #' @export
 reshape_preds <- function(ts, ts_pred, n_quantile = 4, lag = 3) {
   ts_df <- pivot_ts(ts_pred) |>
