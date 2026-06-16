@@ -1,28 +1,47 @@
 #' Read a CSV file hosted on Figshare
 #'
 #' Figshare's download redirector (`ndownloader`) can block a bare
-#' `read_csv(url)` call because R's URL connections do not always follow the
-#' full redirect chain that Figshare uses (typically a 302 → S3/CDN hop).
-#' This wrapper first downloads the file with [download.file()], which uses
-#' libcurl and follows redirects automatically, then hands the local copy to
+#' `read_csv(url)` call because the `figshare.com/ndownloader` redirect path
+#' returns a 202 Accepted response instead of a direct 302 → S3 hop.
+#' This wrapper normalises both common URL forms to the
+#' `ndownloader.figshare.com` subdomain (which redirects reliably to S3),
+#' downloads the file with [download.file()], then hands the local copy to
 #' [readr::read_csv()].  Within an R session the file is kept in a
 #' temporary cache directory so repeated calls for the same URL skip the
 #' network entirely.
 #'
-#' @param url A Figshare `ndownloader` URL, e.g.
-#'   `"https://figshare.com/ndownloader/files/40275934/subject.csv"`.
+#' @param url A Figshare `ndownloader` URL in either of the two common forms:
+#'   * `"https://ndownloader.figshare.com/files/40275934"` (canonical)
+#'   * `"https://figshare.com/ndownloader/files/40275934/subject.csv"`
+#'     (also accepted; the hostname and optional trailing filename are
+#'     normalised automatically).
 #' @param ... Additional arguments forwarded to [readr::read_csv()].
 #' @return A [tibble::tibble()] as returned by [readr::read_csv()].
 #' @importFrom readr read_csv
 #' @export
 read_figshare_csv <- function(url, ...) {
+  # Normalise figshare.com/ndownloader/files/{id}[/name] to the subdomain form
+  # that actually returns a 302 redirect to S3.  The canonical form served by
+  # the Figshare API is https://ndownloader.figshare.com/files/{id}.
+  url <- sub(
+    "^https?://figshare\\.com/ndownloader/files/([0-9]+).*",
+    "https://ndownloader.figshare.com/files/\\1",
+    url
+  )
+
   cache_dir <- file.path(tempdir(), "mbtransfer_figshare_cache")
   dir.create(cache_dir, showWarnings = FALSE, recursive = TRUE)
 
-  dest <- file.path(cache_dir, basename(url))
+  # Use the numeric file ID (last path component) as the cache filename.
+  file_id <- basename(url)
+  # Recover a human-readable name from the original URL when available.
+  dest <- file.path(cache_dir, file_id)
   if (!file.exists(dest)) {
-    message("Downloading ", basename(url), " from Figshare...")
-    download.file(url, destfile = dest, mode = "wb", quiet = TRUE)
+    message("Downloading file ", file_id, " from Figshare...")
+    status <- download.file(url, destfile = dest, mode = "wb", quiet = TRUE)
+    if (status != 0 || !file.exists(dest)) {
+      stop("download.file() failed for ", url, " (status ", status, ")")
+    }
   }
 
   read_csv(dest, ...)
@@ -33,12 +52,12 @@ read_figshare_csv <- function(url, ...) {
 #' @examples
 #' library(readr)
 #' library(tibble)
-#' subject <- read_figshare_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
-#' interventions <- read_figshare_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
+#' subject <- read_figshare_csv("https://ndownloader.figshare.com/files/40275934")
+#' interventions <- read_figshare_csv("https://ndownloader.figshare.com/files/40279171") |>
 #'   column_to_rownames("sample")
-#' reads <- read_figshare_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
+#' reads <- read_figshare_csv("https://ndownloader.figshare.com/files/40279108") |>
 #'   column_to_rownames("sample")
-#' samples <- read_figshare_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
+#' samples <- read_figshare_csv("https://ndownloader.figshare.com/files/40275943")
 #' ts <- as.matrix(reads) |>
 #'   ts_from_dfs(interventions, samples, subject)
 #' ts
