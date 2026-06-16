@@ -67,12 +67,12 @@ are used in this analysis, and we have reshaped the data into a format that can
 be used by our `ts_from_dfs` function.
 
 ```{r}
-subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
-interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
+subject <- read_figshare_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
+interventions <- read_figshare_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
   column_to_rownames("sample")
-reads <- read_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
+reads <- read_figshare_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
   column_to_rownames("sample")
-samples <- read_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
+samples <- read_figshare_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
 ```
 
 Next, we unify the read counts, subject variables, and intervention status into
@@ -186,7 +186,6 @@ reshaped_preds |>
     legend.title = element_text(size = 14),
     legend.text = element_text(size = 11),
   )
-ggsave("Fig7.tiff", width = 10, height = 6)
 ```
 
 We can make this interpretation more precise by calculating in and out-of-sample
@@ -234,7 +233,7 @@ However, this takes time, and you can reset the value of `n_splits` to a smaller
 value and still work through the rest of this vignette (many taxa will still be
 easily detectable).
 
-```{r}
+```{r, eval = FALSE}
 #staxa <- select_taxa(ts, ws[[1]], ws[[10]],  \(x) mbtransfer(x, 2, 2), n_splits = 25)
 staxa <- readRDS(url("https://github.com/krisrs1128/mbtransfer_demo/raw/main/staxa-diet.rds"))
 ```
@@ -245,7 +244,7 @@ sensitivity to the intervention. We've chosen the 50 taxa with the largest
 average mirror statistics for visualization (whether or not they were large
 enough to be considered discoveries).
 
-```{r, fig.height = 5, fig.width = 10}
+```{r, fig.height = 5, fig.width = 10, eval = FALSE}
 staxa$ms <- staxa$ms |>
   mutate(
     taxon = taxa(ts)[taxon],
@@ -267,7 +266,7 @@ model ($Q = 3$). This gives evidence that considering only instantaneous
 intervention effects is not sufficient (for example, this suggests that the
 generalized Lotka Volterra would likely underfit).
 
-```{r, fig.height = 5, fig.width = 10}
+```{r, fig.height = 5, fig.width = 10, eval=FALSE}
 staxa$ms |>
   filter(taxon %in% vis_otus) |>
   mutate(selected = ifelse(taxon %in% focus_taxa, "Selected", "Unselected")) |>
@@ -279,7 +278,6 @@ staxa$ms |>
   scale_color_manual(values = c("#c6dbef", "#6baed6", "#2171b5", "#084594")) +
   labs(y = expression(M[j]), x = "Taxon") +
   theme(axis.text.x = element_text(angle = 90, size = 11))
-ggsave("diet_mirror_statistics.tiff")
 ```
 
 ### Comparing Counterfactual Trajectories
@@ -345,7 +343,8 @@ rdata |>
   labs(x = "Time", y = "Median Counterfactual Diference") +
   theme(
     panel.spacing = unit(0, "line"),
-    axis.text.y = element_text(size = 8)
+    axis.text.y = element_text(size = 8),
+    legend.position = "bottom"
   )
 ```
 
@@ -424,5 +423,4 @@ p2 <- hm_data |>
 p1 / p2 +
   plot_layout(heights = c(1, 2), guides = "collect") &
   theme(legend.position = "right")
-ggsave("Fig8.tiff", width = 10, height = 4)
 ```

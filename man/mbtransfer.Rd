@@ -15,7 +15,7 @@ mbtransfer(
   alpha = 0.01,
   eta = 0.1,
   interactions = "search",
-  nthread = -1,
+  nthreads = 0,
   ...
 )
 }

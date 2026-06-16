@@ -12,12 +12,12 @@ Build a  \code{ts}
 \examples{
 library(readr)
 library(tibble)
-subject <- read_csv("https://figshare.com/ndownloader/files/40275934/subject.csv")
-interventions <- read_csv("https://figshare.com/ndownloader/files/40279171/interventions.csv") |>
+subject <- read_figshare_csv("https://ndownloader.figshare.com/files/40275934")
+interventions <- read_figshare_csv("https://ndownloader.figshare.com/files/40279171") |>
   column_to_rownames("sample")
-reads <- read_csv("https://figshare.com/ndownloader/files/40279108/reads.csv") |>
+reads <- read_figshare_csv("https://ndownloader.figshare.com/files/40279108") |>
   column_to_rownames("sample")
-samples <- read_csv("https://figshare.com/ndownloader/files/40275943/samples.csv")
+samples <- read_figshare_csv("https://ndownloader.figshare.com/files/40275943")
 ts <- as.matrix(reads) |>
   ts_from_dfs(interventions, samples, subject)
 ts

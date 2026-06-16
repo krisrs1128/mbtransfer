@@ -1,7 +1,7 @@
 Package: mbtransfer
 Title: Microbiome Intervention Analysis via Transfer Functions and Mirror Statistics
-Version: 0.3
-Authors@R: 
+Version: 0.3.1
+Authors@R:
     c(person("Kris", "Sankaran", email = "ksankaran@wisc.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9415-1971")),
     person("Pratheepa", "Jeganathan", role = c("aut"),
@@ -10,8 +10,7 @@ Description: Microbiome intervention studies generate valuable data on  microbia
 License: CC0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
-Depends: 
+Depends:
     R (>= 3.50),
     abind,
     ggplot2,
@@ -22,7 +21,7 @@ Depends:
     insight,
     xgboost (>= 2.1.0)
 LazyData: true
-Suggests: 
+Suggests:
     knitr,
     xyz,
     rmarkdown,
@@ -31,3 +30,4 @@ Config/testthat/edition: 3
 VignetteBuilder: knitr
 Remotes:
     gathanei/xyz
+Config/roxygen2/version: 8.0.0
